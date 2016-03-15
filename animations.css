@@ -80,6 +80,11 @@ slideUp
 ==============================================
 */
 
+<<<<<<< HEAD
+=======
+/* Enable hardware acceleration to fix laggy transitions */
+
+>>>>>>> origin/master
 .slideUp{
 	animation-name: slideUp;
 	-webkit-animation-name: slideUp;	
