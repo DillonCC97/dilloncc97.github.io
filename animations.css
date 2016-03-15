@@ -93,6 +93,7 @@ slideUp
 	-webkit-animation-timing-function: ease;
 
 	visibility: visible !important;	
+	overflow: hidden;
 
 }
 
