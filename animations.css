@@ -91,7 +91,13 @@ slideUp
 	animation-timing-function: ease;	
 	-webkit-animation-timing-function: ease;
 
-	visibility: visible !important;			
+	visibility: visible !important;	
+	/* Enable hardware acceleration to fix laggy transitions */
+-webkit-transform: translateZ(0);
+-moz-transform: translateZ(0);
+-ms-transform: translateZ(0);
+-o-transform: translateZ(0);
+transform: translateZ(0);
 }
 
 @keyframes slideUp {
