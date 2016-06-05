@@ -1,189 +1,258 @@
-﻿
+<!doctype html>
 
-    <!DOCTYPE html>
-    <!--TODO : unweebafy-->
-    <!-- homepage by noha javascript by nullbyte -->
-     
-    <html>
-     
-    <head>
-     
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="animations.css">
-     
-    <title>welcome</title>
-     
-    </head>
-    <style>
-	
-    a{
-            color:#c3c3c3;
-            font-family:"Lucida Console";
-            font-size:20px;
-            text-decoration:none;
-            margin-left:5px;
-            transition-property: color;
-            transition-duration: .1s;
-            transition-timing-function: linear;
-    }
-    body{
-            padding-left:10px;
-            padding-right:10px;
-            font-family:"Monospace";
-            color:#c8c8c8;
-            font-size:34px;
-            background:#1F222D;
-    }
-     
-    span{
-            margin-left:10px;
-            text-family:"segoe UI";
-            text-align: center;
-    }
-     
-    a:hover { color:#A9BFA5}
-     
-    input[type=text] {
-            width: 18px;
-            padding: 3px;
-            position:absolute;
-            right:5px;bottom:5px;
-            border: 1px solid #1F222D;
-            transition-property: all;
-            transition-duration: .5s;
-            transition-timing-function: ease;
-            color: #1F222D;
-			background-position: -2px -1px;
-			background-image: url('http://i.imgur.com/ziSic3u.png');
-			background-repeat: no-repeat;
-    }
-     
-    input[type=text]:hover {
-            border-color: #bebebe;
-            transition-property: all;
-            transition-duration: .5s;
-            transition-timing-function: ease;
-            color: #bebebe;
-			width:230px;
-			background-position: 227px -1px;
-			padding-right: 20px;
-    }
-	input[type=text]:focus {
-            border-color: #bebebe;
-            transition-property: all;
-            transition-duration: .5s;
-            transition-timing-function: ease;
-            color: #bebebe;
-			width:230px;
-			background-position: 227px -1px;
-			padding-right: 20px;
-	}
-     
-    .boxed {
-            border: 1px solid #1F222D;
-            padding: 5px;
-            color: #1F222D;
-            background-color: #1F222D;
-            width: 760px;
-            margin-left: -390px;
-            margin-right: auto;
-            position:absolute;
-            left: 50%;
-			top: 40%;
-    }
-     
-    h1 {
-          padding-bottom: -600px;
-		  position: absolute;
-		  visibility: hidden;
-		  margin-top: -200px;
-		  margin-left: -380px;
-		  left: 50%;
-		  top: 40%;
-		  
-    }
-     
-    </style>
-            <body>
-            <h1 align="center" id="message" class="expandUp"></h1>
-                <script type="text/javascript">
-                        var d = new Date();
-                        var n = d.getHours();
- 
-                        if ( n == 23 || n == 0) {
-                                message = "<img src='goodnight1.png'></img>";
-                        } else if ( n >= 1 && n <= 4 ) {
-                                message = "<img src='goodnight1.png'></img>";
-                        } else if ( n >= 5 && n <= 11 ) {
-                                message = "<img src='goodmorning1.png'></img>";
-                        } else if ( n >= 12 && n <= 17 ) {
-                                message = "<img src='goodafternoon1.png'></img>";
-                        } else if ( n >= 18 && n <= 22 ) {
-                                message = "<img src='goodevening1.png'></img>";
-                        }
- 
-                        document.getElementById("message").innerHTML = message;
-                </script>
-            <div class="boxed" class=slideUp style="text-align: center;">
-            <!--<span> <img src="4chan.png"></span> -->
-            <a style="padding-left:10px" href="http://boards.4chan.org/mu/catalog">/mu/</a>
-            <a href="http://boards.4chan.org/fa/catalog">/fa/</a>
-            <a href="http://boards.4chan.org/wg/catalog">/wg/</a>
-            <a href="http://boards.4chan.org/g/catalog">/g/</a>
-            <a href="http://boards.4chan.org/wsg/catalog">/wsg/</a>
-            </br>
-            <!--<span> <img src="social.png"></span>-->
-            <a style="padding-left:10px" href="https://www.facebook.com">facebook</a>
-            <a href="https://www.youtube.com/feed/subscriptions">youtube</a>
-			<a href="https://www.tumblr.com/dashboard">tumblr</a>
-            </br>
-            <!--<span> <img src="music.png"></span>-->
-            <a style="padding-left:10px" href="http://rateyourmusic.com/">rym</a>
-            <a href="http://my.mangapark.me/bookmark">manga</a>
-	    <a href="http://www.crunchyroll.com/home/queue">crunchyroll</a>
-	    <a href="http://www.randomramen.com/users/4454#">stream</a>
-	    <a href="http://xdcc.horriblesubs.info/">anime</a>
-	    <a href="http://sunxdcc.com/">search</a>
-            </br>
-            <!--<span> <img src="school.png"></span>-->
-            <a style="padding-left:10px" href="https://student.ufl.edu/">student</a>
-			<a href="http://elearning.ufl.edu/">canvas</a>
-			<a href="https://www.webassign.net/ufl/login.html">webassign</a>
-			<a href="https://apps.ufl.edu/vpn/index.html">ufapps</a>
-			<a href="https://my.ufl.edu/ps/signon.html">myufl</a>
-			<a href="https://www.codecademy.com/learn#_=_">codecademy</a>
-            </br>
-			<!--<span> <img src="reddit.png"></span>-->
-			<a style="padding-left:10px" href="http://hypebeast.com/">hypebeast</a>
-			<a href="http://www.eventhubs.com/">eventhubs</a>
-			<a href="http://shoryuken.com/">shoryuken</a>
-			<a href="http://www.thefader.com/">fader</a>
-			<a href="http://www.papermag.com/">paper</a>
-			</br>
-            <!--<span> <img src="mail.png"></span>-->
-            <a style="padding-left:10px" href="http://mail.google.com">gmail</a>
-            <a href="https://dirtybirds.slack.com/messages/general/">slack</a>
-            <a href="https://mightytext.net/web8/?exp=1">text</a>
+<title>~</title>
 
-			<!--<form method="get" action="http://www.google.com/search"> <input type="text" placeholder="" value=""
-            name="q">-->
-           
-            </div>
-     
-	 
-	 <script>
-	$(window).scroll(function() {
-		$('#animatedElement').each(function(){
-		var imagePos = $(this).offset().top;
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		var topOfWindow = $(window).scrollTop();
-			if (imagePos < topOfWindow+400) {
-				$(this).addClass("slideUp");
-			}
-		});
-	});
+<script>WebFontConfig={google:{families:['Lucidia Console']}};</script>
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js" async></script>
+
+<style type="text/css">
+  body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #1F222D;
+    color: #3e445a;
+    font-family: 'Lato', sans-serif;
+  }
+
+  main {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-98px);
+    text-align: center;
+  }
+
+  time {
+    font-size: 5rem;
+    letter-spacing: 6px;
+  }
+
+  input {
+    box-sizing: border-box;
+    width: 90%;
+    max-width: 310px;
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #252936;
+    border-radius: 2px;
+    color: #3e445a;
+    font-family: 'Lucidia Console', sans-serif;
+    font-size: 1.1rem;
+  }
+
+  input,
+  input:focus {
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+  aside {
+    position: fixed;
+    box-sizing: border-box;
+    left: 0;
+    width: 100%;
+    max-width: 190px;
+    height: 100%;
+    padding: 15px 0 0;
+    background-color: #3e445a;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 700ms;
+    transform: translateX(-205px);
+    overflow: auto;
+    z-index: 1;
+  }
+
+  aside[data-toggled='true'] {
+    transform: translateX(0);
+  }
+
+  h1 {
+    margin: 0 25px 15px;
+    line-height: 1rem;
+  }
+
+  ul {
+    margin: 0 0 15px;
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  a {
+    display: block;
+    padding: 0 25px;
+    color: #3e445a;
+    line-height: 1.7rem;
+    text-decoration: none;
+  }
+
+  a:hover span:last-of-type {
+    text-decoration: underline;
+  }
+
+  span:first-of-type {
+    font-family: 'Lucidia Console', monospace;
+  }
+
+  span:last-of-type {
+    font-size: 0.9rem;
+  }
+</style>
+
+<main>
+  <time id="js-clock"></time>
+  <form id="js-search-form" autocomplete="off">
+    <input id="js-search-input" type="text" autofocus>
+  </form>
+</main>
+
+<aside id="js-sidebar">
+  <h1>~</h1>
+  <ul id="js-help"></ul>
+</aside>
+
+<script>
+  'use strict';
+
+  (function() {
+    var clock = document.getElementById('js-clock');
+
+    function leftpad(num) {
+      return ('0' + num.toString()).slice(-2);
+    }
+
+    function setTime() {
+      var date = new Date();
+      var hours = leftpad(date.getHours());
+      var minutes = leftpad(date.getMinutes());
+        if (hours >= 12) {
+        hours = hours-12;
+    }
+    if (hours == 0) {
+        hours = 12;
+    }
+    hours = hours<10?"0"+hours:hours;
+      clock.innerHTML = hours + ' ' + minutes;
+    }
+
+    setTime();
+    setInterval(setTime, 1000);
+  })();
+
+  (function(opts) {
+    var sidebar = document.getElementById('js-sidebar');
+    var searchForm = document.getElementById('js-search-form');
+    var searchInput = document.getElementById('js-search-input');
+    var searchHelp = document.getElementById('js-help');
+    var urlRegex = /(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/;
+
+    opts.commands.forEach(function(command) {
+      var li = document.createElement('li');
+      var link = document.createElement('a');
+      var key = document.createElement('span');
+      var name = document.createElement('span');
+
+      key.innerHTML = command.key + ': ';
+      name.innerHTML = command.name;
+      link.href = command.url;
+
+      link.appendChild(key);
+      link.appendChild(name);
+      li.appendChild(link);
+      searchHelp.appendChild(li);
+    });
+
+    searchForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      var q = searchInput.value.trim();
+      var redirect = '';
+
+      if (q === '' || q === '?') {
+        sidebar.setAttribute('data-toggled', true);
+        searchInput.value = '';
+        return false;
+      }
+
+      if (q.match(new RegExp(urlRegex))) {
+        redirect = q;
+      } else {
+        redirect = opts.defaultCommand + encodeURIComponent(q);
+      }
+
+      q = q.split(opts.delimiter);
+
+      opts.commands.forEach(function(command) {
+        if (q[0] === command.key) {
+          if (q[1] && command.search) {
+            q.shift();
+            var search = encodeURIComponent(q.join(opts.delimiter).trim());
+            redirect = command.url + command.search + search;
+          } else {
+            redirect = command.url;
+          }
+        }
+      });
+
+      window.location.href = redirect;
+    }, false);
+
+    document.addEventListener('keydown', function(event) {
+      if (event.keyCode === 27) sidebar.removeAttribute('data-toggled');
+    });
+  })({
+    delimiter: ':',
+    defaultCommand: 'https://www.google.com/search?q=',
+    commands: [
+      { key: 'amazon', name: 'Amazon', url: 'https://www.amazon.com', search: '/s/?field-keywords=' },
+      { key: 'email', name: 'Email', url: 'https://mail.google.com/mail', search: '/u/0/#search/' },
+      { key: 'face', name: 'Facebook', url: 'https://www.facebook.com', search: '/search/top/?q=' },
+      { key: 'git', name: 'GitHub', url: 'https://github.com', search: '/search?q=' },
+      { key: 'inbox', name: 'Inbox', url: 'https://inbox.google.com', search: '/search/' },
+      { key: 'khan', name: 'Khan Academy', url: 'https://www.khanacademy.org', search: '/search?page_search_query=' },
+      { key: 'mu', name: 'Music', url: 'https://boards.4chan.org/mu/' },
+      { key: 'fa', name: 'Fashion', url: 'https://boards.4chan.org/fa/' },
+      { key: 'wg', name: 'Wall General', url: 'https://boards.4chan.org/wg/' },
+      { key: 'g', name: 'Tech', url: 'https://boards.4chan.org/g/' },
+      { key: 'wsg', name: 'WorkSafe Gif', url: 'https://boards.4chan.org/wsg/' },
+      { key: 'paper', name: 'PaperMag', url: 'http://www.papermag.com/', search: 'search/?q=' },
+      { key: 'slack', name: 'Slack', url: 'https://dirtybirds.slack.com/messages/general/' },
+      { key: 'text', name: 'MightyText', url: 'https://mightytext.net/web8/', },
+      { key: 'xkcd', name: 'XKCD', url: 'https://xkcd.com/', },
+      { key: 'tumblr', name: 'Tumblr', url: 'https://www.tumblr.com/', search: 'search/' },
+      { key: 'rym', name: 'RateYourMusic', url: 'http://rateyourmusic.com/', search: 'search?searchtype=a&searchterm=' }, <!--TODO add other searchtypes-->
+      { key: 'manga', name: 'Manga', url: 'http://mangapark.me/', search: 'search?q=' },
+      { key: 'cr', name: 'CrunchyRoll', url: 'http://www.crunchyroll.com/', search: 'search?from=&q=' },
+      { key: 'xdcc', name: 'HorribleSubsXDCC', url: 'http://xdcc.horriblesubs.info/'}, <!--TODO allow this to open both packlist and catalog-->
+      { key: 'horrible', name: 'HorribleSubs', url: 'http://horriblesubs.info/' },
+      { key: 'ufstudent', name: 'UFStudent', url: 'https://student.ufl.edu/', },
+      { key: 'canvas', name: 'Canvas', url: 'http://elearning.ufl.edu/', },
+      { key: 'webassign', name: 'WebAssign', url: 'https://www.webassign.net/ufl/login.html', },
+      { key: 'ufapps', name: 'UFApps', url: 'https://apps.ufl.edu/' },
+      { key: 'myuf', name: 'MyUF', url: 'https://my.ufl.edu/', },
+      { key: 'codecademy', name: 'Codecademy', url: 'https://www.codecademy.com/' },
+      { key: 'hb', name: 'HypeBeast', url: 'http://hypebeast.com/', search: 'search?s=' },
+      { key: 'eventhubs', name: 'EventHubs', url: 'http://www.eventhubs.com/', search: 'cse?cx=018347486046165119511%3Aveqnczdsfxw&ie=UTF-8&q=asdf&sa.x=17&sa.y=13#gsc.tab=0&gsc.q=' },
+      { key: 'shoryuken', name: 'Shoryuken', url: 'http://shoryuken.com/', search: 'search-results/?q=' },
+      { key: 'fader', name: 'TheFader', url: 'http://www.thefader.com/', search: 'search?query=' },
+      { key: 'p', name: 'Product Hunt', url: 'https://www.producthunt.com', search: '/search?q=' },
+      { key: 'soundcloud', name: 'SoundCloud', url: 'https://soundcloud.com', search: '/search?q=' },
+      { key: 'twitter', name: 'Twitter', url: 'https://twitter.com', search: '/search?q=' },
+      { key: 'yt', name: 'YouTube', url: 'https://www.youtube.com', search: '/results?search_query=' }
+    ]
+  });
 </script>
-
-
-    </body>
 
