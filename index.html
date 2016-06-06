@@ -208,6 +208,11 @@
       });
 
       window.location.href = redirect;
+	  
+	  if (redirect == 'http://xdcc.horriblesubs.info/'){
+		window.open('http://horriblesubs.info/', '_blank');
+	  }
+	  
     }, false);
 
     document.addEventListener('keydown', function(event) {
@@ -236,8 +241,8 @@
       { key: 'rym', name: 'RateYourMusic', url: 'http://rateyourmusic.com/', search: 'search?searchtype=a&searchterm=' }, <!--TODO add other searchtypes-->
       { key: 'manga', name: 'Manga', url: 'http://mangapark.me/', search: 'search?q=' },
       { key: 'cr', name: 'CrunchyRoll', url: 'http://www.crunchyroll.com/', search: 'search?from=&q=' },
-      { key: 'xdcc', name: 'HorribleSubsXDCC', url: 'http://xdcc.horriblesubs.info/'}, <!--TODO allow this to open both packlist and catalog-->
-      { key: 'horrible', name: 'HorribleSubs', url: 'http://horriblesubs.info/' },
+      { key: 'xdcc', name: 'SunXDCC', url: 'http://sunxdcc.com/'},
+      { key: 'horrible', name: 'HorribleSubs', url: 'http://xdcc.horriblesubs.info/' },
       { key: 'ufstudent', name: 'UFStudent', url: 'https://student.ufl.edu/', },
       { key: 'canvas', name: 'Canvas', url: 'http://elearning.ufl.edu/', },
       { key: 'webassign', name: 'WebAssign', url: 'https://www.webassign.net/ufl/login.html', },
