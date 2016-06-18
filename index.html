@@ -142,11 +142,11 @@
       var minutes = leftpad(date.getMinutes());
         if (hours >= 12) {
         hours = hours-12;
+        hours = hours<10?"0"+hours:hours;
     }
     if (hours == 0) {
         hours = 12;
     }
-    //hours = hours<10?"0"+hours:hours;
       clock.innerHTML = hours + ' ' + minutes;
     }
 
