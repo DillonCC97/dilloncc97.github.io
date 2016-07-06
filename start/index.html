@@ -73,6 +73,11 @@
     transform: translateX(-315px);
     overflow: auto;
     z-index: 1;
+    overflow-x: hidden;
+    }
+  ::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
   }
 
   aside[data-toggled='true'] {
@@ -223,7 +228,7 @@
   })({
     delimiter: ':',
     defaultCommand: 'https://www.google.com/search?q=',
-    commands: [
+    commands: [ //TODO Make alphabetical
       { key: 'amazon', name: 'Amazon', url: 'https://www.amazon.com', search: '/s/?field-keywords=' },
       { key: 'email', name: 'Email', url: 'https://mail.google.com/mail', search: '/u/0/#search/' },
       { key: 'face', name: 'Facebook', url: 'https://www.facebook.com', search: '/search/top/?q=' },
