@@ -1,0 +1,19 @@
+!SESSION 2017-01-21 08:46:02.580 -----------------------------------------------
+eclipse.buildId=3.6.1.201410201044
+java.version=1.7.0_111
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/dillon/Code/github/dilloncc97.github.io/ -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.jobs 4 2 2017-01-21 08:46:05.721
+!MESSAGE An internal error occurred during: "Start Ruble bundle manager".
+!STACK 0
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:922)
+	at java.util.HashMap$ValueIterator.next(HashMap.java:950)
+	at org.eclipse.core.commands.CommandManager.addExecutionListener(CommandManager.java:324)
+	at org.eclipse.ui.internal.commands.CommandService.addExecutionListener(CommandService.java:110)
+	at com.aptana.scripting.ui.internal.listeners.ExecutionListenerRegistrant.setup(ExecutionListenerRegistrant.java:275)
+	at com.aptana.scripting.ui.internal.listeners.ExecutionListenerRegistrant.getInstance(ExecutionListenerRegistrant.java:47)
+	at com.aptana.scripting.ui.ScriptingUIPlugin$1.run(ScriptingUIPlugin.java:95)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
