@@ -25,12 +25,8 @@
       			</span>
     		</div><!-- /input-group -->
   		</div><!-- /.col-lg-6 --> 
-  		<div class="footer">
-  			<p class="footer-links"><a href="#">FAQ</a></p>
-  			<p class="footer-links"><a href="#">About</a></p>
-  			<p class="footer-links"><a href="#">Legal</a></p>
-  			<p class="footer-links"><a href="#">Contact Us</a></p>
-  			<p class="footer-links"><a href="#">Jobs</a></p>
-  		</div>
     </body>
+    <footer class="site-footer">
+  		I'm the Sticky Footer.
+	</footer>
 </html>

@@ -37,7 +37,6 @@
 	padding-top: 30px
 	float: center;
 	display: inline-block;
-	  min-width: 75px;
 }
 
 .full {
@@ -99,4 +98,5 @@ body {
   padding: 1rem;
   background-color: #efefef;
   text-align: center;
+  min-width: 300px;
 }

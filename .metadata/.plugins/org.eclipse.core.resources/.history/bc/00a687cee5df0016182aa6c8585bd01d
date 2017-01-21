@@ -4,6 +4,23 @@
 	margin: 0;
 }
 
+}
+html, body {
+  height: 100%;
+}
+.page-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -9000px; 
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.site-footer, .page-wrap:after {
+  height: 142px; 
+}
+
 .welcome-title {
 	font-size: 45px;
 	color: #4DD0E1;
@@ -29,15 +46,6 @@
 	float: right;
 	padding-right: 40px;
 	padding-top: 30px;
-}
-
-.footer-links {
-	font-size: 15px;
-	padding-right: 40px;
-	padding-top: 30px
-	float: center;
-	display: inline-block;
-	  min-width: 75px;
 }
 
 .full {
@@ -89,14 +97,4 @@ h1 {
 body {
 	width: 100%;
 	background: #E0E0E0;
-}
-
-.footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  background-color: #efefef;
-  text-align: center;
 }

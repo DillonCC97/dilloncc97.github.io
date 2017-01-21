@@ -35,9 +35,6 @@
 	font-size: 15px;
 	padding-right: 40px;
 	padding-top: 30px
-	float: center;
-	display: inline-block;
-	  min-width: 75px;
 }
 
 .full {

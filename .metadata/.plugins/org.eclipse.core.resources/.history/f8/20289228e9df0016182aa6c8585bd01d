@@ -31,15 +31,6 @@
 	padding-top: 30px;
 }
 
-.footer-links {
-	font-size: 15px;
-	padding-right: 40px;
-	padding-top: 30px
-	float: center;
-	display: inline-block;
-	  min-width: 75px;
-}
-
 .full {
 	width: 100%;
 	height: 100px;
