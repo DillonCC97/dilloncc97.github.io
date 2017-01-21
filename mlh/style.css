@@ -1,0 +1,82 @@
+*{
+	box-sizing: border-box;
+	font-family: 'Inconsolata', monospace;
+}
+
+.welcome-title {
+	font-size: 45px;
+	color: #4DD0E1;
+	padding-left: 40px;
+	padding-top: 30px;
+}
+
+.header {
+	color: #4DD0E1;
+}
+
+.header p {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.header a {
+	color: #4DD0E1;
+}
+
+.educators {
+	font-size: 15px;
+	float: right;
+	padding-right: 40px;
+	padding-top: 30px;
+}
+
+.full {
+	width: 100%;
+	height: 100px;
+}
+
+.pseudo-vert {
+	padding-top: 150px;
+	padding-bottom: 30px;
+	text-align: center;
+}
+
+.class-id-input {
+	height: 50px;
+	width: 250px;
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:active {
+	text-decoration: none;
+}
+
+input{
+	text-align:center;
+	font-size: 30px;
+}
+
+form {
+	height:1000px;
+	width:1000px;
+}
+
+h1 {
+	color: #fff;
+}
+
+body {
+	width: 100%;
+	background: #E0E0E0;
+}
