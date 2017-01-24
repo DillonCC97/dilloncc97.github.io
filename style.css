@@ -1,0 +1,12 @@
+:root {
+    --bg-light: #1f222d;
+    --bg-dark: #111111;
+    --fg-light: #000000;
+    --fg-light: #996633;
+}
+
+* {
+    box-string: border-box;
+    font-family: 'Inconsolata', monospace;
+    margin: 0px;
+}
