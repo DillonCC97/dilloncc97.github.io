@@ -70,7 +70,7 @@ table {
 }
 
 .about {
-    
+    margin-bottom:2em;
 }
 
 .intro h1 {
@@ -78,16 +78,22 @@ table {
     font-size:50px;
     margin-top:0px;
     padding-top:5%;
+    font-family: 'Inconsolata', monospace;
 }
 
-.panel-group {
-    
+.ui-state-focus {
+    outline: none;
 }
 
-.panel {
-    
+.ui-state-hover {
+    color:gray;
 }
 
-.panel-collapse{
-    
+h3 {
+    padding:5px 0px 5px 0px;
+}
+
+#accordion div{
+    color:red;
+    height:300px;
 }
