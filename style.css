@@ -1,3 +1,50 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+        font-family: 'Inconsolata', monospace;
+	
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+//Reset end
+
 :root {
     --bg-light: #1f222d;
     --bg-dark: #111111;
@@ -7,6 +54,38 @@
 
 * {
     box-string: border-box;
-    font-family: 'Inconsolata', monospace;
     margin: 0px;
+}
+
+#splash {
+    height:100%;
+    position:fixed;
+    padding-right:5px;
+    margin-top:0px;
+}
+
+.intro {
+    padding-left:22%; //set to width of image +5
+}
+
+.about {
+    padding-left:22%;
+}
+
+.intro h1 {
+    color:red;
+    font-size:50px;
+    margin-top:0px;
+    padding-top:5%;
+}
+
+.panel-group{
+    padding-left:22%; //set to width of image +5
+}
+
+.panel {
+    width:99%;
+}
+
+.panel-collapse{
 }
