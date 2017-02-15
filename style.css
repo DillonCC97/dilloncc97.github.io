@@ -150,3 +150,36 @@ h3 {
     margin-right:3px;
     pargin-bottom:1%;
 }
+
+li {
+    list-style-type:disc;
+}
+
+.job {
+    
+}
+
+.experience-content td {
+    vertical-align:top;
+    padding-right:20px;
+    padding-top:10px;
+}
+
+.desc-cell {
+    padding-left:10px;
+}
+
+.experience-content img {
+    height:11vh;
+    width:auto;
+}
+
+.img-cell {
+    text-align:center;
+    width:15%;
+}
+
+.job-cell {
+    width:30%;
+}
+
