@@ -95,5 +95,55 @@ h3 {
 
 #accordion div{
     color:red;
+    height:100%;
+}
+
+#accordion {
     height:300px;
+}
+
+.contact {
+    display:inline-block;
+    position:absolute;
+    top:0;
+    right:0;
+    margin-right:10px;
+    margin-top:3px;
+}
+
+.contact a {
+    display: inline-block;
+    text-align: center;
+}
+
+.contact a:link {
+    text-decoration:none;
+    font-weight:bold;
+    color:black;
+}
+
+.contact a:visited {
+    text-decoration:none;
+    font-weight:bold;
+    color:black;
+}
+
+.contact a:hover {
+    text-decoration:none;
+    color:gray;
+}
+
+.contact a:active {
+    text-decoration:none;
+    color:gray;
+}
+
+.credit p {
+    display:inline-block;
+    position:absolute;
+    bottom:0;
+    right:0;
+    font-weight:bold;
+    margin-right:3px;
+    pargin-bottom:3px;
 }
