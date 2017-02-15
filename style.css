@@ -87,6 +87,7 @@ table {
 
 .ui-state-hover {
     color:gray;
+    cursor:pointer;
 }
 
 h3 {
