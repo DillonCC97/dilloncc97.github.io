@@ -58,18 +58,19 @@ table {
 }
 
 #splash {
-    height:100%;
-    position:fixed;
+    height:100vh;
+    float:left;
     padding-right:5px;
     margin-top:0px;
+    display:inline-block;
 }
 
 .intro {
-    padding-left:22%; //set to width of image +5
+    
 }
 
 .about {
-    padding-left:22%;
+    
 }
 
 .intro h1 {
@@ -79,13 +80,14 @@ table {
     padding-top:5%;
 }
 
-.panel-group{
-    padding-left:22%; //set to width of image +5
+.panel-group {
+    
 }
 
 .panel {
-    width:99%;
+    
 }
 
 .panel-collapse{
+    
 }
