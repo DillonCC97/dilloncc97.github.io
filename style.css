@@ -60,7 +60,7 @@ table {
 #splash {
     height:100vh;
     float:left;
-    padding-right:5px;
+    padding-right:10px;
     margin-top:0px;
     display:inline-block;
 }
@@ -71,6 +71,7 @@ table {
 
 .about {
     margin-bottom:1.6%;
+    margin-right:10px;
 }
 
 .intro h1 {
@@ -97,6 +98,7 @@ h3 {
 #accordion div{
     color:red;
     height:100%;
+    margin-right:10px;
 }
 
 #accordion {
