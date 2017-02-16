@@ -70,16 +70,24 @@ table {
 }
 
 .about {
-    margin-bottom:1.6%;
+    margin-bottom:1.6vh;
     margin-right:10px;
+}
+
+.about-content {
+    height:6vh;
 }
 
 .intro h1 {
     color:red;
-    font-size:375%;
+    font-size:10vh;
     margin-top:0px;
-    padding-top:5%;
+    padding-top:5vh;
     font-family: 'Inconsolata', monospace;
+}
+
+.intro h2 {
+    font-size:3vh;
 }
 
 .ui-state-focus {
@@ -92,7 +100,7 @@ table {
 }
 
 h3 {
-    padding:0.4% 0px 0.4% 0px;
+    padding:0.4vh 0px 0.4vh 0px;
 }
 
 #accordion div{
@@ -102,7 +110,7 @@ h3 {
 }
 
 #accordion {
-    height:48vh;
+    height:58vh;
 }
 
 .contact {
@@ -111,7 +119,7 @@ h3 {
     top:0;
     right:0;
     margin-right:10px;
-    margin-top:0.4%;
+    margin-top:0.4vh;
 }
 
 .contact a {
@@ -148,7 +156,7 @@ h3 {
     right:0;
     font-weight:bold;
     margin-right:3px;
-    pargin-bottom:1%;
+    margin-bottom:1vh;
 }
 
 li {
@@ -159,10 +167,14 @@ li {
     
 }
 
+.experience-content {
+    padding-top:0.2vh;
+}
+
 .experience-content td {
     vertical-align:top;
     padding-right:20px;
-    padding-bottom:25px;
+    padding-bottom:2.5vh;
 }
 
 .desc-cell {
@@ -170,40 +182,87 @@ li {
 }
 
 .experience-content img {
-    height:11vh;
+    height:70px;
+    width:auto;
+}
+
+.education-content td {
+    vertical-align:top;
+}
+
+.school-list {
+    margin-left:20px;
+}
+
+.school-id {
+    margin-bottom:3px;
+}
+
+.education-content table:nth-child(2) {
+    margin-top:3vh;
+}
+
+.education-content table {
+    width:60vw;
+}
+
+.education-content table:nth-child(1) tr td img {
+    margin:0px 1vw 0px 0px;
+}
+
+.education-content table:nth-child(2) tr td img {
+    margin:0px 0px 0px 1vw;
+}
+
+.education-content table:nth-child(1) tr td:nth-child(2) {
+    width:800%;
+}
+
+.text-box {
+    float:left;
+    text-align:left;
+    height:300px;
+    width:auto;
+}
+
+.left {
+    float:left;
+    padding-right:25px;
+}
+
+.right {
+    float:right;
+    padding-left:25px;
+}
+
+.education-content img {
+    height:250px;
     width:auto;
 }
 
 .img-cell {
     text-align:center;
-    width:15%;
+    width:4vw;
 }
 
 .job-cell {
-    width:30%;
+    width:26vw;
 }
 
 .icon {
     display:inline;
+    padding-right:5px;
 }
 
-.ui-accordion-header-collapsed img {
-    content:url("right.svg");
-    height:auto;
-    width:15px;
-    padding-right:2px;
+.ui-accordion-header-collapsed::before {
+    content:url("right.png");
 }
 
-.ui-accordion-header-active img {
-    content:url("down.svg");
-    height:auto;
-    width:15px;
-    padding-right:2px;
+.ui-accordion-header-active::before {
+    content:url("down.png") !important;
 }
 
-.icon {
-    content:url("right.svg");
-    height:auto;
-    width:15px;
-    padding-right:2px;
+.ui-accordion-header::before {
+    content:url("right.png");
 }
+
