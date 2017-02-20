@@ -5,6 +5,13 @@
     -Make more intuitive for smaller screens
 */
 
+:root {
+    --bg-color: #f8f8f8;
+    --fg-bright: #93241d;
+    --content-text: #130E0D;
+    --hover: #b6b4b5;
+    --hover-light: #e6e4e5; 
+}
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -34,6 +41,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
     line-height: 1;
+    background-color:var(--bg-color);
 }
 ol, ul {
     list-style: none;
@@ -53,13 +61,6 @@ table {
 
 //Reset end
 
-:root {
-    --bg-light: #1f222d;
-    --bg-dark: #111111;
-    --fg-light: #000000;
-    --fg-light: #996633;
-}
-
 * {
     box-string: border-box;
     margin: 0px;
@@ -74,7 +75,7 @@ table {
 }
 
 .intro {
-    
+    color:var(--content-text);
 }
 
 .about {
@@ -84,10 +85,11 @@ table {
 
 .about-content {
     height:6vh;
+    color:var(--content-text);
 }
 
 .intro h1 {
-    color:red;
+    color:var(--fg-bright);
     font-size:10vh;
     margin-top:0px;
     padding-top:5vh;
@@ -103,7 +105,7 @@ table {
 }
 
 .ui-state-hover {
-    color:gray;
+    color:var(--hover);
     cursor:pointer;
 }
 
@@ -112,13 +114,26 @@ h3 {
 }
 
 #accordion div{
-    color:red;
+    color:var(--content-text);
     height:60vh;
     margin-right:10px;
 }
 
 #accordion {
     height:58vh;
+}
+
+#accordion h3{
+    color:var(--fg-bright);
+}
+
+#accordion h3:hover{
+    color:var(--hover);
+}
+
+.header {
+    color:var(--fg-bright);
+    font-weight:bold;
 }
 
 .contact {
@@ -138,23 +153,23 @@ h3 {
 .contact a:link {
     text-decoration:none;
     font-weight:bold;
-    color:black;
+    color:var(--content-text);
 }
 
 .contact a:visited {
     text-decoration:none;
     font-weight:bold;
-    color:black;
+    color:var(--content-text);
 }
 
 .contact a:hover {
     text-decoration:none;
-    color:gray;
+    color:var(--hover);
 }
 
 .contact a:active {
     text-decoration:none;
-    color:gray;
+    color:var(--hover);
 }
 
 .credit p {
@@ -268,3 +283,27 @@ li {
     content:url("right.png");
 }
 
+.project-cell img {
+    width:150px;
+    height:auto;
+}
+
+.project-cell h3,.project-cell p {
+    text-align:center;
+}
+
+.project-cell {
+    width:275px;
+    text-align:center;
+    padding:10px;
+    -webkit-animation-delay: 4s; /* Chrome, Safari, Opera */                                      animation-delay: 2s;
+}
+
+.project-cell:hover {
+    background-color:var(--hover-light);
+}
+
+.projects-content table{
+    border-spacing:15px;
+    border-collapse: separate;
+}
