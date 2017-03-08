@@ -66,6 +66,11 @@ table {
     margin: 0px;
 }
 
+a {
+    color:inherit;
+    text-decoration:inherit;
+}
+
 #splash {
     height:100vh;
     float:left;
@@ -115,12 +120,12 @@ h3 {
 
 #accordion div{
     color:var(--content-text);
-    height:60vh;
+    height:55vh;
     margin-right:10px;
 }
 
 #accordion {
-    height:58vh;
+    height:60vh;
 }
 
 #accordion h3{
@@ -272,19 +277,19 @@ li {
 }
 
 .ui-accordion-header-collapsed::before {
-    content:url("right.png");
+    content:url("img/right.png");
 }
 
 .ui-accordion-header-active::before {
-    content:url("down.png") !important;
+    content:url("img/down.png") !important;
 }
 
 .ui-accordion-header::before {
-    content:url("right.png");
+    content:url("img/right.png");
 }
 
 .project-cell img {
-    width:150px;
+    width:20vh;
     height:auto;
 }
 
@@ -296,7 +301,8 @@ li {
     width:275px;
     text-align:center;
     padding:10px;
-    -webkit-animation-delay: 4s; /* Chrome, Safari, Opera */                                      animation-delay: 2s;
+    -webkit-animation-delay: 4s; /* Chrome, Safari, Opera */
+    animation-delay: 2s;
 }
 
 .project-cell:hover {
@@ -306,4 +312,23 @@ li {
 .projects-content table{
     border-spacing:15px;
     border-collapse: separate;
+}
+
+.skills-content img {
+    padding:0px 1vw 5vh 1vw;
+}
+
+#accordion .skills-content div {
+    height:17vh;
+    width:95vw;
+}
+
+.wide {
+    width:15vw;
+    height:auto;
+}
+
+.tall {
+    height:15vh;
+    width:auto;
 }
