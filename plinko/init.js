@@ -47,7 +47,7 @@ function setup() {
 }
 
 function newParticle() {
-    var p = new Particle(mouseX, mouseY, 10);
+    var p = new Particle(mouseX, 50, 10);
     particles.push(p);
 }
 
