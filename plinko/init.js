@@ -52,6 +52,9 @@ function newParticle() {
 
 function keyPressed() {
     if (keyCode == 82) {
+        for (var i = 0; i < particles.length; i++) {
+            World.remove(world, particles[i].body);
+        }
         score = 0;
         particles = [];
         balls = 20;
