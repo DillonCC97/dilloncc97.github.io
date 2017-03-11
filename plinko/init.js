@@ -60,7 +60,9 @@ function draw() {
     for (var i = 0; i < particles.length; i++) {
         particles[i].show();
         if (particles[i].offScreen()) {
-            score += 1000 - (Math.abs(ceil(particles[i].body.position.x / width * 11) - 6) * 150);
+            if (particles[i].body.position.x > 0 && particles[i].body.position.x < 600){
+                score += 1000 - (Math.abs(ceil(particles[i].body.position.x / width * 11) - 6) * 150);
+            }
             World.remove(world, particles[i].body);
             particles.splice(i,1);
             i--;
