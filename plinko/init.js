@@ -47,8 +47,15 @@ function setup() {
 }
 
 function newParticle() {
-    var p = new Particle(mouseX, 50, 10);
+    var p = new Particle(mouseX, 50, 10); // Change mouseY to 50
     particles.push(p);
+}
+
+function keyPressed() {
+    if (keyCode == 82) {
+        score =0;
+        particles = [];
+    }
 }
 
 function draw() {
@@ -76,6 +83,22 @@ function draw() {
     }
     textSize(20);
     text("Score: " + score, 20,20);
+    textSize(12);
+    text("Press 'r' to reset.", width - 110, 20);
+    textSize(15);
+    scores = ["250","400","550","700","850"]
+    for (var i = 0; i < scores.length; i++){
+        text(scores[i],(i*55)+13,height-5);
+    }
+    for (var i = 0; i <scores.length; i++) {
+        text(scores[i],(width - 39) - (i * 55), height - 5);
+    }
+    text("1000", width/2 - 19, height - 5);
+//    text("250", 13, height - 5);
+//    text("400", 68, height-5);
+//    text("550", 123, height - 5);
+//    text("700", 178, height -5);
+//    text("850", 233, height -5);
 }
 
 function mousePressed() {
