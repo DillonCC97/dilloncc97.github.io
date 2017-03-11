@@ -9,11 +9,11 @@ var plinkos = [];
 var bounds = [];
 var buckets = [];
 var cols = 10;
-var rows = 10;
+var rows = 7;
 var score = 0;
 
 function setup() {
-    createCanvas(600,800);
+    createCanvas(600,650);
     engine = Engine.create();
     world = engine.world;
     var spacing = width / cols;
