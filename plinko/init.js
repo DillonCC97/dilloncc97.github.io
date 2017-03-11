@@ -1,3 +1,5 @@
+// TODO: add free ball bucket
+
 var Engine = Matter.Engine,
     World = Matter.World,
     Bodies = Matter.Bodies;
@@ -11,6 +13,7 @@ var buckets = [];
 var cols = 10;
 var rows = 7;
 var score = 0;
+var balls = 20;
 
 function setup() {
     createCanvas(600,650);
@@ -55,6 +58,7 @@ function keyPressed() {
     if (keyCode == 82) {
         score =0;
         particles = [];
+        balls = 20;
     }
 }
 
@@ -82,7 +86,8 @@ function draw() {
         buckets[i].show();
     }
     textSize(20);
-    text("Score: " + score, 20,20);
+    text("Score: " + score, 20 ,25);
+    text("Balls: " + balls, 19, 50);
     textSize(12);
     text("Press 'r' to reset.", width - 110, 20);
     textSize(15);
@@ -102,5 +107,8 @@ function draw() {
 }
 
 function mousePressed() {
-    newParticle();
+    if (balls > 0){
+        newParticle();
+        balls--;
+    }
 }
