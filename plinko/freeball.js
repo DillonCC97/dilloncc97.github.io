@@ -1,17 +1,18 @@
-function Boundary(x, y, w, h, rest) {
+function FreeBall(x, y, w, h) {
     var options = {
-        isStatic: true
-        , restitution: rest
-        , friction: 0
+        restitution: 1
+        , isStatic: false
+        , density: 0
     }
     this.body = Bodies.rectangle(x, y, w, h, options);
     this.w = w;
     this.h = h;
+    this.body.velocity.x = 10;
     World.add(world, this.body);
 }
-Boundary.prototype.show = function () {
-    fill(255, 192, 203);
-    stroke(255, 192, 203);
+FreeBall.prototype.show = function () {
+    fill(255);
+    stroke(255);
     var pos = this.body.position;
     push();
     translate(pos.x, pos.y);
