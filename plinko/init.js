@@ -19,6 +19,9 @@ function setup() {
     world = engine.world;
     var spacing = width / cols;
     for (var j = 0; j < rows; j++) {
+        if (j % 2 == 0) {
+            cols++;
+        }
         for (var i = 0; i < cols; i++) {
             var x = i * spacing;
             if (j % 2 == 0) {

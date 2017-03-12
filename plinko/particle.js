@@ -1,6 +1,6 @@
 function Particle(x, y, r) {
-    var randX = (Math.random() * 0.0014) - 0.0007;
-    var randY = (Math.random() * 0.0014) - 0.0007;
+    var randX = (Math.random() * 0.001) - 0.0005;
+    var randY = (Math.random() * 0.001) - 0.0005;
     console.log(randX);
     console.log(randY);
     var options = {
