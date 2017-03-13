@@ -16,10 +16,22 @@ var score = 0;
 var balls = 20;
 var ballsThrown = 0;
 var freePos = 0;
+var leaderboard = JSON.parse("[{\"score\":21000,\"balls\":35,\"ratio\":600},{\"score\":12000,\"balls\":20,\"ratio\":600},{\"score\":9000,\"balls\":15,\"ratio\":600},{\"score\":6000,\"balls\":10,\"ratio\":600},{\"score\":3000,\"balls\":5,\"ratio\":600}]");
 
 //TODO Play ding.mp3 when free ball collision happens
-var ding;
-function preload() {
+//var ding;
+//function preload() {
+//}
+
+function leaderObj(score_arg, balls_arg) {
+    this.score = score_arg;
+    this.balls = balls_arg;
+    this.ratio = this.score / this.balls;
+}
+
+for (var i = 0; i < 5; i++){
+    var p = new leaderObj(0,0);
+    leaderboard.push(p);
 }
 
 function collision(event) {
@@ -35,10 +47,12 @@ function collision(event) {
 }
 
 function setup() {
-    ding = loadSound('ding.mp3');
-    createCanvas(600, 650);
+    dispLeader();
+//    ding = loadSound('ding.mp3');
+    var canvas = createCanvas(600, 650);
     engine = Engine.create();
     world = engine.world;
+    canvas.parent('canvas-holder');
     var spacing = width / cols;
     for (var j = 0; j < rows; j++) {
         if (j % 2 == 0) {
@@ -89,15 +103,34 @@ function newFree() {
     freeArr.push(f);
 }
 
+function sortNumber(a,b) {
+    return a.score - b.score;
+}
+
+
+function dispLeader() {
+    for (var i = 0; i < 5; i++) {
+            document.getElementById("lead-" + i).innerHTML = "Score: " + leaderboard[i].score + 
+                " | Balls Dropped: " + leaderboard[i].balls + " | Score/Ball: " + round(leaderboard[i].score / leaderboard[i].balls);
+        }
+}
+
+//TODO add scores to a hosted database
 function keyPressed() {
     if (keyCode == 82) {
         for (var i = 0; i < particles.length; i++) {
             World.remove(world, particles[i].body);
         }
+        var s = new leaderObj(score, ballsThrown);
+        leaderboard.push(s);
+        leaderboard.sort(sortNumber)
+        leaderboard.reverse();
+        leaderboard.splice(4,1);
         score = 0;
         particles = [];
         balls = 20;
         ballsThrown = 0;
+        dispLeader();
     }
 }
 
