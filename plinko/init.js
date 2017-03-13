@@ -17,6 +17,7 @@ var balls = 20;
 var ballsThrown = 0;
 var freePos = 0;
 
+//TODO Play ding.mp3 when free ball collision happens
 var ding;
 //function preload() {
 //    ding = loadSound('ding.mp3');
@@ -29,7 +30,7 @@ function collision(event) {
         var labelB = pairs[i].bodyB.label;
         if ((labelA == 'ball' && labelB == 'free') || (labelB == 'ball' && labelA == 'free')) {
             balls+=1;
-            //newFree();
+//            ding.play();
         }
     }
 }
@@ -77,8 +78,9 @@ function newParticle() {
     particles.push(p);
 }
 
+//TODO Make platform faster in center and slower at edges
 function newFree() {
-    freePos = (Math.sin(frameCount/40) * 285) + 300 ;
+    freePos = (Math.sin(frameCount/25) * 285) + 300 ;
     if (freeArr[0] != undefined){
         World.remove(world, freeArr[0].body);
         freeArr.splice(0, 1);
@@ -100,6 +102,8 @@ function keyPressed() {
 }
 
 //TODO free ball cooldown?
+//TODO ball disappears when getting free ball? Increase ball+=2
+//TODO change shape of free ball platform, hole w/ no collision? Cup?
 function draw() {
     background(51);
     Engine.update(engine);
