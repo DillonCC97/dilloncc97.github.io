@@ -7,6 +7,7 @@ function Plinko(x, y, r) {
     this.body = Bodies.circle(x, y, r, options);
     this.r = r;
     World.add(world, this.body);
+    this.body.label = "peg";
 }
 Plinko.prototype.show = function () {
     fill(0, 255, 0);

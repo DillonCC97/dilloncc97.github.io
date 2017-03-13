@@ -1,17 +1,37 @@
 // TODO: add free ball bucket
 var Engine = Matter.Engine
     , World = Matter.World
-    , Bodies = Matter.Bodies;
+    , Bodies = Matter.Bodies
+    , Events = Matter.Events;
 var engine;
 var world;
 var particles = [];
 var plinkos = [];
 var bounds = [];
 var buckets = [];
+var freeArr = [];
 var cols = 10;
 var rows = 7;
 var score = 0;
 var balls = 20;
+var freePos = 0;
+
+var ding;
+//function preload() {
+//    ding = loadSound('ding.mp3');
+//}
+
+function collision(event) {
+    var pairs = event.pairs;
+    for (var i = 0; i < pairs.length; i++) {
+        var labelA = pairs[i].bodyA.label;
+        var labelB = pairs[i].bodyB.label;
+        if ((labelA == 'ball' && labelB == 'free') || (labelB == 'ball' && labelA == 'free')) {
+            balls+=2;
+            //newFree();
+        }
+    }
+}
 
 function setup() {
     createCanvas(600, 650);
@@ -32,6 +52,9 @@ function setup() {
             plinkos.push(p);
         }
     }
+        
+    Events.on(engine, 'collisionStart', collision);
+    
     var b = new Boundary(width / 2, height + 50, width, 100, 0);
     bounds.push(b);
     b = new Boundary(0, height / 2, 1, height, 1);
@@ -49,8 +72,18 @@ function setup() {
 }
 
 function newParticle() {
-    var p = new Particle(mouseX, 50, 10);
+    var p = new Particle(mouseX, 50, 10); // mousey to 50
     particles.push(p);
+}
+
+function newFree() {
+    freePos = (Math.sin(frameCount/40) * 285) + 300 ;
+    if (freeArr[0] != undefined){
+        World.remove(world, freeArr[0].body);
+        freeArr.splice(0, 1);
+    }
+    var f = new FreeBall(freePos, height - 110, 30, 4);
+    freeArr.push(f);
 }
 
 function keyPressed() {
@@ -64,6 +97,7 @@ function keyPressed() {
     }
 }
 
+//TODO free ball cooldown?
 function draw() {
     background(51);
     Engine.update(engine);
@@ -81,12 +115,19 @@ function draw() {
             i--;
         }
     }
+        
     for (var i = 0; i < plinkos.length; i++) {
         plinkos[i].show();
     }
     for (var i = 0; i < buckets.length; i++) {
         buckets[i].show();
     }
+    for (var i = 0; i < freeArr.length; i++) {
+        freeArr[i].show();
+    }
+    
+    newFree();
+    
     textSize(20);
     text("Score: " + score, 20, 25);
     text("Balls: " + balls, 19, 50);
