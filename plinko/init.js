@@ -156,6 +156,5 @@ function mousePressed() {
         newParticle();
         balls--;
         ballsThrown++;
-        console.log(mouseX);
     }
 }
