@@ -95,6 +95,7 @@ function keyPressed() {
         score = 0;
         particles = [];
         balls = 20;
+        ballsThrown = 0;
     }
 }
 
@@ -147,9 +148,10 @@ function draw() {
 }
 
 function mousePressed() {
-    if (balls > 0) {
+    if (balls > 0 && mouseX < 600 && mouseX > 0) {
         newParticle();
         balls--;
         ballsThrown++;
+        console.log(mouseX);
     }
 }
