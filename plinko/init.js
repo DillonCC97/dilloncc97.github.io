@@ -14,6 +14,7 @@ var cols = 10;
 var rows = 7;
 var score = 0;
 var balls = 20;
+var ballsThrown = 0;
 var freePos = 0;
 
 var ding;
@@ -27,7 +28,7 @@ function collision(event) {
         var labelA = pairs[i].bodyA.label;
         var labelB = pairs[i].bodyB.label;
         if ((labelA == 'ball' && labelB == 'free') || (labelB == 'ball' && labelA == 'free')) {
-            balls+=2;
+            balls+=1;
             //newFree();
         }
     }
@@ -128,9 +129,10 @@ function draw() {
     
     newFree();
     
-    textSize(20);
+    textSize(15);
     text("Score: " + score, 20, 25);
     text("Balls: " + balls, 19, 50);
+    text("Dropped: " + ballsThrown, 20, 75);
     textSize(12);
     text("Press 'r' to reset.", width - 110, 20);
     textSize(15);
@@ -148,5 +150,6 @@ function mousePressed() {
     if (balls > 0) {
         newParticle();
         balls--;
+        ballsThrown++;
     }
 }
