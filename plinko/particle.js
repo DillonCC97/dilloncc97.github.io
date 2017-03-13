@@ -1,9 +1,8 @@
 function Particle(x, y, r) {
-    var randX = (Math.random() * 0.001) - 0.0005;
     var randY = (Math.random() * 0.001) - 0.0005;
     var options = {
         restitution: 1,
-        force: { x: randX, y: randY}
+        force: { x: 0, y: randY}
     }
     this.body = Bodies.circle(x, y, r, options);
     this.r = r;
