@@ -110,9 +110,11 @@ function sortNumber(a,b) {
 
 function dispLeader() {
     for (var i = 0; i < 5; i++) {
-            document.getElementById("lead-" + i).innerHTML = "Score: " + leaderboard[i].score + 
-                " | Balls Dropped: " + leaderboard[i].balls + " | Score/Ball: " + round(leaderboard[i].score / leaderboard[i].balls);
-        }
+        //document.getElementById("lead-" + i).innerHTML = "Score: " + leaderboard[i].score + " | Balls Dropped: " + leaderboard[i].balls + " | Score/Ball: " + round(leaderboard[i].score / leaderboard[i].balls);
+        document.getElementById("score-" + i).innerHTML = leaderboard[i].score;
+        document.getElementById("balls-" + i).innerHTML = leaderboard[i].balls;
+        document.getElementById("ratio-" + i).innerHTML = round(leaderboard[i].score / leaderboard[i].balls);
+    }
 }
 
 //TODO add scores to a hosted database

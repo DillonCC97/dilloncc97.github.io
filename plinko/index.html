@@ -4,6 +4,14 @@
 <head>
     <title>Plinko</title>
     <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta name="viewport" content="initial-scale=1.0">
     <script src="matter.js" type="text/javascript"></script>
@@ -21,6 +29,7 @@
     </div>
     <div>
         <h2>Leaderboard</h2>
+<!--
         <ol id="leaderboard">
             <li id="lead-0"></li>
             <li id="lead-1"></li>
@@ -28,6 +37,46 @@
             <li id="lead-3"></li>
             <li id="lead-4"></li>
         </ol>
+-->
+        
+        <table class=" table table-hover table-striped table-condensed">
+            <tr>
+                <td>Rank</td>
+                <td>Score</td>
+                <td>Balls Dropped</td>
+                <td>Points/Ball</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td id="score-0"></td>
+                <td id="balls-0"></td>
+                <td id="ratio-0"></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td id="score-1"></td>
+                <td id="balls-1"></td>
+                <td id="ratio-1"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td id="score-2"></td>
+                <td id="balls-2"></td>
+                <td id="ratio-2"></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td id="score-3"></td>
+                <td id="balls-3"></td>
+                <td id="ratio-3"></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td id="score-4"></td>
+                <td id="balls-4"></td>
+                <td id="ratio-4"></td>
+            </tr>
+        </table>
     </div>
 </body>
 

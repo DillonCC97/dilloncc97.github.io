@@ -4,3 +4,12 @@ body {
     -khtml-user-select: none; /* webkit (konqueror) browsers */
     -ms-user-select: none; /* IE10+ */
 }
+
+/*
+tr {
+    border-bottom: thick solid black;
+}*/
+
+.table {
+    width:600px;
+}
