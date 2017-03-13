@@ -19,9 +19,8 @@ var freePos = 0;
 
 //TODO Play ding.mp3 when free ball collision happens
 var ding;
-//function preload() {
-//    ding = loadSound('ding.mp3');
-//}
+function preload() {
+}
 
 function collision(event) {
     var pairs = event.pairs;
@@ -36,6 +35,7 @@ function collision(event) {
 }
 
 function setup() {
+    ding = loadSound('ding.mp3');
     createCanvas(600, 650);
     engine = Engine.create();
     world = engine.world;
