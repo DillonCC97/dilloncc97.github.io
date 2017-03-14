@@ -1,0 +1,39 @@
+li button {
+    float: right;
+}
+
+li {
+    border-bottom: 1px solid lightgray;
+    font-size: 24px;
+}
+
+li:hover {
+    background-color: lightgray;
+}
+
+ol,
+.input-group {
+    margin-left: 10vw;
+    width: 80vw;
+}
+
+input {
+    margin-bottom: 200px;
+}
+
+.header {
+    font-size: 38px;
+    margin-left: 10vw;
+}
+
+.minus-btn {
+    border: 1px;
+    padding: 6px 15px 6px 15px;
+    width: 38px;
+}
+
+span {
+    display: inline-block;
+    margin-bottom: 0;
+    max-width: 200px;
+}
