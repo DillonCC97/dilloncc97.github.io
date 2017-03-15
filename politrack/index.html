@@ -24,11 +24,20 @@
                     <input type="text" class="form-control" placeholder="Search for legislator" />
                     <div class="input-group-btn">
                         <div class="btn-group" role="group">
+                            <div class="btn-group inline" role="group" aria-label="...">
+                                <div class="btn-group inline" data-toggle="buttons">
+                                    <label class="btn btn-default active" id="ors">
+                                        <input type="radio" name="inputWalls" id="inputWalls" value="Good"> Legislators </label>
+                                    <label class="btn btn-default" id="ure">
+                                        <input type="radio" name="inputWalls" id="inputWalls" value="Poor"> Legislature </label>
+                                </div>
+                            </div>
                             <div class="dropdown dropdown-lg">
                                 <!--                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>-->
                                 <button type="button" class="btn btn-default dropdown-toggle" aria-expanded="false" id="adv-options"><span class="caret"></span></button>
                                 <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                    <form class="form-horizontal" role="form">
+                                    <!--- Legislators Menu --->
+                                    <form class="form-horizontal" id="ors_menu" role="form">
                                         <div class="form-group">
                                             <label for="filter">Sort</label>
                                             <select class="form-control">
@@ -41,13 +50,24 @@
                                             <label for="contain">Party</label>
                                             <div class="btn-group" role="group" aria-label="...">
                                                 <div class="btn-group" data-toggle="buttons">
-                                                    <label class="btn btn-default **active**">
+                                                    <label class="btn btn-default">
                                                         <input type="radio" name="inputWalls" id="inputWalls" value="Excellent"> Democrat </label>
                                                     <label class="btn btn-default">
                                                         <input type="radio" name="inputWalls" id="inputWalls" value="Good"> Independent </label>
                                                     <label class="btn btn-default">
                                                         <input type="radio" name="inputWalls" id="inputWalls" value="Poor"> Republican </label>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contain">Congress</label>
+                                            <div class="btn-group" role="group" aria-label="...">
+                                                <div class="btn-group" data-toggle="buttons">
+                                                    <label class="btn btn-default">
+                                                        <input type="radio" name="inputWalls" id="inputWalls" value="Good"> Year </label>
+                                                    <label class="btn btn-default">
+                                                        <input type="radio" name="inputWalls" id="inputWalls" value="Poor"> Number </label>
+                                                    <input class="inline" type="number" name="cong_num" min="1" max="5"> </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -60,7 +80,7 @@
                                                         <input type="radio" name="inputWalls" id="inputWalls" value="Poor"> Senate </label>
                                                 </div>
                                             </div>
-                                            <input class="inline" type="number" name="cong_num" min="1" max="5"> </div>
+                                        </div>
                                         <div class="form-group">
                                             <label for="contain">Committee</label>
                                             <select class="form-control">
@@ -81,6 +101,87 @@
                                         </div>
                                         <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                     </form>
+                                    <!--- Legislature Menu --->
+                                    <form class="form-horizontal" id="ure_menu" role="form">
+                                        <div class="form-group">
+                                            <label for="filter">Sort</label>
+                                            <select class="form-control">
+                                                <option value="1">Alphabetically</option>
+                                                <option value="2">Most recent action</option>
+                                                <option value="3">Introduction Date</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contain">Sponsor</label>
+                                            <input class="form-control" type="text" /> </div>
+                                        <div class="form-group">
+                                            <label for="contain">Introduced</label>
+                                            <div class="btn-group" role="group" aria-label="...">
+                                                <div class="btn-group" data-toggle="buttons">
+                                                    <label class="btn btn-default">
+                                                        <input type="radio" name="inputWalls" id="inputWalls" value="Good"> Year </label>
+                                                    <label class="btn btn-default">
+                                                        <input type="radio" name="inputWalls" id="inputWalls" value="Poor"> Congress Number </label>
+                                                    <input class="inline" type="number" name="cong_num" min="1" max="5"> </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-xs-12">
+                                                <div class="form-group">
+                                                    <label for="contain">Party</label>
+                                                    <div class="btn-group" role="group" aria-label="...">
+                                                        <div class="btn-group" data-toggle="buttons">
+                                                            <label class="btn btn-default">
+                                                                <input type="radio" name="inputWalls" id="inputWalls" value="Excellent"> Democrat </label>
+                                                            <label class="btn btn-default">
+                                                                <input type="radio" name="inputWalls" id="inputWalls" value="Good"> Independent </label>
+                                                            <label class="btn btn-default">
+                                                                <input type="radio" name="inputWalls" id="inputWalls" value="Poor"> Republican </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-xs-12">
+                                                <div class="form-group">
+                                                    <label for="contain">Chamber of Origin</label>
+                                                    <div class="btn-group" role="group" aria-label="...">
+                                                        <div class="btn-group" data-toggle="buttons">
+                                                            <label class="btn btn-default">
+                                                                <input type="radio" name="inputWalls" id="inputWalls" value="Good"> House </label>
+                                                            <label class="btn btn-default">
+                                                                <input type="radio" name="inputWalls" id="inputWalls" value="Poor"> Senate </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contain">Committee</label>
+                                            <select class="form-control">
+                                                <option value="1">Agriculture</option>
+                                                <option value="2">Appropriations</option>
+                                                <option value="3">Armed Services</option>
+                                                <option value="4">...</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sel1">Status</label>
+                                            <select class="form-control" id="sel1">
+                                                <option>Introduced</option>
+                                                <option>Committee Consideration</option>
+                                                <option>Floor Consideration</option>
+                                                <option>Failed One Chamber</option>
+                                                <option>Failed Both Chambers</option>
+                                                <option>Passed One Chamber</option>
+                                                <option>Passed Both Chambers</option>
+                                                <option>Resolving Differences</option>
+                                                <option>To President</option>
+                                                <option>Vetoed</option>
+                                                <option>Became Law</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                    </form>
                                 </div>
                             </div>
                             <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
@@ -89,6 +190,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="description">
+        <h4>About PoliTrack</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in mi id augue tincidunt imperdiet quis non dui. Ut dignissim nunc at est scelerisque auctor. Vivamus tincidunt ullamcorper rutrum. Vestibulum tempor orci at quam rhoncus, nec lobortis ex consectetur. Phasellus mattis, dui maximus mollis fringilla, elit velit dictum nibh, sit amet ultricies odio metus vitae nisi. Ut luctus fermentum ex, ut vestibulum metus ornare quis. Maecenas vestibulum semper molestie. Mauris pretium at quam a pulvinar. Nam condimentum pharetra justo, sed auctor tortor scelerisque sed. Praesent sit amet nisl finibus turpis interdum dictum dapibus a felis. Aenean libero urna, commodo sit amet risus ac, sodales cursus sapien. Aliquam erat volutpat. Curabitur ante magna, euismod quis tortor quis, congue suscipit urna. Mauris tristique luctus sapien sit amet fringilla.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in mi id augue tincidunt imperdiet quis non dui. Ut dignissim nunc at est scelerisque auctor. Vivamus tincidunt ullamcorper rutrum. Vestibulum tempor orci at quam rhoncus, nec lobortis ex consectetur. Phasellus mattis, dui maximus mollis fringilla, elit velit dictum nibh, sit amet ultricies odio metus vitae nisi. Ut luctus fermentum ex, ut vestibulum metus ornare quis. Maecenas vestibulum semper molestie. Mauris pretium at quam a pulvinar. Nam condimentum pharetra justo, sed auctor tortor scelerisque sed. Praesent sit amet nisl finibus turpis interdum dictum dapibus a felis. Aenean libero urna, commodo sit amet risus ac, sodales cursus sapien. Aliquam erat volutpat. Curabitur ante magna, euismod quis tortor quis, congue suscipit urna. Mauris tristique luctus sapien sit amet fringilla.</p>
     </div>
     <script src="script.js"></script>
 </body>
