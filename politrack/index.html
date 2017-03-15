@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <!--JavaScript-->
-    <script src="script.js"></script>
 </head>
 
 <body>
@@ -26,7 +25,8 @@
                     <div class="input-group-btn">
                         <div class="btn-group" role="group">
                             <div class="dropdown dropdown-lg">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                <!--                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>-->
+                                <button type="button" class="btn btn-default dropdown-toggle" aria-expanded="false" id="adv-options"><span class="caret"></span></button>
                                 <div class="dropdown-menu dropdown-menu-right" role="menu">
                                     <form class="form-horizontal" role="form">
                                         <div class="form-group">
@@ -60,13 +60,22 @@
                                                         <input type="radio" name="inputWalls" id="inputWalls" value="Poor"> Senate </label>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <input class="inline" type="number" name="cong_num" min="1" max="5"> </div>
                                         <div class="form-group">
                                             <label for="contain">Committee</label>
                                             <select class="form-control">
                                                 <option value="1">Agriculture</option>
                                                 <option value="2">Appropriations</option>
                                                 <option value="3">Armed Services</option>
+                                                <option value="4">...</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contain">State</label>
+                                            <select class="form-control">
+                                                <option value="1">Alabama</option>
+                                                <option value="2">Alaska</option>
+                                                <option value="3">Arizona</option>
                                                 <option value="4">...</option>
                                             </select>
                                         </div>
@@ -81,6 +90,7 @@
             </div>
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
 
 </html>

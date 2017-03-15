@@ -43,7 +43,7 @@ h1 {
 
 @media screen and (min-width: 768px) {
     #adv-search {
-        width: 500px;
+        width: 80vw;
         margin: 0 auto;
     }
     .dropdown.dropdown-lg {
@@ -51,5 +51,10 @@ h1 {
     }
     .dropdown.dropdown-lg .dropdown-menu {
         min-width: 500px;
+        width: 80vw;
     }
+}
+
+.inline {
+    display: inline;
 }
