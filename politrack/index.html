@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>PoliTrack</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <!--CSS-->
+    <link type="text/css" rel="stylesheet" href="style.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!--JavaScript-->
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="input-group" id="adv-search">
+                    <input type="text" class="form-control" placeholder="Search for legislator" />
+                    <div class="input-group-btn">
+                        <div class="btn-group" role="group">
+                            <div class="dropdown dropdown-lg">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group">
+                                            <label for="filter">Sort</label>
+                                            <select class="form-control">
+                                                <option value="1">Alphabetically</option>
+                                                <option value="2">Most recent in Office</option>
+                                                <option value="3">Time in Office</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contain">Party</label>
+                                            <div class="btn-group" role="group" aria-label="...">
+                                                <div class="btn-group" data-toggle="buttons">
+                                                    <label class="btn btn-default **active**">
+                                                        <input type="radio" name="inputWalls" id="inputWalls" value="Excellent"> Democrat </label>
+                                                    <label class="btn btn-default">
+                                                        <input type="radio" name="inputWalls" id="inputWalls" value="Good"> Independent </label>
+                                                    <label class="btn btn-default">
+                                                        <input type="radio" name="inputWalls" id="inputWalls" value="Poor"> Republican </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contain">Contains the words</label>
+                                            <input class="form-control" type="text" /> </div>
+                                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                    </form>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
