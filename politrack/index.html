@@ -17,6 +17,7 @@
 </head>
 
 <body>
+    <h1>PoliTrack</h1>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -50,8 +51,25 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="contain">Contains the words</label>
-                                            <input class="form-control" type="text" /> </div>
+                                            <label for="contain">Chamber</label>
+                                            <div class="btn-group" role="group" aria-label="...">
+                                                <div class="btn-group" data-toggle="buttons">
+                                                    <label class="btn btn-default">
+                                                        <input type="radio" name="inputWalls" id="inputWalls" value="Good"> House </label>
+                                                    <label class="btn btn-default">
+                                                        <input type="radio" name="inputWalls" id="inputWalls" value="Poor"> Senate </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contain">Committee</label>
+                                            <select class="form-control">
+                                                <option value="1">Agriculture</option>
+                                                <option value="2">Appropriations</option>
+                                                <option value="3">Armed Services</option>
+                                                <option value="4">...</option>
+                                            </select>
+                                        </div>
                                         <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                     </form>
                                 </div>
