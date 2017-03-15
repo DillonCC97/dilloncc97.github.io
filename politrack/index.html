@@ -21,19 +21,19 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="input-group" id="adv-search">
-                    <input type="text" class="form-control" placeholder="Search for legislator" />
+                    <!--TODO get main search input passing properly-->
+                    <input type="text" class="form-control" name="search" placeholder="Search for legislator" />
                     <div class="input-group-btn">
                         <div class="btn-group" role="group">
                             <div class="btn-group inline" role="group" aria-label="...">
                                 <div class="btn-group inline" data-toggle="buttons">
                                     <label class="btn btn-default active" id="ors">
-                                        <input type="radio" name="inputWalls" id="inputWalls" value="Good"> Legislators </label>
+                                        <input type="radio"> Legislators </label>
                                     <label class="btn btn-default" id="ure">
-                                        <input type="radio" name="inputWalls" id="inputWalls" value="Poor"> Legislature </label>
+                                        <input type="radio"> Legislature </label>
                                 </div>
                             </div>
                             <div class="dropdown dropdown-lg">
-                                <!--                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>-->
                                 <button type="button" class="btn btn-default dropdown-toggle" aria-expanded="false" id="adv-options"><span class="caret"></span></button>
                                 <div class="dropdown-menu dropdown-menu-right" role="menu">
                                     <!--- Legislators Menu --->
@@ -41,9 +41,9 @@
                                         <div class="form-group">
                                             <label for="filter">Sort</label>
                                             <select class="form-control">
-                                                <option value="1">Alphabetically</option>
-                                                <option value="2">Most recent in Office</option>
-                                                <option value="3">Time in Office</option>
+                                                <option value="alph">Alphabetically</option>
+                                                <option value="recent">Most recent in Office</option>
+                                                <option value="time">Time in Office</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -51,11 +51,11 @@
                                             <div class="btn-group" role="group" aria-label="...">
                                                 <div class="btn-group" data-toggle="buttons">
                                                     <label class="btn btn-default">
-                                                        <input type="radio" name="inputWalls" id="inputWalls" value="Excellent"> Democrat </label>
+                                                        <input type="radio" name="party" id="inputWalls" value="dem"> Democrat </label>
                                                     <label class="btn btn-default">
-                                                        <input type="radio" name="inputWalls" id="inputWalls" value="Good"> Independent </label>
+                                                        <input type="radio" name="party" value="ind"> Independent </label>
                                                     <label class="btn btn-default">
-                                                        <input type="radio" name="inputWalls" id="inputWalls" value="Poor"> Republican </label>
+                                                        <input type="radio" name="party" value="rep"> Republican </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -64,6 +64,7 @@
                                             <div class="btn-group" role="group" aria-label="...">
                                                 <div class="btn-group" data-toggle="buttons">
                                                     <label class="btn btn-default">
+                                                        <!-- TODO make Year and Number buttons change input name and range of number input-->
                                                         <input type="radio" name="inputWalls" id="inputWalls" value="Good"> Year </label>
                                                     <label class="btn btn-default">
                                                         <input type="radio" name="inputWalls" id="inputWalls" value="Poor"> Number </label>
@@ -75,15 +76,16 @@
                                             <div class="btn-group" role="group" aria-label="...">
                                                 <div class="btn-group" data-toggle="buttons">
                                                     <label class="btn btn-default">
-                                                        <input type="radio" name="inputWalls" id="inputWalls" value="Good"> House </label>
+                                                        <input type="radio" name="chamber" value="house"> House </label>
                                                     <label class="btn btn-default">
-                                                        <input type="radio" name="inputWalls" id="inputWalls" value="Poor"> Senate </label>
+                                                        <input type="radio" name="chamber" value="senate"> Senate </label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="contain">Committee</label>
                                             <select class="form-control">
+                                                <!--TODO Fill out Committees and assign values-->
                                                 <option value="1">Agriculture</option>
                                                 <option value="2">Appropriations</option>
                                                 <option value="3">Armed Services</option>
@@ -93,6 +95,7 @@
                                         <div class="form-group">
                                             <label for="contain">State</label>
                                             <select class="form-control">
+                                                <!--TODO Fill out States and assign values-->
                                                 <option value="1">Alabama</option>
                                                 <option value="2">Alaska</option>
                                                 <option value="3">Arizona</option>
@@ -191,7 +194,7 @@
             </div>
         </div>
     </div>
-    <div id="description">
+    <div id="description" class="well">
         <h4>About PoliTrack</h4>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in mi id augue tincidunt imperdiet quis non dui. Ut dignissim nunc at est scelerisque auctor. Vivamus tincidunt ullamcorper rutrum. Vestibulum tempor orci at quam rhoncus, nec lobortis ex consectetur. Phasellus mattis, dui maximus mollis fringilla, elit velit dictum nibh, sit amet ultricies odio metus vitae nisi. Ut luctus fermentum ex, ut vestibulum metus ornare quis. Maecenas vestibulum semper molestie. Mauris pretium at quam a pulvinar. Nam condimentum pharetra justo, sed auctor tortor scelerisque sed. Praesent sit amet nisl finibus turpis interdum dictum dapibus a felis. Aenean libero urna, commodo sit amet risus ac, sodales cursus sapien. Aliquam erat volutpat. Curabitur ante magna, euismod quis tortor quis, congue suscipit urna. Mauris tristique luctus sapien sit amet fringilla.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in mi id augue tincidunt imperdiet quis non dui. Ut dignissim nunc at est scelerisque auctor. Vivamus tincidunt ullamcorper rutrum. Vestibulum tempor orci at quam rhoncus, nec lobortis ex consectetur. Phasellus mattis, dui maximus mollis fringilla, elit velit dictum nibh, sit amet ultricies odio metus vitae nisi. Ut luctus fermentum ex, ut vestibulum metus ornare quis. Maecenas vestibulum semper molestie. Mauris pretium at quam a pulvinar. Nam condimentum pharetra justo, sed auctor tortor scelerisque sed. Praesent sit amet nisl finibus turpis interdum dictum dapibus a felis. Aenean libero urna, commodo sit amet risus ac, sodales cursus sapien. Aliquam erat volutpat. Curabitur ante magna, euismod quis tortor quis, congue suscipit urna. Mauris tristique luctus sapien sit amet fringilla.</p>
