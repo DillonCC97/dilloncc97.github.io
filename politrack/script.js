@@ -20,7 +20,7 @@ function showUreMenu() {
     console.log("Show Legislature Menu");
     ors_menu.style.display = "none";
     ure_menu.style.display = "block";
-    document.querySelector(".form-control").placeholder = "Search for Legislation or Bill ID";
+    document.querySelector(".form-control").placeholder = "Search for Legislation by Name or Bill ID";
 }
 showOrsMenu();
 ors_button.addEventListener("click", showOrsMenu);

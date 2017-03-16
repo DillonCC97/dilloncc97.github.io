@@ -56,12 +56,16 @@ h1 {
     }
     .dropdown.dropdown-lg .dropdown-menu {
         min-width: 80vw;
-        width: 80vw;
+        width: 100%;
     }
 }
 
 .inline {
     display: inline;
+}
+
+#search-bar {
+    width: 100%;
 }
 
 #description {
