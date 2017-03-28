@@ -3,9 +3,12 @@
 }
 
 body {
-    background: #4b6cb7;
-    background: -webkit-linear-gradient(to left, #4b6cb7, #182848);
-    background: linear-gradient(to left, #4b6cb7, #182848);
+    background: #DAE2F8;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #DAE2F8, #D6A4A4);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #DAE2F8, #D6A4A4);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     font-family: Lato;
 }
 
@@ -14,7 +17,7 @@ body {
     margin: 0 auto;
 }
 
-.checked{
+.checked {
     text-decoration: line-through;
     color: #bbb;
 }
@@ -22,8 +25,8 @@ body {
 #container {
     width: 360px;
     margin: 100px auto;
-    background: #f7f7f7;
-    box-shadow: 0 0 3px rgba(0,0,0,0.1);
+    background: #DAE2f8;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
 span {
@@ -49,7 +52,7 @@ li:hover span {
 }
 
 h1 {
-    background: #2980b9;
+    background: #D6A4A4;
     color: white;
     margin: 0;
     padding: 10px 20px;
@@ -82,13 +85,13 @@ input {
     background-color: #f7f7f7;
     outline: none;
     font-size: 18px;
-    color: #2980b9;
-    border: 3px solid rgba(0,0,0,0);
+    color: #D6A4A4;
+    border: 3px solid #D6A4A4;
 }
 
 input:focus {
     background: #fff;
-    border: 3px solid #2980b9;
+    border: 3px solid #D6A4A4;
 }
 
 .fa-plus-square {
