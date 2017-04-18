@@ -8,12 +8,18 @@ if (navigator.geolocation) {
     x.innerHTML = "Geolocation is not supported by this browser.";
 }
 
+
 function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude +
-        "<br>Longitude: " + position.coords.longitude;
     lat = position.coords.latitude;
     long = position.coords.longitude;
 }
+
+//var geocoder = new google.maps.Geocoder();
+//geocoder.geocode({
+//    "address": inputAddress
+//}, function (results) {
+//    console.log(results[0].geometry.location); //LatLng
+//});
 
 var bg;
 var y = 0;
@@ -34,5 +40,5 @@ function draw() {
     var coordX = ((long - (-82.470921)) / 0.232796) * 1366;
     var coordY = 768 - (((lat - 29.599735) / 0.114327) * 768);
     console.log(coordY);
-    ellipse(coordX, coordY, 10, 10); // (x, y, size)
+    rect(coordX, coordY, 15, 15); // (x, y, size)
 }
