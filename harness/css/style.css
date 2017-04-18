@@ -214,7 +214,7 @@ a:hover, a:focus {
 section {
     position: relative;
     width: 100%;
-    background: #fff;
+    background: #f8f8f8;
 }
 .home-slider {
     position: relative;
@@ -366,7 +366,7 @@ section {
     color: #cccccc;
 }
 .heading-block-3 {
-    margin-bottom: 130px;
+    margin-bottom: 120px;
 }
 .heading-block-3 h3 {
   font-family: Martel;
@@ -3137,7 +3137,7 @@ header.header-3d{
             testimonial
 ========================================================*/
 .testimonial {
-    background: url(../images/illustration-home-feature.png) top center no-repeat;
+    background: #f8f8f8 url(../images/illustration-home-feature.png) top center no-repeat;
 }
 .testimonial .slider-sec {
     max-width: 1277px;
@@ -4358,4 +4358,35 @@ header .is-sticky .sticky {
     vertical-align: bottom;
     margin-bottom: 56px;
     margin-top: 56px;
+}
+
+#content-section-1 {
+    background-color: #f8f8f8;
+}
+
+.inner-content {
+    background-color: #ffffff;
+    width: 80vw;
+    padding-bottom: 70px;
+    box-shadow: 0 0 4.5px 1.5px rgba(0, 0, 0, 0.10);*/
+}
+
+.padding-top-44 {
+    padding-top:44px;
+}
+
+.half-module {
+
+}
+
+#left-half-module {
+    width: 590px;
+    height: 398px;
+    background-color: #ffffff;
+}
+
+#right-half-module{
+    width: 588px;
+    height: 398px;
+    background-color: #3e82f7;
 }

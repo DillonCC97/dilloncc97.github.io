@@ -50,6 +50,7 @@
     <div id="wrap">
 
         <!-- Header -->
+        <!-- TODO Fix Navbar color and dropdown on mobile displays -->
         <header class="header">
             <div class="sticky">
                 <div class="container">
@@ -100,8 +101,8 @@
         <div id="content" class="inner-pages">
 
             <!-- Services -->
-            <section class="services web padding-top-50 padding-bottom-50">
-                <div class="container">
+            <section id="content-section-1" class="services web">
+                <div class="container padding-top-50 inner-content"> <!-- TODO Make bottom box shadow overlap into next div -->
 
                     <!-- HEADING BLOCK -->
                     <div class="heading-block-3 text-center">
@@ -109,42 +110,46 @@
                     </div>
                     <div class="services-grid">
                         <!-- Services List -->
-                        <ul class="row">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                <ul>
+                                    <!-- Collect -->
+                                    <li>
+                                        <div class="icon-larger-img animate fadeInUp" data-wow-delay="0.4s"> <img class="img-responsive" src="images/illlustration-home-collect.png" alt=" "> </div>
+                                        <h5>Collect</h5>
+                                        <p>Say goodbye to awkward cold calls and unopened direct mail. Collecting donations just got easier and faster than ever.</p>
 
-                            <!-- Collect -->
-                            <li>
-                                <div class="icon-larger-img animate fadeInUp" data-wow-delay="0.4s"> <img class="img-responsive" src="images/illlustration-home-collect.png" alt=" "> </div>
-                                <h5>Collect</h5>
-                                <p>Say goodbye to awkward cold calls and unopened direct mail. Collecting donations just got easier and faster than ever.</p>
+                                    </li>
 
-                            </li>
+                                    <!-- Engage -->
+                                    <li>
+                                        <div class="icon-larger-img animate fadeInUp" data-wow-delay="0.4s"> <img class="img-responsive" src="images/illustration-home-engage.png" alt=" "> </div>
+                                        <h5>Engage</h5>
+                                        <p>Show your supporters the big difference they're making, as they're making it - and build a relationship that will last a lifetime.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
-                            <!-- Engage -->
-                            <li>
-                                <div class="icon-larger-img animate fadeInUp" data-wow-delay="0.4s"> <img class="img-responsive" src="images/illustration-home-engage.png" alt=" "> </div>
-                                <h5>Engage</h5>
-                                <p>Show your supporters the big difference they're making, as they're making it - and build a relationship that will last a lifetime.</p>
-                            </li>
+                        <div class="row padding-top-50">
+                            <div class="col-md-10 col-md-offset-1">
+                                <ul>
+                                    <!-- Analyze -->
+                                    <li>
+                                        <div class="icon-larger-img animate fadeInUp padding-top-44" data-wow-delay="0.4s"> <img class="img-responsive" src="images/illustration-home-analyze.png" alt=" "> </div>
+                                        <h5>Analyze</h5>
+                                        <p>Get to know your donors and how they're donating, with real-time analysis, insights, tracking and reports.</p>
+                                    </li>
 
-                        </ul>
-
-                        <ul class="row padding-top-50">
-
-                            <!-- Analyze -->
-                            <li>
-                                <div class="icon-larger-img animate fadeInUp" data-wow-delay="0.4s"> <img class="img-responsive" src="images/illustration-home-analyze.png" alt=" "> </div>
-                                <h5>Analyze</h5>
-                                <p>Get to know your donors and how they're donating, with real-time analysis, insights, tracking and reports.</p>
-                            </li>
-
-                            <!-- Customize -->
-                            <li>
-                                <div class="icon-larger-img animate fadeInUp" data-wow-delay="0.4s"> <img class="img-responsive" src="images/illustration-home-customize.png" alt=" "> </div>
-                                <h5>Customize</h5>
-                                <p>Our white-label technology gives you complete control of your donor's experience, from the first page to the final click.</p>
-                            </li>
-
-                        </ul>
+                                    <!-- Customize -->
+                                    <li>
+                                        <div class="icon-larger-img animate fadeInUp" data-wow-delay="0.4s"> <img class="img-responsive" src="images/illustration-home-customize.png" alt=" "> </div>
+                                        <h5>Customize</h5>
+                                        <p>Our white-label technology gives you complete control of your donor's experience, from the first page to the final click.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -239,7 +244,7 @@
             </section>
 
             <!-- Portfolio -->
-            <section class="our-work padding-top-150 padding-bottom-150" data-stellar-background-ratio="0.4">
+            <section class="our-work padding-top-50 padding-bottom-50" data-stellar-background-ratio="0.4">
                 <div class="container">
 
                     <!-- Liast Work -->
@@ -267,7 +272,11 @@
                 </div>
             </section>
 
-
+            <!-- TODO Finish half-module -->
+            <div class="row half-module">
+                <div id="left-half-module" class="col-md-4 col-md-offset-2"></div>
+                <div id="right-half-module" class="col-md-4 col-md-offset-2"></div>
+            </div>
         </div>
         <!-- End Content -->
 
@@ -325,10 +334,8 @@
                             </form>
                         </div>
                         <div class="col-md-3">
-                            <img src="images/harness-logo-white.png"
-                                 srcset="images/harness-logo@2x-white.png 2x,
-                                         images/harness-logo@3x-white.png 3x"
-                                 class="harness_logo">
+                            <img src="images/harness-logo-white.png" srcset="images/harness-logo@2x-white.png 2x,
+                                         images/harness-logo@3x-white.png 3x" class="harness_logo">
                         </div>
                     </div>
                     <div id="policies" class="row">
