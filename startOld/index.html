@@ -1,0 +1,293 @@
+<!doctype html>
+
+<title>~</title>
+
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script>WebFontConfig={google:{families:['Lucidia Console']}};</script>
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js" async></script>
+<script src="//fast.eager.io/p9INrAOSHS.js"></script>
+
+<style type="text/css">
+  body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #1F222D;
+  color: #3e445a;
+  font-family: 'Lucidia Console', monospace;
+  }
+
+  main {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-98px);
+  text-align: center;
+  }
+
+  time {
+  font-size: 5rem;
+  letter-spacing: 6px;
+  }
+
+  input {
+  box-sizing: border-box;
+  width: 90%;
+  text-align: center;
+  max-width: 310px;
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #252936;
+  border-radius: 2px;
+  color: #3e445a;
+  font-family: 'Lucidia Console', monospace;
+  font-size: 1.1rem;
+  }
+
+  input,
+  input:focus {
+  border: 0;
+  outline: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  }
+
+  aside {
+  position: fixed;
+  box-sizing: border-box;
+  left: 0;
+  width: 100%;
+  max-width: 300px;
+  height: 100%;
+  padding: 15px 0 0;
+  background-color: #000000;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 700ms;
+  transform: translateX(-315px);
+  overflow: auto;
+  z-index: 1;
+  overflow-x: hidden;
+  }
+  ::-webkit-scrollbar {
+  width: 0px;  /* remove scrollbar space */
+  background: transparent;  /* optional: just make scrollbar invisible */
+  }
+
+  aside[data-toggled='true'] {
+  transform: translateX(0);
+  }
+
+  h1 {
+  margin: 0 25px 15px;
+  line-height: 1rem;
+  }
+
+  ul {
+  margin: 0 0 15px;
+  padding: 0;
+  }
+
+  li {
+  list-style: none;
+  }
+
+  a {
+  display: block;
+  padding: 0 25px;
+  color: #3e445a;
+  line-height: 1.7rem;
+  text-decoration: none;
+  }
+
+  a:hover span:last-of-type {
+  text-decoration: underline;
+  }
+
+  span:first-of-type {
+  font-family: 'Lucidia Console', monospace;
+  }
+
+  span:last-of-type {
+  font-size: 0.9rem;
+  }
+</style>
+
+<main>
+  <time id="js-clock"></time>
+  <form id="js-search-form" autocomplete="off">
+    <input id="js-search-input" type="text" autofocus>
+  </form>
+</main>
+
+<aside id="js-sidebar">
+  <h1>~</h1>
+  <ul id="js-help"></ul>
+</aside>
+
+<script>
+  'use strict';
+
+  (function() {
+  var clock = document.getElementById('js-clock');
+
+  function leftpad(num) {
+  return ('0' + num.toString()).slice(-2);
+  }
+
+  function setTime() {
+  var date = new Date();
+  var hours = leftpad(date.getHours());
+  var minutes = leftpad(date.getMinutes());
+  if (hours >= 12) {
+  hours = hours-12;
+  hours = hours<10?"0"+hours:hours;
+                 }
+                 if (hours == 0) {
+                 hours = 12;
+                 }
+                 clock.innerHTML = hours + ' ' + minutes;
+                 }
+
+                 setTime();
+                 setInterval(setTime, 1000);
+                 })();
+
+                 (function(opts) {
+                 var sidebar = document.getElementById('js-sidebar');
+                 var searchForm = document.getElementById('js-search-form');
+                 var searchInput = document.getElementById('js-search-input');
+                 var searchHelp = document.getElementById('js-help');
+                 var urlRegex = /(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/;
+
+                 opts.commands.forEach(function(command) {
+                 var li = document.createElement('li');
+                 var link = document.createElement('a');
+                 var key = document.createElement('span');
+                 var name = document.createElement('span');
+
+                 key.innerHTML = command.key + ': ';
+                 name.innerHTML = command.name;
+                 link.href = command.url;
+
+                 link.appendChild(key);
+                 link.appendChild(name);
+                 li.appendChild(link);
+                 searchHelp.appendChild(li);
+                 });
+
+                 searchForm.addEventListener('submit', function(event) {
+                 event.preventDefault();
+
+                 var q = searchInput.value.trim();
+                 var redirect = '';
+
+                 if (q === '' || q === '?') {
+                 sidebar.setAttribute('data-toggled', true);
+                 searchInput.value = '';
+                 return false;
+                 }
+
+                 if (q.match(new RegExp(urlRegex))) {
+                 redirect = q;
+                 } else {
+                 redirect = opts.defaultCommand + encodeURIComponent(q);
+                 }
+
+                 q = q.split(opts.delimiter);
+
+                 opts.commands.forEach(function(command) {
+                 if (q[0] === command.key) {
+                 if (q[1] && command.search) {
+                 q.shift();
+                 var search = encodeURIComponent(q.join(opts.delimiter).trim());
+                 redirect = command.url + command.search + search;
+                 } else {
+                 redirect = command.url;
+                 }
+                 }
+                 });
+
+                 window.location.href = redirect;
+	         
+	         if (redirect == 'http://xdcc.horriblesubs.info/'){
+		 window.open('http://horriblesubs.info/', '_blank');
+	         } //kek
+	         
+                 }, false);
+
+                 document.addEventListener('keydown', function(event) {
+                 if (event.keyCode === 27) sidebar.removeAttribute('data-toggled');
+                 });
+                 })({
+                 delimiter: ':',
+                 defaultCommand: 'https://www.google.com/search?q=',
+                 commands: [ //TODO Make alphabetical
+                 { key: 'amazon', name: 'Amazon', url:
+                 'https://www.amazon.com', search:
+                 '/s/?field-keywords=' },
+                 { key: 'archnews', name: 'Arch News', url:
+                 'https://www.archlinux.org/news/' },
+                 { key: 'bit', name: 'BitBucket', url: 'https://bitbucket.org/', search: 'DillonCC97/' },
+                 { key: 'canvas', name: 'Canvas', url: 'http://elearning.ufl.edu/', },
+                 { key: 'codecademy', name: 'Codecademy', url: 'https://www.codecademy.com/' },
+                 { key: 'cr', name: 'CrunchyRoll', url: 'http://www.crunchyroll.com/', search: 'search?from=&q=' },
+                 { key: 'email', name: 'Email', url: 'https://mail.google.com/mail', search: '/u/0/#search/' },
+                 { key: 'eventhubs', name: 'EventHubs', url: 'http://www.eventhubs.com/', search: 'cse?cx=018347486046165119511%3Aveqnczdsfxw&ie=UTF-8&q=asdf&sa.x=17&sa.y=13#gsc.tab=0&gsc.q=' },
+                 { key: 'fa', name: 'Fashion', url: 'https://boards.4chan.org/fa/' },
+                 { key: 'face', name: 'Facebook', url: 'https://www.facebook.com', search: '/search/top/?q=' },
+                 { key: 'fader', name: 'TheFader', url: 'http://www.thefader.com/', search: 'search?query=' },
+                 { key: 'g', name: 'Tech', url: 'https://boards.4chan.org/g/' },
+                 { key: 'gif', name: 'AdultGif', url: 'https://boards.4chan.org/gif/' },
+                 { key: 'git', name: 'GitHub', url: 'https://github.com', search: '/search?q=' },
+                 { key: 'hb', name: 'HypeBeast', url: 'http://hypebeast.com/', search: 'search?s=' },
+                 { key: 'horrible', name: 'HorribleSubs', url:
+                 'http://xdcc.horriblesubs.info/' },
+                 { key: 'imgur', name: 'Imgur', url:
+                 'https://imgur.com/', search: '/search?q=' },
+                 { key: 'inbox', name: 'Inbox', url: 'https://inbox.google.com', search: '/search/' },
+                 { key: 'kat', name: 'KickAss', url: 'https://kat.cr/', search: 'usearch/' },
+                 { key: 'khan', name: 'Khan Academy', url: 'https://www.khanacademy.org', search: '/search?page_search_query=' },
+                 { key: 'manga', name: 'Manga', url: 'http://mangapark.me/', search: 'search?q=' },
+                 { key: 'mu', name: 'Music', url: 'https://boards.4chan.org/mu/' },
+                 { key: 'myuf', name: 'MyUF', url: 'https://my.ufl.edu/' },
+                 { key: 'p', name: 'Product Hunt', url: 'https://www.producthunt.com', search: '/search?q=' },
+                 { key: 'paper', name: 'PaperMag', url: 'http://www.papermag.com/', search: 'search/?q=' },
+                 { key: 'rym', name: 'RateYourMusic', url: 'http://rateyourmusic.com/', search: 'search?searchtype=a&searchterm=' }, <!--TODO add other searchtypes-->
+                 { key: 'shoryuken', name: 'Shoryuken', url: 'http://shoryuken.com/', search: 'search-results/?q=' },
+                 { key: 'slack', name: 'Slack', url: 'https://dirtybirds.slack.com/messages/general/' },
+                 { key: 'soundcloud', name: 'SoundCloud', url: 'https://soundcloud.com', search: '/search?q=' },
+                 { key: 'stack', name: 'StackOverflow', url: 'http://stackoverflow.com/', search: 'search?q=' },
+                 { key: 'text', name: 'MightyText', url: 'https://mightytext.net/web8/', },
+                 { key: 'tumblr', name: 'Tumblr', url: 'https://www.tumblr.com/', search: 'search/' },
+                 { key: 'twitter', name: 'Twitter', url: 'https://twitter.com', search: '/search?q=' },
+                 { key: 'ufapps', name: 'UFApps', url:
+                 'https://apps.ufl.edu/' },
+                 { key: 'ufmail', name: 'UFMail', utl:
+                 'http://outlook.com/owa/anest.ufl.edu' },
+                 { key: 'ufstudent', name: 'UFStudent', url: 'https://student.ufl.edu/' },
+                 { key: 'webassign', name: 'WebAssign', url: 'https://www.webassign.net/ufl/login.html' },
+                 { key: 'wg', name: 'Wall General', url: 'https://boards.4chan.org/wg/' },
+                 { key: 'wsg', name: 'WorkSafe Gif', url: 'https://boards.4chan.org/wsg/' },
+                 { key: 'xdcc', name: 'SunXDCC', url: 'http://sunxdcc.com/'},
+                 { key: 'xkcd', name: 'XKCD', url: 'https://xkcd.com/', },
+                 { key: 'yt', name: 'YouTube', url: 'https://www.youtube.com', search: '/results?search_query=' },
+                 { key: 'discord', name: 'Discord', url: 'https://discordapp.com/channels/@me'},
+                 { key: 'waffles', name: 'Waffles', url: 'https://waffles.ch/browse.php', search: '?q=' }
+                 //{ key: 'about', name: 'About', url: 'about:about'},
+                 //{ key: 'addons', name: 'AddOns', url: 'about:addons' },
+                 //{ key: 'cache', name: 'Cache', url: 'about:cache' },
+                 //{ key: 'config', name: 'Config', url: 'about:config' },
+                 //{ key: 'downloads', name: 'Downloads', url: 'about:downloads' },
+                 //{ key: 'memory', name: 'Memory', url: 'about:memory' },
+                 //{ key: 'plugins', name: 'Plugins', url: 'about:plugins' },
+                 ]
+                 });
+                 </script>
+
