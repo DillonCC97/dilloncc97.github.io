@@ -408,6 +408,22 @@ function updateTentTable() {
     pricePerSqFtCell.setAttribute("role", "cell");
     row.appendChild(pricePerSqFtCell);
 
+    const removeCell = document.createElement("td");
+    removeCell.setAttribute("role", "cell");
+    // Create the button element
+    const removeButton = document.createElement("button");
+    removeButton.className = "remove-tent";
+    removeButton.setAttribute("aria-label", "Remove Tent");
+    removeButton.textContent = "Remove"; // Button label
+
+    // Add the onClick event
+    removeButton.onclick = () => removeTent(index);
+
+    // Append the button to the cell
+    removeCell.appendChild(removeButton);
+
+    row.appendChild(removeCell);
+
     // Append the row to the table
     tableBody.appendChild(row);
   });
