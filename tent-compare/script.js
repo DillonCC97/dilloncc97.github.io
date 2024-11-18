@@ -1,3 +1,4 @@
+// TODO: Clean up and break up file :)
 // Tent data stored in inches
 const tents = [
   { name: "REI Flash Air", length: 88, width: 35, price: 249.99 },
