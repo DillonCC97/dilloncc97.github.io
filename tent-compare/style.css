@@ -1,4 +1,4 @@
-/* General Body Styles */
+/* General Styles */
 body {
   display: flex;
   flex-direction: column;
@@ -32,8 +32,8 @@ button:focus, input:focus, select:focus {
 .header select {
   font-size: 14px;
   padding: 5px;
-  border-radius: 4px;
   border: 1px solid #fff;
+  border-radius: 4px;
   background-color: #fff;
   color: #000;
 }
@@ -58,7 +58,7 @@ button:focus, input:focus, select:focus {
 }
 
 .chart-container {
-  display: flex; /* Flex for canvas alignment */
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -66,11 +66,6 @@ button:focus, input:focus, select:focus {
   max-height: 95vh;
 }
 
-.chart-selection {
-  padding: 5px;
-}
-
-/* Chart Styling */
 .chart-container canvas {
   border: 2px solid #000;
   background-color: #fff;
@@ -81,23 +76,15 @@ button:focus, input:focus, select:focus {
   object-fit: contain; /* Preserve aspect ratio */
 }
 
-/* Responsive Design for Small Screens */
-@media (max-aspect-ratio: 4/3) {
-  .main-container {
-    flex-direction: column; /* Stack everything in one column */
-  }
-
-  .form-container,
-  .charts-container {
-    flex: 0 1 auto;
-  }
-
-  .chart-container {
-    flex: 1 1 100%; /* Charts span full width when stacked */
-  }
+.chart-selection, .chart-option-container {
+  padding: 5px;
 }
 
-/* Form and Table Section */
+.chart-option-container select {
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* Form Styles */
 form {
   display: flex;
   flex-wrap: wrap;
@@ -112,30 +99,28 @@ form {
 form label {
   width: 100%;
   font-size: 14px;
-  /*margin-bottom: 5px;*/
 }
 
 form input,
 form select,
 form button {
-  margin: 2px 0;
+  margin: 2px 0 10px;
   font-size: 12px;
   padding: 5px;
   border: 1px solid #000;
   border-radius: 4px;
   background-color: #fff;
-  width: 48%; /* Two inputs per row */
-  height: auto; /* Reset height */
-  display: block; /* Ensure consistent block behavior */
-  align-self: center; /* Prevent stretching in flexbox */
+  width: 48%;
+  height: auto;
+  display: block;
+  align-self: center;
   box-sizing: border-box; /* Ensure padding and border are included */
-  margin-bottom: 10px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
 }
 
 form select {
-  max-height: 2.5em; /* Limit height for better appearance */
-  padding: 0.2em; /* Add padding for better usability */
+  max-height: 2.5em;
+  padding: 0.2em;
 }
 
 form button {
@@ -146,8 +131,9 @@ form button {
   font-weight: bold;
 }
 
+/* Table Styles */
 .tent-table {
-  width: 100%; /* Ensure the table adjusts to its container's width */
+  width: 100%;
   border-collapse: collapse;
   margin: 10px auto;
   font-size: 12px;
@@ -159,13 +145,13 @@ form button {
 .tent-table th {
   background-color: #660000;
   color: white;
-  cursor: pointer;
   padding: 5px;
-  transition: background-color 0.2s ease; /* Smooth transition effect */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .tent-table th:hover {
-  background-color: #880000; /* Slightly lighter shade on hover */
+  background-color: #880000;
 }
 
 .tent-table td {
@@ -174,18 +160,13 @@ form button {
 }
 
 .tent-table tr:focus {
-  outline: 2px solid #000; /* Adds a focus indicator */
-  outline-offset: 2px; /* Keeps the indicator spaced from the row content */
-  background-color: #f0f0f0; /* Highlights row during focus */
-}
-
-.tent-table {
-  display: table; /* Ensure proper table layout */
+  outline: 2px solid #000;
+  outline-offset: 2px;
+  background-color: #f0f0f0;
 }
 
 .tent-table[role="table"] {
-  border-collapse: collapse;
-  width: 100%;
+  display: table;
 }
 
 .tent-table [role="row"] {
@@ -206,7 +187,7 @@ form button {
   cursor: pointer;
 }
 
-/* Footer Styles */
+/* Footer */
 footer {
   text-align: center;
   font-size: 10px;
@@ -214,68 +195,59 @@ footer {
   color: #666;
 }
 
-.chart-option-container {
-  margin-bottom: 5px;
+/* Responsive Design */
+@media (max-aspect-ratio: 4/3) {
+  .main-container {
+    flex-direction: column;
+  }
+
+  .form-container,
+  .charts-container {
+    flex: 0 1 auto;
+  }
+
+  .chart-container {
+    flex: 1 1 100%;
+  }
 }
 
-.chart-option-container select {
-  font-family: 'Courier New', Courier, monospace;
-}
-
-/* Card Layout for Small Screens */
 @media (max-width: 768px) {
   .tent-table {
     display: block;
-    border: none; /* Remove table border for card styling */
+    border: none;
   }
 
   .tent-table thead {
-    display: none; /* Hide the table header */
+    display: none;
   }
 
   .tent-table tbody {
     display: flex;
-    flex-direction: column; /* Stack rows as cards */
+    flex-direction: column;
   }
 
-  .tent-table tr {
+  .tent-table [role="row"] {
     display: flex;
-    flex-direction: column; /* Each row becomes a card */
-    border: 1px solid #000; /* Add border for card */
+    flex-direction: column;
+    border: 2px solid #000;
     margin-bottom: 10px;
     padding: 10px;
     background-color: white;
     box-shadow: 2px 2px 5px #999;
   }
 
-  .tent-table td {
+  .tent-table [role="cell"] {
     display: flex;
-    justify-content: space-between; /* Label and value side-by-side */
+    justify-content: space-between;
     padding: 5px 0;
     font-size: 14px;
     border: 0;
   }
 
   .tent-table td::before {
-    content: attr(data-label); /* Display the column header */
+    content: attr(data-label);
     font-weight: bold;
     margin-right: 10px;
-    text-align: left;
-    font-size: 14px;
-  }
-
-  .tent-table td::before {
-    content: attr(data-label); /* Dynamically display column header */
-    font-weight: bold; /* Make headers stand out */
-    margin-right: 10px; /* Add space between label and value */
-    display: inline-block; /* Ensure it's inline for better readability */
-  }
-
-  .tent-table tr {
-    border: 1px solid #000; /* Card-style border for rows */
-    margin-bottom: 10px; /* Add space between cards */
-    background-color: #fff; /* Background for better visibility */
-    padding: 10px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for card effect */
+    display: inline-block;
   }
 }
