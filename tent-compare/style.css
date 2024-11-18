@@ -173,6 +173,31 @@ form button {
   padding: 5px;
 }
 
+.tent-table tr:focus {
+  outline: 2px solid #000; /* Adds a focus indicator */
+  outline-offset: 2px; /* Keeps the indicator spaced from the row content */
+  background-color: #f0f0f0; /* Highlights row during focus */
+}
+
+.tent-table {
+  display: table; /* Ensure proper table layout */
+}
+
+.tent-table[role="table"] {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tent-table [role="row"] {
+  display: table-row;
+}
+
+.tent-table [role="cell"] {
+  display: table-cell;
+  padding: 5px;
+  border: 1px solid #000;
+}
+
 .tent-table button {
   font-size: 10px;
   padding: 3px 5px;
@@ -237,5 +262,20 @@ footer {
     margin-right: 10px;
     text-align: left;
     font-size: 14px;
+  }
+
+  .tent-table td::before {
+    content: attr(data-label); /* Dynamically display column header */
+    font-weight: bold; /* Make headers stand out */
+    margin-right: 10px; /* Add space between label and value */
+    display: inline-block; /* Ensure it's inline for better readability */
+  }
+
+  .tent-table tr {
+    border: 1px solid #000; /* Card-style border for rows */
+    margin-bottom: 10px; /* Add space between cards */
+    background-color: #fff; /* Background for better visibility */
+    padding: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for card effect */
   }
 }

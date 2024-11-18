@@ -339,13 +339,17 @@ function generateOverlayChart(selectedUnit = "ft") {
 let currentSortColumn = null;
 let currentSortDirection = "asc";
 
+function roundNumber(number, decimalPlaces = 2) {
+  console.log(number, decimalPlaces);
+  return Math.round((number + Number.EPSILON) * (10 * decimalPlaces)) / (10 * decimalPlaces);
+}
+
 /**
- * Updates the tent table based on the selected unit.
+ * Updates the tent table with dynamically added tent data.
  */
 function updateTentTable() {
   const tableBody = document.querySelector("#tent-table tbody");
-  tableBody.innerHTML = "";
-
+  tableBody.innerHTML = ""; // Clear existing rows
   const selectedUnit = document.getElementById("global-unit").value;
 
   tents.forEach((tent, index) => {
@@ -355,20 +359,73 @@ function updateTentTable() {
     const pricePerUnit = tent.price / convertedArea;
 
     const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${tent.name}</td>
-      <td>${convertedLength.toFixed(2)}</td>
-      <td>${convertedWidth.toFixed(2)}</td>
-      <td>${convertedArea.toFixed(2)}</td>
-      <td>${tent.price.toFixed(2)}</td>
-      <td>${pricePerUnit.toFixed(2)}</td>
-      <td><button onclick="removeTent(${index})">Remove</button></td>
-    `;
+
+    // Assign ARIA role to row
+    row.setAttribute("role", "row");
+    row.tabIndex = 0; // Make row focusable
+    row.setAttribute("aria-label", `Tent data row ${index + 1}`);
+
+    // Create cells with data-label and ARIA roles
+    const nameCell = document.createElement("td");
+    nameCell.textContent = tent.name;
+    nameCell.setAttribute("data-label", "Name");
+    nameCell.setAttribute("role", "cell");
+    row.appendChild(nameCell);
+
+    const lengthCell = document.createElement("td");
+    lengthCell.textContent = roundNumber(convertedLength);
+    lengthCell.setAttribute("data-label", "Length");
+    lengthCell.setAttribute("role", "cell");
+    row.appendChild(lengthCell);
+
+    const widthCell = document.createElement("td");
+    widthCell.textContent = roundNumber(convertedWidth);
+    widthCell.setAttribute("data-label", "Width");
+    widthCell.setAttribute("role", "cell");
+    row.appendChild(widthCell);
+
+    const areaCell = document.createElement("td");
+    areaCell.textContent = roundNumber(convertedArea);
+    areaCell.setAttribute("data-label", "Area");
+    areaCell.setAttribute("role", "cell");
+    row.appendChild(areaCell);
+
+    const priceCell = document.createElement("td");
+    priceCell.textContent = `$${tent.price.toFixed(2)}`;
+    priceCell.setAttribute("data-label", "Price");
+    priceCell.setAttribute("role", "cell");
+    row.appendChild(priceCell);
+
+    const pricePerSqFtCell = document.createElement("td");
+    pricePerSqFtCell.textContent = roundNumber(pricePerUnit).toFixed(2);
+    pricePerSqFtCell.setAttribute("data-label", "Price Per Area");
+    pricePerSqFtCell.setAttribute("role", "cell");
+    row.appendChild(pricePerSqFtCell);
+
+    // Append the row to the table
     tableBody.appendChild(row);
   });
 
-  updateTableHeaders(); // Update header indicators
-  updateTableDataLabels();
+  updateTableHeaders();
+}
+
+/**
+ * Updates the column headers with sorting indicators.
+ */
+function updateSortIndicators() {
+  const headers = document.querySelectorAll("#tent-table th");
+  headers.forEach((header) => {
+    const key = header.getAttribute("onclick").match(/sortTable\('(.+?)'\)/)?.[1];
+    if (key === currentSortColumn) {
+      header.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)}${
+          currentSortDirection === "asc" ? "↑" : "↓"
+      }`;
+    } else {
+      header.textContent = key
+          ? key.charAt(0).toUpperCase() + key.slice(1)
+          : header.textContent;
+    }
+  });
 }
 
 /**
@@ -428,18 +485,13 @@ function sortTable(key) {
 function updateTableHeaders() {
   const selectedUnit = document.getElementById("global-unit").value;
 
-  const unitLabel =
-    selectedUnit === "in" ? "In" :
-      selectedUnit === "ft" ? "Ft" :
-        selectedUnit === "cm" ? "Cm" : "M";
-
   const headersConfig = {
     name: "Name",
-    length: `Length (${unitLabel})`,
-    width: `Width (${unitLabel})`,
-    area: `Area (${unitLabel}²)`,
-    price: "Price ($)",
-    pricePerSqFt: `Price/${unitLabel}² ($)`,
+    length: `Length(${selectedUnit})`,
+    width: `Width(${selectedUnit})`,
+    area: `Area(${selectedUnit}²)`,
+    price: "Price($)",
+    pricePerSqFt: `Price($)/${selectedUnit}²`,
   };
 
   const headers = document.querySelectorAll("#tent-table th");
