@@ -1,7 +1,7 @@
 // Tent data stored in inches
 const tents = [
-  { name: "REI Flash Air", length: 88, width: 35, price: 200 },
-  { name: "Big Agnes Spicer Peak 4", length: 118, width: 100, price: 400 },
+  { name: "REI Flash Air", length: 88, width: 35, price: 249.99 },
+  { name: "Big Agnes Spicer Peak 4", length: 118, width: 100, price: 279.73 },
 ];
 
 // Unit conversion factors based on inches
@@ -14,6 +14,63 @@ const unitConversions = {
 
 let scatterChartInstance = null;
 let overlayCtx = null;
+
+/**
+ * Generates a color palette with earthy tones.
+ * @returns {string[]} - An array of hex color strings.
+ */
+function generateRusticColors() {
+  const baseColors = [
+    "#800000",
+    "#556B2F", // Dark Olive Green - academic, rugged
+    "#A0522D", // Sienna - earthy brown
+    "#FFD700", // Gold - old-school internet
+    "#CD853F", // Peru - rustic feel
+    "#8B4513", // Saddle Brown - rugged
+  ];
+
+  // Function to slightly modify a base color for variety
+  const lightenOrDarken = (color, amount) => {
+    let usePound = false;
+
+    if (color[0] === "#") {
+      color = color.slice(1);
+      usePound = true;
+    }
+
+    const num = parseInt(color, 16);
+    const r = Math.min(255, Math.max(0, (num >> 16) + amount));
+    const g = Math.min(255, Math.max(0, ((num >> 8) & 0x00ff) + amount));
+    const b = Math.min(255, Math.max(0, (num & 0x0000ff) + amount));
+
+    return (usePound ? "#" : "") + ((r << 16) | (g << 8) | b).toString(16).padStart(6, "0");
+  };
+
+  // Generate new colors based on existing palette
+  const extendedColors = [];
+  for (let i = 0; i < 5; i++) {
+    baseColors.forEach((color) => {
+      extendedColors.push(lightenOrDarken(color, i * 15 - 30)); // Adjust brightness
+    });
+  }
+
+  return [...baseColors, ...extendedColors];
+}
+
+// Color palette for charts
+let colorPalette = generateRusticColors();
+let colorIndex = 0;
+
+/**
+ * Gets the next color from the palette.
+ * Resets to the start if the palette is exhausted.
+ * @returns {string} - A hex color string.
+ */
+function getNextColor() {
+  const color = colorPalette[colorIndex];
+  colorIndex = (colorIndex + 1) % colorPalette.length;
+  return color;
+}
 
 /**
  * Converts a value in inches to the selected unit.
@@ -104,31 +161,24 @@ function generateScatterChart(selectedUnit = "ft") {
   scatterChartInstance = new Chart(scatterCtx, {
     type: "scatter",
     data: {
-      datasets: tents.map((tent, index) => ({
-        label: `${tent.name}`,
+      datasets: tents.map((tent) => ({
+        label: tent.name,
         data: [
           {
             x: tent.areaInInches * scaleFactor ** 2,
             y: tent.pricePerSqIn / (scaleFactor ** 2),
           },
         ],
-        backgroundColor: `rgba(${index * 45 % 255}, ${192 - index * 20 % 255}, 192, 0.6)`,
+        backgroundColor: getNextColor(),
       })),
     },
     options: {
-      responsive: true, // Ensures chart resizes with its container
-      maintainAspectRatio: false, // Allows the chart to stretch vertically
+      responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: { display: true, position: "top" },
         tooltip: {
           enabled: true,
-          callbacks: {
-            label: function (tooltipItem) {
-              const dataset = tooltipItem.dataset.label;
-              const { x, y } = tooltipItem.raw;
-              return `${dataset}: Area ${x.toFixed(2)} ${selectedUnit}², Price ${y.toFixed(2)} $/${selectedUnit}²`;
-            },
-          },
         },
       },
       scales: {
@@ -151,7 +201,6 @@ function generateScatterChart(selectedUnit = "ft") {
   });
 }
 
-// Generate the overlay chart with unit conversion
 /**
  * Generates the overlay chart with unit conversion for display.
  * @param {string} selectedUnit - The selected unit for display.
@@ -225,17 +274,17 @@ function generateOverlayChart(selectedUnit = "ft") {
     const rectWidthPx = tent.width * scaleFactor * scale;
     const rectHeightPx = tent.length * scaleFactor * scale;
 
-    overlayCtx.fillStyle = `rgba(${index * 60 % 255}, ${150 - index * 30 % 255}, 100, 0.1)`;
+    overlayCtx.fillStyle = `${colorPalette[index]}1A`;
     overlayCtx.fillRect(0, 0, rectWidthPx, rectHeightPx);
 
-    overlayCtx.strokeStyle = `rgba(${index * 60 % 255}, ${150 - index * 30 % 255}, 100, 1)`;
+    overlayCtx.strokeStyle = colorPalette[index];
     overlayCtx.strokeRect(0, 0, rectWidthPx, rectHeightPx);
 
     // Convert length and width to the selected unit
     const convertedLength = tent.length * scaleFactor;
     const convertedWidth = tent.width * scaleFactor;
 
-    overlayCtx.fillStyle = `rgba(${index * 60 % 255}, ${150 - index * 30 % 255}, 100, 1)`;
+    overlayCtx.fillStyle = colorPalette[index];
     overlayCtx.fillText(
       `${tent.name} (${convertedLength.toFixed(1)}x${convertedWidth.toFixed(1)} ${selectedUnit})`,
       30,
