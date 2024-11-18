@@ -125,6 +125,7 @@ form button {
   align-self: center; /* Prevent stretching in flexbox */
   box-sizing: border-box; /* Ensure padding and border are included */
   margin-bottom: 10px;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 form select {
@@ -180,6 +181,10 @@ footer {
 
 .chart-option-container {
   margin-bottom: 5px;
+}
+
+.chart-option-container select {
+  font-family: 'Courier New', Courier, monospace;
 }
 
 /* Card Layout for Small Screens */
