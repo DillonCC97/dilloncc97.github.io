@@ -5,6 +5,13 @@ body {
   box-sizing: border-box;
   background-color: #ffffe0; /* Light yellow for vintage feel */
   color: #000;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.form-container {
+  width: 30%;
+  float: left;
 }
 
 h1, h2 {
@@ -101,6 +108,8 @@ select {
   justify-content: space-between;
   gap: 5px;
   margin: 5px auto;
+  width: 65%;
+  float: right;
 }
 
 .chart-container {

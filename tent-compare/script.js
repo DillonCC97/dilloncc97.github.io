@@ -4,16 +4,18 @@ const tents = [
   { name: "Tent C", length: 15, width: 10, price: 400 },
 ];
 
+// Correct unit conversions with feet as the base unit
 const unitConversions = {
-  ft: 1,
-  in: 1 / 12,
-  cm: 1 / 30.48,
-  m: 1 / 3.28084,
+  ft: 1, // Feet as the base unit
+  in: 12, // Feet to inches (1 ft = 12 inches)
+  cm: 30.48, // Feet to centimeters (1 ft = 30.48 cm)
+  m: 0.3048, // Feet to meters (1 ft = 0.3048 m)
 };
 
 let scatterChartInstance = null;
 let overlayCtx = null;
 
+// Normalize dimensions and calculate derived properties
 function normalizeDimensions(tent) {
   if (tent.width > tent.length) {
     [tent.length, tent.width] = [tent.width, tent.length];
@@ -22,6 +24,7 @@ function normalizeDimensions(tent) {
   tent.pricePerSqFt = tent.price / tent.area;
 }
 
+// Add tent to the list and regenerate charts
 function addTent() {
   const name = document.getElementById("tent-name").value;
   const length = parseFloat(document.getElementById("tent-length").value);
@@ -35,26 +38,27 @@ function addTent() {
     return;
   }
 
+  // Convert input lengths to feet
   const tent = {
     name,
-    length: length * unitConversions[lengthUnit],
-    width: width * unitConversions[widthUnit],
+    length: length / unitConversions[lengthUnit],
+    width: width / unitConversions[widthUnit],
     price,
   };
   normalizeDimensions(tent);
   tents.push(tent);
   updateTentList();
-  generateScatterChart();
-  generateOverlayChart();
+  generateCharts();
 }
 
+// Remove a tent and update
 function removeTent(index) {
   tents.splice(index, 1);
   updateTentList();
-  generateScatterChart();
-  generateOverlayChart();
+  generateCharts();
 }
 
+// Update the tent list in the DOM
 function updateTentList() {
   const list = document.getElementById("tent-list");
   list.innerHTML = "";
@@ -69,28 +73,45 @@ function updateTentList() {
   });
 }
 
-function generateScatterChart() {
-  const scatterCtx = document.getElementById("scatter-chart").getContext("2d");
-  const scatterUnit = document.getElementById("scatter-unit").value;
+// Generate charts based on selected unit
+function generateCharts() {
+  const selectedUnit = document.getElementById("scatter-unit").value;
+  generateScatterChart(selectedUnit);
+  generateOverlayChart(selectedUnit);
+}
 
-  // Conversion factor for selected unit
-  const unitFactor = 1 / unitConversions[scatterUnit];
+// Generate the scatter chart with unit conversion
+function generateScatterChart(selectedUnit = "ft") {
+  const scatterCanvas = document.getElementById("scatter-chart");
+  const scatterCtx = scatterCanvas.getContext("2d");
 
-  // Destroy existing scatter chart if present
+  // Convert tent dimensions to the selected unit
+  const scaleFactor = unitConversions[selectedUnit];
+
+  // Calculate the maximum area and price per square unit across all tents
+  const maxArea = Math.max(...tents.map(tent => tent.area * scaleFactor ** 2));
+  const maxPricePerSqUnit = Math.max(...tents.map(tent => tent.pricePerSqFt / (scaleFactor ** 2)));
+
+  // Add 10% padding to the maximum values
+  const paddedMaxArea = maxArea + maxArea * 0.1; // 10% extra padding
+  const paddedMaxPrice = maxPricePerSqUnit + maxPricePerSqUnit * 0.1; // 10% extra padding
+
+  // Destroy any existing chart instance
   if (scatterChartInstance) {
     scatterChartInstance.destroy();
+    scatterChartInstance = null;
   }
 
-  // Create Scatter Chart
+  // Create the scatter plot
   scatterChartInstance = new Chart(scatterCtx, {
     type: "scatter",
     data: {
       datasets: tents.map((tent, index) => ({
-        label: tent.name,
+        label: `${tent.name} ($${(tent.pricePerSqFt / (scaleFactor ** 2)).toFixed(2)} per ${selectedUnit}²)`,
         data: [
           {
-            x: tent.area * unitFactor * unitFactor, // Convert area
-            y: tent.pricePerSqFt / (unitFactor * unitFactor), // Convert price per square unit
+            x: tent.area * scaleFactor ** 2, // Convert area to the selected unit
+            y: tent.pricePerSqFt / (scaleFactor ** 2), // Convert price per area unit
           },
         ],
         backgroundColor: `rgba(${index * 45 % 255}, ${192 - index * 20 % 255}, 192, 0.6)`,
@@ -99,83 +120,129 @@ function generateScatterChart() {
     options: {
       plugins: {
         legend: { display: true, position: "top" },
-        tooltip: { enabled: true },
+        tooltip: {
+          enabled: true,
+          callbacks: {
+            label: function (tooltipItem) {
+              const dataset = tooltipItem.dataset.label;
+              const { x, y } = tooltipItem.raw;
+              return `${dataset}: Area ${x.toFixed(2)} ${selectedUnit}², Price ${y.toFixed(2)} $/${selectedUnit}²`;
+            },
+          },
+        },
       },
       scales: {
-        x: { title: { display: true, text: `Area (${scatterUnit}²)` } },
-        y: { title: { display: true, text: `Price per ${scatterUnit}² ($)` } },
+        x: {
+          type: "linear",
+          position: "bottom",
+          title: {
+            display: true,
+            text: `Area (${selectedUnit}²)`,
+          },
+          min: 0, // Start from 0
+          max: paddedMaxArea, // Include padding
+        },
+        y: {
+          title: {
+            display: true,
+            text: `Price per ${selectedUnit}² ($)`,
+          },
+          min: 0, // Start from 0
+          max: paddedMaxPrice, // Include padding
+        },
       },
     },
   });
 }
 
-function generateOverlayChart() {
+// Generate the overlay chart with unit conversion
+function generateOverlayChart(selectedUnit = "ft") {
   const overlayCanvas = document.getElementById("overlay-chart");
   overlayCtx = overlayCanvas.getContext("2d");
-  const scatterUnit = document.getElementById("scatter-unit").value;
 
-  // Maximum dimensions of the tents
-  const maxTentLength = Math.max(...tents.map((tent) => tent.length));
-  const maxTentWidth = Math.max(...tents.map((tent) => tent.width));
+  // Fixed canvas size
+  const canvasWidth = 550; // Fixed canvas width
+  const canvasHeight = 800; // Fixed canvas height
+  overlayCanvas.width = canvasWidth;
+  overlayCanvas.height = canvasHeight;
 
-  // Dynamic canvas size based on maximum tent width
-  overlayCanvas.width = maxTentWidth * 100; // Scale width to 100px per unit
-  overlayCanvas.height = maxTentLength * 100; // Scale height to 100px per unit
+  overlayCtx.clearRect(0, 0, canvasWidth, canvasHeight);
 
-  // Conversion factor for selected unit
-  const unitFactor = 1 / unitConversions[scatterUnit];
+  // Convert tent dimensions to the selected unit
+  const scaleFactor = unitConversions[selectedUnit];
+  const maxTentLength = Math.max(...tents.map(t => t.length * scaleFactor), 1); // Max length in units
+  const maxTentWidth = Math.max(...tents.map(t => t.width * scaleFactor), 1); // Max width in units
 
-  // Clear the canvas
-  overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+  // Calculate scaling factor to fit tents with at least 10% padding
+  const lengthScale = canvasHeight / (maxTentLength * 1.1); // Scale to fit length with 10% padding
+  const widthScale = canvasWidth / (maxTentWidth * 1.1); // Scale to fit width with 10% padding
+  const scale = Math.min(lengthScale, widthScale); // Use the smaller scale for consistent sizing
 
-  // Calculate scale factor to fit all tents within canvas
-  const scale = Math.min(
-    overlayCanvas.width / maxTentWidth,
-    overlayCanvas.height / maxTentLength
-  );
+  // Calculate grid spacing in units, rounded to the nearest multiple of 5
+  const maxGridLines = 20; // Maximum number of gridlines
+  let rawGridSpacing = Math.max(maxTentLength, maxTentWidth) / maxGridLines; // Tent size per gridline
+  if (rawGridSpacing < 1) {
+    rawGridSpacing = 1; // Minimum spacing
+  } else {
+    rawGridSpacing = Math.ceil(rawGridSpacing / 5) * 5; // Round up to nearest multiple of 5
+  }
 
-  // Sort tents by area in descending order for layering
+  const gridSpacingPx = rawGridSpacing * scale; // Grid spacing in pixels
+
+  // Set dynamic font size for labels
+  const baseFontSize = Math.max(10, Math.min(14, canvasHeight / 50));
+  overlayCtx.font = `${baseFontSize}px Arial`;
+
+  // Draw grid lines and labels
+  overlayCtx.strokeStyle = "#cccccc";
+  overlayCtx.lineWidth = 0.5;
+
+  // Vertical grid lines and labels
+  for (let i = 0; i <= canvasWidth / gridSpacingPx; i++) {
+    const xPx = i * gridSpacingPx; // Position in pixels
+    const x = (xPx / scale); // Convert back to units
+    overlayCtx.beginPath();
+    overlayCtx.moveTo(xPx, 0);
+    overlayCtx.lineTo(xPx, canvasHeight);
+    overlayCtx.stroke();
+    overlayCtx.fillText(`${x.toFixed(0)} ${selectedUnit}`, xPx + 5, canvasHeight - 10);
+  }
+
+  // Horizontal grid lines and labels
+  for (let i = 0; i <= canvasHeight / gridSpacingPx; i++) {
+    const yPx = i * gridSpacingPx; // Position in pixels
+    const y = (yPx / scale); // Convert back to units
+    overlayCtx.beginPath();
+    overlayCtx.moveTo(0, yPx);
+    overlayCtx.lineTo(canvasWidth, yPx);
+    overlayCtx.stroke();
+    overlayCtx.fillText(`${y.toFixed(0)} ${selectedUnit}`, 5, yPx - 5);
+  }
+
+  // Render tents with scaling
   const sortedTents = [...tents].sort((a, b) => b.area - a.area);
 
   sortedTents.forEach((tent, index) => {
-    // Calculate scaled rectangle dimensions
-    const rectWidth = tent.width * scale;
-    const rectHeight = tent.length * scale;
+    const rectWidthPx = tent.width * scaleFactor * scale; // Convert width to pixels
+    const rectHeightPx = tent.length * scaleFactor * scale; // Convert length to pixels
 
-    // Convert dimensions to selected unit
-    const lengthConverted = tent.length * unitFactor;
-    const widthConverted = tent.width * unitFactor;
+    overlayCtx.fillStyle = `rgba(${index * 60 % 255}, ${150 - index * 30 % 255}, 100, 0.1)`;
+    overlayCtx.fillRect(0, 0, rectWidthPx, rectHeightPx);
 
-    // Define colors for fill and stroke
-    const fillColor = `rgba(${index * 60 % 255}, ${192 - index * 30 % 255}, 150, 0.4)`;
-    const strokeColor = `rgba(${index * 60 % 255}, ${192 - index * 30 % 255}, 150, 1)`;
+    overlayCtx.strokeStyle = `rgba(${index * 60 % 255}, ${150 - index * 30 % 255}, 100, 1)`;
+    overlayCtx.strokeRect(0, 0, rectWidthPx, rectHeightPx);
 
-    // Align to the top-left corner
-    const offsetX = 0;
-    const offsetY = 0;
-
-    // Draw the filled rectangle
-    overlayCtx.fillStyle = fillColor;
-    overlayCtx.fillRect(offsetX, offsetY, rectWidth, rectHeight);
-
-    // Draw the rectangle outline
-    overlayCtx.strokeStyle = strokeColor;
-    overlayCtx.lineWidth = 2;
-    overlayCtx.strokeRect(offsetX, offsetY, rectWidth, rectHeight);
-
-    // Add label to the bottom-left of the rectangle
-    overlayCtx.font = "14px Arial";
-    overlayCtx.fillStyle = "black";
+    // Add tent name and dimensions to the label
+    overlayCtx.fillStyle = `rgba(${index * 60 % 255}, ${150 - index * 30 % 255}, 100, 1)`;
     overlayCtx.fillText(
-      `${tent.name} (${lengthConverted.toFixed(2)}x${widthConverted.toFixed(2)} ${scatterUnit})`,
-      offsetX + 5, // Padding from left
-      offsetY + rectHeight - 5 // Padding from bottom
+      `${tent.name} (${tent.length.toFixed(1)}x${tent.width.toFixed(1)} ${selectedUnit})`,
+      30,
+      rectHeightPx - 30
     );
   });
 }
 
-// Initial setup
+// Initialize charts with default unit
 tents.forEach(normalizeDimensions);
 updateTentList();
-generateScatterChart();
-generateOverlayChart();
+generateCharts();
