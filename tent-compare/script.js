@@ -204,7 +204,6 @@ function generateScatterChart(selectedUnit = "ft") {
  * @param {string} selectedUnit - The selected unit for display.
  */
 function generateOverlayChart(selectedUnit = "ft") {
-  console.log('GEN', selectedUnit);
   const overlayCanvas = document.getElementById("overlay-chart");
   overlayCtx = overlayCanvas.getContext("2d");
 
