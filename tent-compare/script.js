@@ -407,6 +407,7 @@ function updateTentTable() {
   });
 
   updateTableHeaders();
+  updateTableDataLabels();
 }
 
 /**
