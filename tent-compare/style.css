@@ -178,3 +178,21 @@ footer {
   margin-top: 10px;
   color: #666;
 }
+
+.chart-container {
+  flex: 1 1 auto; /* Adjust the chart container size flexibly */
+  max-width: 48%; /* Restrict width for side-by-side layout */
+  border: 2px solid #000;
+  background-color: #fff;
+  padding: 0; /* Remove padding to avoid spacing issues */
+  box-shadow: 2px 2px 5px #666;
+  display: flex; /* Flex layout to make the canvas fill */
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-container canvas {
+  width: 100%;
+  height: 100%; /* Make the canvas fill the container height */
+  border: none; /* Remove borders for a seamless fit */
+}

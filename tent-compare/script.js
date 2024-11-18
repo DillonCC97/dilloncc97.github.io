@@ -116,6 +116,8 @@ function generateScatterChart(selectedUnit = "ft") {
       })),
     },
     options: {
+      responsive: true, // Ensures chart resizes with its container
+      maintainAspectRatio: false, // Allows the chart to stretch vertically
       plugins: {
         legend: { display: true, position: "top" },
         tooltip: {
@@ -137,16 +139,12 @@ function generateScatterChart(selectedUnit = "ft") {
             display: true,
             text: `Area (${selectedUnit}²)`,
           },
-          min: 0,
-          max: paddedMaxArea,
         },
         y: {
           title: {
             display: true,
             text: `Price per ${selectedUnit}² ($)`,
           },
-          min: 0,
-          max: paddedMaxPrice,
         },
       },
     },
