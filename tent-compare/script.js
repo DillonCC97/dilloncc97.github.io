@@ -21,7 +21,7 @@ let overlayCtx = null;
  */
 function generateRusticColors() {
   const baseColors = [
-    "#800000",
+    "#660000",
     "#556B2F", // Dark Olive Green - academic, rugged
     "#A0522D", // Sienna - earthy brown
     "#FFD700", // Gold - old-school internet

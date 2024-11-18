@@ -11,10 +11,15 @@ body {
   min-height: 100vh;
 }
 
+button:focus, input:focus, select:focus {
+  outline: 2px dashed #000;
+  outline-offset: 2px;
+}
+
 /* Header Section */
 .header {
   padding: 10px;
-  background-color: #800000;
+  background-color: #660000;
   color: white;
   text-align: center;
 }
@@ -115,7 +120,7 @@ form select,
 form button {
   margin: 2px 0;
   font-size: 12px;
-  padding: 3px;
+  padding: 5px;
   border: 1px solid #000;
   border-radius: 4px;
   background-color: #fff;
@@ -134,7 +139,7 @@ form select {
 }
 
 form button {
-  background-color: #800000;
+  background-color: #660000;
   color: white;
   cursor: pointer;
   padding: 5px 10px;
@@ -152,10 +157,11 @@ form button {
 }
 
 .tent-table th {
-  background-color: #800000;
+  background-color: #660000;
   color: white;
   cursor: pointer;
   padding: 5px;
+
 }
 
 .tent-table td {
@@ -167,7 +173,7 @@ form button {
   font-size: 10px;
   padding: 3px 5px;
   color: white;
-  background-color: #800000;
+  background-color: #660000;
   cursor: pointer;
 }
 
@@ -226,6 +232,6 @@ footer {
     font-weight: bold;
     margin-right: 10px;
     text-align: left;
-    /*flex-basis: 40%; !* Allocate space for labels *!*/
+    font-size: 14px;
   }
 }

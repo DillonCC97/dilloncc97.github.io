@@ -11,13 +11,13 @@
 
 <div class="main-container">
   <div class="form-container">
-    <form id="tent-form">
+    <form id="tent-form" aria-label="Tent Comparison Form">
       <label for="tent-name">Tent Name</label>
-      <input type="text" id="tent-name" placeholder="Enter tent name" required>
+      <input type="text" id="tent-name" placeholder="Enter tent name" required aria-required="true">
 
       <label for="tent-length">Length</label>
-      <input type="number" id="tent-length" placeholder="Enter length" required>
-      <select id="length-unit">
+      <input type="number" id="tent-length" placeholder="Enter length" required aria-required="true">
+      <select id="length-unit" aria-label="Select length unit">
         <option value="ft">Feet</option>
         <option value="in">Inches</option>
         <option value="cm">Centimeters</option>
@@ -25,8 +25,8 @@
       </select>
 
       <label for="tent-width">Width</label>
-      <input type="number" id="tent-width" placeholder="Enter width" required>
-      <select id="width-unit">
+      <input type="number" id="tent-width" placeholder="Enter width" required aria-required="true">
+      <select id="width-unit" aria-label="Select width unit">
         <option value="ft">Feet</option>
         <option value="in">Inches</option>
         <option value="cm">Centimeters</option>
@@ -34,18 +34,18 @@
       </select>
 
       <label for="tent-price">Price ($)</label>
-      <input type="number" id="tent-price" placeholder="Enter price" required>
+      <input type="number" id="tent-price" placeholder="Enter price" required aria-required="true">
       <button type="button" onclick="addTent()">Add Tent</button>
     </form>
-    <table id="tent-table" class="tent-table">
+    <table id="tent-table" class="tent-table" aria-label="Tent Comparison Table">
       <thead>
       <tr>
-        <th onclick="sortTable('name')">Name</th>
-        <th id="length-header" onclick="sortTable('length')">Length</th>
-        <th id="width-header" onclick="sortTable('width')">Width</th>
-        <th id="area-header" onclick="sortTable('area')">Area</th>
-        <th onclick="sortTable('price')">Price ($)</th>
-        <th id="price-per-area-header" onclick="sortTable('pricePerSqFt')"></th>
+        <th scope="col" onclick="sortTable('name')">Name</th>
+        <th scope="col" id="length-header" onclick="sortTable('length')">Length</th>
+        <th scope="col" id="width-header" onclick="sortTable('width')">Width</th>
+        <th scope="col" id="area-header" onclick="sortTable('area')">Area</th>
+        <th scope="col" onclick="sortTable('price')">Price ($)</th>
+        <th scope="col" id="price-per-area-header" onclick="sortTable('pricePerSqFt')">Price Per Area</th>
       </tr>
       </thead>
       <tbody>
@@ -54,19 +54,18 @@
     </table>
   </div>
 
-
   <div class="charts-container">
     <div class="chart-selection">
       <div class="chart-option-container">
         <label for="chart-type">Select Chart:</label>
-        <select id="chart-type" onchange="updateChartVisibility();">
+        <select id="chart-type" onchange="updateChartVisibility();" aria-label="Chart Type Selector">
           <option value="scatter-chart">Price/Unit vs Area Scatter Chart</option>
           <option value="overlay-chart">Area Overlay Chart</option>
         </select>
       </div>
       <div class="chart-option-container">
         <label for="global-unit">Select Unit:</label>
-        <select id="global-unit" onchange="updateTableHeaders(); updateTentTable(); generateCharts();">
+        <select id="global-unit" onchange="updateTableHeaders(); updateTentTable(); generateCharts();" aria-label="Unit Selector">
           <option value="ft">Feet</option>
           <option value="in">Inches</option>
           <option value="cm">Centimeters</option>
@@ -74,10 +73,10 @@
         </select>
       </div>
     </div>
-    <div class="chart-container">
+    <div class="chart-container" role="img" aria-label="Scatter Chart of Price/Unit vs Area">
       <canvas id="scatter-chart"></canvas>
     </div>
-    <div class="chart-container">
+    <div class="chart-container" role="img" aria-label="Overlay Chart of Tent Area">
       <canvas id="overlay-chart"></canvas>
     </div>
   </div>
