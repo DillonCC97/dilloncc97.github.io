@@ -205,10 +205,12 @@ function generateScatterChart(selectedUnit = "ft") {
  */
 function generateOverlayChart(selectedUnit = "ft") {
   const overlayCanvas = document.getElementById("overlay-chart");
+  const parentContainer = overlayCanvas.parentElement;
   overlayCtx = overlayCanvas.getContext("2d");
 
-  const canvasWidth = 1300;
-  const canvasHeight = 800;
+  const canvasWidth = parentContainer.offsetWidth - 14;
+  const canvasHeight = parentContainer.offsetHeight - 14;
+  console.log('WIDTHS', canvasWidth, canvasHeight);
   overlayCanvas.width = canvasWidth;
   overlayCanvas.height = canvasHeight;
 
