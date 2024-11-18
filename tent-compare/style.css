@@ -161,7 +161,11 @@ form button {
   color: white;
   cursor: pointer;
   padding: 5px;
+  transition: background-color 0.2s ease; /* Smooth transition effect */
+}
 
+.tent-table th:hover {
+  background-color: #880000; /* Slightly lighter shade on hover */
 }
 
 .tent-table td {
