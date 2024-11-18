@@ -1,30 +1,42 @@
+// Tent data stored in inches
 const tents = [
-  { name: "Tent A", length: 10, width: 8, price: 200 },
-  { name: "Tent B", length: 12, width: 10, price: 300 },
-  { name: "Tent C", length: 15, width: 10, price: 400 },
+  { name: "REI Flash Air", length: 88, width: 35, price: 200 },
+  { name: "Big Agnes Spicer Peak 4", length: 118, width: 100, price: 400 },
 ];
 
-// Correct unit conversions with feet as the base unit
+// Unit conversion factors based on inches
 const unitConversions = {
-  ft: 1, // Feet as the base unit
-  in: 12, // Feet to inches (1 ft = 12 inches)
-  cm: 30.48, // Feet to centimeters (1 ft = 30.48 cm)
-  m: 0.3048, // Feet to meters (1 ft = 0.3048 m)
+  in: 1, // Inches as the base unit
+  ft: 1 / 12, // Inches to feet
+  cm: 2.54, // Inches to centimeters
+  m: 0.0254, // Inches to meters
 };
 
 let scatterChartInstance = null;
 let overlayCtx = null;
 
-// Normalize dimensions and calculate derived properties
-function normalizeDimensions(tent) {
-  if (tent.width > tent.length) {
-    [tent.length, tent.width] = [tent.width, tent.length];
-  }
-  tent.area = tent.length * tent.width;
-  tent.pricePerSqFt = tent.price / tent.area;
+/**
+ * Converts a value in inches to the selected unit.
+ * @param {number} value - The value in inches.
+ * @param {string} unit - The target unit.
+ * @returns {number} - The converted value.
+ */
+function convertFromInches(value, unit) {
+  return value * unitConversions[unit];
 }
 
-// Add tent to the list and regenerate charts
+/**
+ * Normalizes tent dimensions, calculating area and price per square unit.
+ * @param {Object} tent - The tent object.
+ */
+function normalizeDimensions(tent) {
+  tent.areaInInches = tent.length * tent.width;
+  tent.pricePerSqIn = tent.price / tent.areaInInches;
+}
+
+/**
+ * Adds a tent to the list, converting input dimensions to inches.
+ */
 function addTent() {
   const name = document.getElementById("tent-name").value;
   const length = parseFloat(document.getElementById("tent-length").value);
@@ -38,13 +50,13 @@ function addTent() {
     return;
   }
 
-  // Convert input lengths to feet
   const tent = {
     name,
-    length: length / unitConversions[lengthUnit],
+    length: length / unitConversions[lengthUnit], // Convert to inches
     width: width / unitConversions[widthUnit],
     price,
   };
+
   normalizeDimensions(tent);
   tents.push(tent);
   updateTentTable();
@@ -60,43 +72,44 @@ function removeTent(index) {
 
 // Generate charts based on selected unit
 function generateCharts() {
-  const selectedUnit = document.getElementById("scatter-unit").value;
+  const selectedUnit = document.getElementById("global-unit").value;
   generateScatterChart(selectedUnit);
   generateOverlayChart(selectedUnit);
 }
 
 // Generate the scatter chart with unit conversion
+/**
+ * Generates the scatter chart with unit conversion for display.
+ * @param {string} selectedUnit - The selected unit for display.
+ */
 function generateScatterChart(selectedUnit = "ft") {
   const scatterCanvas = document.getElementById("scatter-chart");
   const scatterCtx = scatterCanvas.getContext("2d");
 
-  // Convert tent dimensions to the selected unit
+  // Convert from inches to the selected unit
   const scaleFactor = unitConversions[selectedUnit];
 
-  // Calculate the maximum area and price per square unit across all tents
-  const maxArea = Math.max(...tents.map(tent => tent.area * scaleFactor ** 2));
-  const maxPricePerSqUnit = Math.max(...tents.map(tent => tent.pricePerSqFt / (scaleFactor ** 2)));
+  const maxArea = Math.max(...tents.map(tent => (tent.areaInInches * scaleFactor ** 2)));
+  const maxPricePerSqUnit = Math.max(...tents.map(tent => (tent.pricePerSqIn / (scaleFactor ** 2))));
 
-  // Add 10% padding to the maximum values
-  const paddedMaxArea = maxArea + maxArea * 0.1; // 10% extra padding
-  const paddedMaxPrice = maxPricePerSqUnit + maxPricePerSqUnit * 0.1; // 10% extra padding
+  const paddedMaxArea = maxArea + maxArea * 0.1;
+  const paddedMaxPrice = maxPricePerSqUnit + maxPricePerSqUnit * 0.1;
 
-  // Destroy any existing chart instance
+  // Destroy any existing chart instance before creating a new one
   if (scatterChartInstance) {
     scatterChartInstance.destroy();
     scatterChartInstance = null;
   }
 
-  // Create the scatter plot
   scatterChartInstance = new Chart(scatterCtx, {
     type: "scatter",
     data: {
       datasets: tents.map((tent, index) => ({
-        label: `${tent.name} ($${(tent.pricePerSqFt / (scaleFactor ** 2)).toFixed(2)} per ${selectedUnit}²)`,
+        label: `${tent.name}`,
         data: [
           {
-            x: tent.area * scaleFactor ** 2, // Convert area to the selected unit
-            y: tent.pricePerSqFt / (scaleFactor ** 2), // Convert price per area unit
+            x: tent.areaInInches * scaleFactor ** 2,
+            y: tent.pricePerSqIn / (scaleFactor ** 2),
           },
         ],
         backgroundColor: `rgba(${index * 45 % 255}, ${192 - index * 20 % 255}, 192, 0.6)`,
@@ -124,16 +137,16 @@ function generateScatterChart(selectedUnit = "ft") {
             display: true,
             text: `Area (${selectedUnit}²)`,
           },
-          min: 0, // Start from 0
-          max: paddedMaxArea, // Include padding
+          min: 0,
+          max: paddedMaxArea,
         },
         y: {
           title: {
             display: true,
             text: `Price per ${selectedUnit}² ($)`,
           },
-          min: 0, // Start from 0
-          max: paddedMaxPrice, // Include padding
+          min: 0,
+          max: paddedMaxPrice,
         },
       },
     },
@@ -141,19 +154,22 @@ function generateScatterChart(selectedUnit = "ft") {
 }
 
 // Generate the overlay chart with unit conversion
+/**
+ * Generates the overlay chart with unit conversion for display.
+ * @param {string} selectedUnit - The selected unit for display.
+ */
 function generateOverlayChart(selectedUnit = "ft") {
   const overlayCanvas = document.getElementById("overlay-chart");
   overlayCtx = overlayCanvas.getContext("2d");
 
-  // Fixed canvas size
-  const canvasWidth = 550; // Fixed canvas width
-  const canvasHeight = 800; // Fixed canvas height
+  const canvasWidth = 550;
+  const canvasHeight = 800;
   overlayCanvas.width = canvasWidth;
   overlayCanvas.height = canvasHeight;
 
   overlayCtx.clearRect(0, 0, canvasWidth, canvasHeight);
 
-  // Convert tent dimensions to the selected unit
+  // Convert from inches to the selected unit
   const scaleFactor = unitConversions[selectedUnit];
   const maxTentLength = Math.max(...tents.map(t => t.length * scaleFactor), 1); // Max length in units
   const maxTentWidth = Math.max(...tents.map(t => t.width * scaleFactor), 1); // Max width in units
@@ -185,7 +201,7 @@ function generateOverlayChart(selectedUnit = "ft") {
   // Vertical grid lines and labels
   for (let i = 0; i <= canvasWidth / gridSpacingPx; i++) {
     const xPx = i * gridSpacingPx; // Position in pixels
-    const x = (xPx / scale); // Convert back to units
+    const x = i * rawGridSpacing; // Converted value in the selected unit
     overlayCtx.beginPath();
     overlayCtx.moveTo(xPx, 0);
     overlayCtx.lineTo(xPx, canvasHeight);
@@ -196,7 +212,7 @@ function generateOverlayChart(selectedUnit = "ft") {
   // Horizontal grid lines and labels
   for (let i = 0; i <= canvasHeight / gridSpacingPx; i++) {
     const yPx = i * gridSpacingPx; // Position in pixels
-    const y = (yPx / scale); // Convert back to units
+    const y = i * rawGridSpacing; // Converted value in the selected unit
     overlayCtx.beginPath();
     overlayCtx.moveTo(0, yPx);
     overlayCtx.lineTo(canvasWidth, yPx);
@@ -205,11 +221,11 @@ function generateOverlayChart(selectedUnit = "ft") {
   }
 
   // Render tents with scaling
-  const sortedTents = [...tents].sort((a, b) => b.area - a.area);
+  const sortedTents = [...tents].sort((a, b) => b.areaInInches - a.areaInInches);
 
   sortedTents.forEach((tent, index) => {
-    const rectWidthPx = tent.width * scaleFactor * scale; // Convert width to pixels
-    const rectHeightPx = tent.length * scaleFactor * scale; // Convert length to pixels
+    const rectWidthPx = tent.width * scaleFactor * scale;
+    const rectHeightPx = tent.length * scaleFactor * scale;
 
     overlayCtx.fillStyle = `rgba(${index * 60 % 255}, ${150 - index * 30 % 255}, 100, 0.1)`;
     overlayCtx.fillRect(0, 0, rectWidthPx, rectHeightPx);
@@ -217,10 +233,13 @@ function generateOverlayChart(selectedUnit = "ft") {
     overlayCtx.strokeStyle = `rgba(${index * 60 % 255}, ${150 - index * 30 % 255}, 100, 1)`;
     overlayCtx.strokeRect(0, 0, rectWidthPx, rectHeightPx);
 
-    // Add tent name and dimensions to the label
+    // Convert length and width to the selected unit
+    const convertedLength = tent.length * scaleFactor;
+    const convertedWidth = tent.width * scaleFactor;
+
     overlayCtx.fillStyle = `rgba(${index * 60 % 255}, ${150 - index * 30 % 255}, 100, 1)`;
     overlayCtx.fillText(
-      `${tent.name} (${tent.length.toFixed(1)}x${tent.width.toFixed(1)} ${selectedUnit})`,
+      `${tent.name} (${convertedLength.toFixed(1)}x${convertedWidth.toFixed(1)} ${selectedUnit})`,
       30,
       rectHeightPx - 30
     );
@@ -231,30 +250,26 @@ let currentSortColumn = null;
 let currentSortDirection = "asc";
 
 /**
- * Updates the tent table in the DOM with unit conversion.
- */
-/**
- * Updates the tent table in the DOM with unit conversion.
+ * Updates the tent table based on the selected unit.
  */
 function updateTentTable() {
   const tableBody = document.querySelector("#tent-table tbody");
-  tableBody.innerHTML = ""; // Clear existing rows
+  tableBody.innerHTML = "";
 
-  const selectedUnit = document.getElementById("scatter-unit").value;
-  const scaleFactor = unitConversions[selectedUnit];
+  const selectedUnit = document.getElementById("global-unit").value;
 
   tents.forEach((tent, index) => {
-    const convertedLength = tent.length * scaleFactor;
-    const convertedWidth = tent.width * scaleFactor;
-    const area = convertedLength * convertedWidth; // Calculate area in selected unit²
-    const pricePerUnit = tent.price / area; // Calculate price per square unit
+    const convertedLength = convertFromInches(tent.length, selectedUnit);
+    const convertedWidth = convertFromInches(tent.width, selectedUnit);
+    const convertedArea = convertedLength * convertedWidth;
+    const pricePerUnit = tent.price / convertedArea;
 
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${tent.name}</td>
       <td>${convertedLength.toFixed(2)}</td>
       <td>${convertedWidth.toFixed(2)}</td>
-      <td>${area.toFixed(2)}</td>
+      <td>${convertedArea.toFixed(2)}</td>
       <td>${tent.price.toFixed(2)}</td>
       <td>${pricePerUnit.toFixed(2)}</td>
       <td><button onclick="removeTent(${index})">Remove</button></td>
@@ -262,7 +277,7 @@ function updateTentTable() {
     tableBody.appendChild(row);
   });
 
-  updateSortIndicators(); // Update header indicators
+  updateTableHeaders(); // Update header indicators
 }
 
 /**
@@ -270,7 +285,7 @@ function updateTentTable() {
  * @param {string} key - The key to sort by (e.g., "name", "length", "area").
  */
 function sortTable(key) {
-  const selectedUnit = document.getElementById("scatter-unit").value;
+  const selectedUnit = document.getElementById("global-unit").value;
   const scaleFactor = unitConversions[selectedUnit];
 
   // Toggle direction if sorting the same column, otherwise default to ascending
@@ -317,6 +332,39 @@ function sortTable(key) {
 }
 
 /**
+ * Updates the table headers to reflect the selected unit and sorting indicators.
+ */
+function updateTableHeaders() {
+  const selectedUnit = document.getElementById("global-unit").value;
+
+  const unitLabel =
+    selectedUnit === "in" ? "In" :
+      selectedUnit === "ft" ? "Ft" :
+        selectedUnit === "cm" ? "Cm" : "M";
+
+  const headersConfig = {
+    name: "Name",
+    length: `Length (${unitLabel})`,
+    width: `Width (${unitLabel})`,
+    area: `Area (${unitLabel}²)`,
+    price: "Price ($)",
+    pricePerSqFt: `Price/${unitLabel}² ($)`,
+  };
+
+  const headers = document.querySelectorAll("#tent-table th");
+  headers.forEach((header) => {
+    const key = header.getAttribute("onclick")?.match(/sortTable\('(.+?)'\)/)?.[1];
+    if (key && headersConfig[key]) {
+      let headerText = headersConfig[key];
+      if (key === currentSortColumn) {
+        headerText += currentSortDirection === "asc" ? "↑" : "↓";
+      }
+      header.textContent = headerText;
+    }
+  });
+}
+
+/**
  * Updates the column headers with sorting indicators.
  */
 function updateSortIndicators() {
@@ -324,7 +372,7 @@ function updateSortIndicators() {
   headers.forEach((header) => {
     const key = header.getAttribute("onclick").match(/sortTable\('(.+?)'\)/)?.[1];
     if (key === currentSortColumn) {
-      header.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)} ${
+      header.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)}${
         currentSortDirection === "asc" ? "↑" : "↓"
       }`;
     } else {
@@ -335,10 +383,6 @@ function updateSortIndicators() {
   });
 }
 
-// Initialize the table
-updateTentTable();
-
-
-// Initialize charts with default unit
 tents.forEach(normalizeDimensions);
+updateTentTable();
 generateCharts();

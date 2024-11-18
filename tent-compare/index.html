@@ -8,53 +8,9 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-<div class="form-container">
-  <form id="tent-form">
-    <label for="tent-name">Tent Name</label>
-    <input type="text" id="tent-name" placeholder="Enter tent name" required>
-
-    <label for="tent-length">Length</label>
-    <input type="number" id="tent-length" placeholder="Enter length" required>
-    <select id="length-unit">
-      <option value="ft">Feet</option>
-      <option value="in">Inches</option>
-      <option value="cm">Centimeters</option>
-      <option value="m">Meters</option>
-    </select>
-
-    <label for="tent-width">Width</label>
-    <input type="number" id="tent-width" placeholder="Enter width" required>
-    <select id="width-unit">
-      <option value="ft">Feet</option>
-      <option value="in">Inches</option>
-      <option value="cm">Centimeters</option>
-      <option value="m">Meters</option>
-    </select>
-
-    <label for="tent-price">Price ($)</label>
-    <input type="number" id="tent-price" placeholder="Enter price" required>
-    <button type="button" onclick="addTent()">Add Tent</button>
-  </form>
-  <table id="tent-table" class="tent-table">
-    <thead>
-    <tr>
-      <th onclick="sortTable('name')">Name</th>
-      <th onclick="sortTable('length')">Length (ft)</th>
-      <th onclick="sortTable('width')">Width (ft)</th>
-      <th onclick="sortTable('area')">Area (ft²)</th>
-      <th onclick="sortTable('price')">Price ($)</th>
-      <th onclick="sortTable('pricePerSqFt')">Price/ft² ($)</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Dynamic content will populate here -->
-    </tbody>
-  </table>
-</div>
-
-<div class="chart-options">
-  <label for="scatter-unit">Scatter Chart Unit:</label>
-  <select id="scatter-unit" onchange="generateCharts()">
+<div class="header">
+  <label for="global-unit">Select Unit:</label>
+  <select id="global-unit" onchange="updateTableHeaders(); updateTentTable(); generateCharts();">
     <option value="ft">Feet</option>
     <option value="in">Inches</option>
     <option value="cm">Centimeters</option>
@@ -62,12 +18,58 @@
   </select>
 </div>
 
-<div class="charts-container">
-  <div class="chart-container">
-    <canvas id="scatter-chart"></canvas>
+<div class="main-container">
+  <div class="form-container">
+    <form id="tent-form">
+      <label for="tent-name">Tent Name</label>
+      <input type="text" id="tent-name" placeholder="Enter tent name" required>
+
+      <label for="tent-length">Length</label>
+      <input type="number" id="tent-length" placeholder="Enter length" required>
+      <select id="length-unit">
+        <option value="ft">Feet</option>
+        <option value="in">Inches</option>
+        <option value="cm">Centimeters</option>
+        <option value="m">Meters</option>
+      </select>
+
+      <label for="tent-width">Width</label>
+      <input type="number" id="tent-width" placeholder="Enter width" required>
+      <select id="width-unit">
+        <option value="ft">Feet</option>
+        <option value="in">Inches</option>
+        <option value="cm">Centimeters</option>
+        <option value="m">Meters</option>
+      </select>
+
+      <label for="tent-price">Price ($)</label>
+      <input type="number" id="tent-price" placeholder="Enter price" required>
+      <button type="button" onclick="addTent()">Add Tent</button>
+    </form>
+    <table id="tent-table" class="tent-table">
+      <thead>
+      <tr>
+        <th onclick="sortTable('name')">Name</th>
+        <th id="length-header" onclick="sortTable('length')">Length</th>
+        <th id="width-header" onclick="sortTable('width')">Width</th>
+        <th id="area-header" onclick="sortTable('area')">Area</th>
+        <th onclick="sortTable('price')">Price ($)</th>
+        <th id="price-per-area-header" onclick="sortTable('pricePerSqFt')"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- Dynamic content will populate here -->
+      </tbody>
+    </table>
   </div>
-  <div class="chart-container">
-    <canvas id="overlay-chart"></canvas>
+
+  <div class="charts-container">
+    <div class="chart-container">
+      <canvas id="scatter-chart"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="overlay-chart"></canvas>
+    </div>
   </div>
 </div>
 

@@ -1,40 +1,77 @@
+/* General Body Styles */
 body {
+  display: flex;
+  flex-direction: column;
   font-family: "Courier New", Courier, monospace;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: #ffffe0; /* Light yellow for vintage feel */
   color: #000;
-  flex-direction: row;
-  flex-wrap: wrap;
 }
 
-.form-container {
-  width: 30%;
-  float: left;
-}
-
-h1, h2 {
-  font-size: 20px;
-  margin: 10px 0;
+/* Header Section */
+.header {
+  padding: 10px;
+  background-color: #800000;
+  color: white;
   text-align: center;
-  color: #800000; /* Deep red */
-  text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff;
 }
 
-form, .chart-container {
-  margin: 5px auto;
+.header label {
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.header select {
+  font-size: 14px;
   padding: 5px;
-  width: 95%;
-  border: 2px solid #000;
-  background-color: #fffbe6;
-  box-shadow: 2px 2px 5px #999;
+  border-radius: 4px;
+  border: 1px solid #fff;
+  background-color: #fff;
+  color: #000;
+}
+
+/* Main Layout */
+.main-container {
+  display: flex;
+  flex-wrap: nowrap; /* Default: no wrapping */
+  justify-content: space-between;
+  gap: 10px;
+  margin: 10px;
+}
+
+@media (max-width: 1200px) {
+  .main-container {
+    flex-wrap: wrap; /* Wrap content when screen is too narrow for side-by-side layout */
+  }
+}
+
+/* Form and Table Section */
+.form-container {
+  flex: 0 1 auto; /* Shrinks to fit content */
+  min-width: 250px; /* Minimum width for usability */
+  max-width: 30%; /* Cap at 30% for larger screens */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (max-width: 1200px) {
+  .form-container {
+    flex: 1 1 100%; /* Take full width in wrapped layout */
+  }
 }
 
 form {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin: 5px auto;
+  padding: 5px;
+  border: 2px solid #000;
+  background-color: #fffbe6;
+  box-shadow: 2px 2px 5px #999;
 }
 
 form label {
@@ -48,7 +85,7 @@ form input, form select, form button {
   font-size: 12px;
   padding: 3px;
   border: 1px solid #000;
-  border-radius: 0;
+  border-radius: 4px;
   background-color: #fff;
   width: 48%; /* Two inputs per row */
 }
@@ -56,78 +93,13 @@ form input, form select, form button {
 form button {
   background-color: #800000;
   color: white;
-  border: 1px solid #000;
   cursor: pointer;
-  text-align: center;
   padding: 5px 10px;
   font-weight: bold;
 }
 
-#tent-list {
-  margin: 5px auto;
-  padding: 5px;
-  width: 95%;
-  background-color: #fffbe6;
-  border: 2px solid #000;
-  font-size: 12px;
-  max-height: 150px;
-  overflow-y: auto;
-}
-
-#tent-list li {
-  list-style: square;
-  margin: 5px 0;
-  display: flex;
-  justify-content: space-between;
-}
-
-#tent-list button {
-  font-size: 10px;
-  padding: 3px 5px;
-  color: white;
-  background-color: #800000;
-  border: 1px solid #000;
-  cursor: pointer;
-}
-
-select {
-  font-size: 12px;
-}
-
-.charts-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 5px;
-  margin: 5px auto;
-  width: 65%;
-  float: right;
-}
-
-.chart-container {
-  flex: 1;
-  min-width: 45%;
-  border: 2px solid #000;
-  background-color: #fff;
-  padding: 5px;
-  box-shadow: 2px 2px 5px #666;
-}
-
-.chart-container canvas {
-  width: 100%;
-  height: auto;
-  border: 1px solid #000;
-}
-
-footer {
-  text-align: center;
-  font-size: 10px;
-  margin-top: 10px;
-  color: #666;
-}
-
 .tent-table {
-  width: 100%;
+  width: 100%; /* Ensure the table adjusts to its container's width */
   border-collapse: collapse;
   margin: 10px auto;
   font-size: 12px;
@@ -153,6 +125,56 @@ footer {
   padding: 3px 5px;
   color: white;
   background-color: #800000;
-  border: 1px solid #000;
   cursor: pointer;
+}
+
+/* Chart Section */
+.charts-container {
+  flex: 1 1 auto; /* Default: flexible space usage */
+  display: flex;
+  flex-wrap: nowrap; /* Keep charts side by side */
+  gap: 10px;
+  justify-content: space-around;
+}
+
+@media (max-width: 1200px) {
+  .charts-container {
+    flex: 1 1 100%; /* Move below the table when screen is too narrow */
+  }
+}
+
+@media (max-width: 800px) {
+  .charts-container {
+    flex-wrap: wrap; /* Stack charts vertically on narrow screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .charts-container {
+    flex-direction: column; /* Ensure charts stack in a single column */
+    gap: 20px;
+  }
+}
+
+.chart-container {
+  flex: 1 1 300px; /* Base size for charts */
+  max-width: 48%; /* Cap at 48% for side-by-side layout */
+  border: 2px solid #000;
+  background-color: #fff;
+  padding: 10px;
+  box-shadow: 2px 2px 5px #666;
+}
+
+.chart-container canvas {
+  width: 100%;
+  height: auto;
+  border: 1px solid #000;
+}
+
+/* Footer Styles */
+footer {
+  text-align: center;
+  font-size: 10px;
+  margin-top: 10px;
+  color: #666;
 }
