@@ -340,7 +340,6 @@ let currentSortColumn = null;
 let currentSortDirection = "asc";
 
 function roundNumber(number, decimalPlaces = 2) {
-  console.log(number, decimalPlaces);
   return Math.round((number + Number.EPSILON) * (10 * decimalPlaces)) / (10 * decimalPlaces);
 }
 
