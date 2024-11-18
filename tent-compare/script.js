@@ -250,12 +250,18 @@ function generateScatterChart(selectedUnit = "ft") {
 function generateOverlayChart(selectedUnit = "ft") {
   const overlayCanvas = document.getElementById("overlay-chart");
   const parentContainer = overlayCanvas.parentElement;
-  overlayCtx = overlayCanvas.getContext("2d");
+  const overlayCtx = overlayCanvas.getContext("2d");
 
   const canvasWidth = parentContainer.offsetWidth - 14;
   const canvasHeight = parentContainer.offsetHeight - 14;
-  overlayCanvas.width = canvasWidth;
-  overlayCanvas.height = canvasHeight;
+
+  // Adjust for high DPI (Retina) screens
+  const dpr = window.devicePixelRatio || 1; // Get device pixel ratio
+  overlayCanvas.width = canvasWidth * dpr;
+  overlayCanvas.height = canvasHeight * dpr;
+  overlayCanvas.style.width = `${canvasWidth}px`;
+  overlayCanvas.style.height = `${canvasHeight}px`;
+  overlayCtx.scale(dpr, dpr); // Scale the context for high-DPI rendering
 
   overlayCtx.clearRect(0, 0, canvasWidth, canvasHeight);
 
@@ -280,13 +286,13 @@ function generateOverlayChart(selectedUnit = "ft") {
 
   const gridSpacingPx = rawGridSpacing * scale; // Grid spacing in pixels
 
-  // Set dynamic font size for labels
+  // Set dynamic font size for labels, adjusted for scaling
   const baseFontSize = Math.max(10, Math.min(12, canvasHeight / 50));
   overlayCtx.font = `${baseFontSize}px Courier New`;
 
   // Draw grid lines and labels
   overlayCtx.strokeStyle = "#cccccc";
-  overlayCtx.lineWidth = 0.5;
+  overlayCtx.lineWidth = 0.5 / dpr; // Adjust line width for scaling
 
   // Vertical grid lines and labels
   for (let i = 0; i <= canvasWidth / gridSpacingPx; i++) {
@@ -330,9 +336,9 @@ function generateOverlayChart(selectedUnit = "ft") {
 
     overlayCtx.fillStyle = colorPalette[index];
     overlayCtx.fillText(
-      `${tent.name} (${convertedLength.toFixed(1)}x${convertedWidth.toFixed(1)} ${selectedUnit})`,
-      40,
-      rectHeightPx - 30
+        `${tent.name} (${convertedLength.toFixed(1)}x${convertedWidth.toFixed(1)} ${selectedUnit})`,
+        40,
+        rectHeightPx - 30
     );
   });
 }
