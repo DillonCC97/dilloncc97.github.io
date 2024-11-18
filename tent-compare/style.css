@@ -1,0 +1,126 @@
+body {
+  font-family: "Courier New", Courier, monospace;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #ffffe0; /* Light yellow for vintage feel */
+  color: #000;
+}
+
+h1, h2 {
+  font-size: 20px;
+  margin: 10px 0;
+  text-align: center;
+  color: #800000; /* Deep red */
+  text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff;
+}
+
+form, .chart-container {
+  margin: 5px auto;
+  padding: 5px;
+  width: 95%;
+  border: 2px solid #000;
+  background-color: #fffbe6;
+  box-shadow: 2px 2px 5px #999;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+form label {
+  width: 100%;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+form input, form select, form button {
+  margin: 2px 0;
+  font-size: 12px;
+  padding: 3px;
+  border: 1px solid #000;
+  border-radius: 0;
+  background-color: #fff;
+  width: 48%; /* Two inputs per row */
+}
+
+form button {
+  background-color: #800000;
+  color: white;
+  border: 1px solid #000;
+  cursor: pointer;
+  text-align: center;
+  padding: 5px 10px;
+  font-weight: bold;
+}
+
+form button:hover {
+  background-color: #ff0000;
+}
+
+#tent-list {
+  margin: 5px auto;
+  padding: 5px;
+  width: 95%;
+  background-color: #fffbe6;
+  border: 2px solid #000;
+  font-size: 12px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+#tent-list li {
+  list-style: square;
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+#tent-list button {
+  font-size: 10px;
+  padding: 3px 5px;
+  color: white;
+  background-color: #800000;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+
+#tent-list button:hover {
+  background-color: #ff0000;
+}
+
+select {
+  font-size: 12px;
+}
+
+.charts-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 5px;
+  margin: 5px auto;
+}
+
+.chart-container {
+  flex: 1;
+  min-width: 45%;
+  border: 2px solid #000;
+  background-color: #fff;
+  padding: 5px;
+  box-shadow: 2px 2px 5px #666;
+}
+
+.chart-container canvas {
+  width: 100%;
+  height: auto;
+  border: 1px solid #000;
+}
+
+footer {
+  text-align: center;
+  font-size: 10px;
+  margin-top: 10px;
+  color: #666;
+}
