@@ -8,6 +8,7 @@ body {
   box-sizing: border-box;
   background-color: #ffffe0; /* Light yellow for vintage feel */
   color: #000;
+  min-height: 100vh;
 }
 
 /* Header Section */
@@ -35,34 +36,43 @@ body {
 /* Main Layout */
 .main-container {
   display: flex;
-  flex-wrap: nowrap; /* Default: no wrapping */
-  justify-content: space-between;
+  flex-direction: row;
   gap: 10px;
-  margin: 10px;
+  flex-grow: 1;
 }
 
-@media (max-width: 1200px) {
+.form-container {
+  flex: 0 1 500px; /* Fixed narrow width */
+  min-width: 500px;
+}
+
+.charts-container {
+  flex: 1 1 auto; /* Occupy remaining space */
+  display: block; /* Stack charts vertically */
+}
+
+.chart-container {
+  display: none; /* Hide all charts initially */
+}
+
+/* Responsive Design for Small Screens */
+@media (max-aspect-ratio: 4/3) {
   .main-container {
-    flex-wrap: wrap; /* Wrap content when screen is too narrow for side-by-side layout */
+    flex-direction: column; /* Stack everything in one column */
   }
+
+  .form-container,
+  .charts-container {
+    flex: 1 1 auto;
+  }
+}
+
+/* Display the first chart by default */
+.chart-container:first-child {
+  display: block;
 }
 
 /* Form and Table Section */
-.form-container {
-  flex: 0 1 auto; /* Shrinks to fit content */
-  min-width: 250px; /* Minimum width for usability */
-  max-width: 30%; /* Cap at 30% for larger screens */
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-@media (max-width: 1200px) {
-  .form-container {
-    flex: 1 1 100%; /* Take full width in wrapped layout */
-  }
-}
-
 form {
   display: flex;
   flex-wrap: wrap;
@@ -80,7 +90,9 @@ form label {
   margin-bottom: 5px;
 }
 
-form input, form select, form button {
+form input,
+form select,
+form button {
   margin: 2px 0;
   font-size: 12px;
   padding: 3px;
@@ -129,56 +141,6 @@ form button {
 }
 
 /* Chart Section */
-.charts-container {
-  flex: 1 1 auto; /* Default: flexible space usage */
-  display: flex;
-  flex-wrap: nowrap; /* Keep charts side by side */
-  gap: 10px;
-  justify-content: space-around;
-}
-
-@media (max-width: 1200px) {
-  .charts-container {
-    flex: 1 1 100%; /* Move below the table when screen is too narrow */
-  }
-}
-
-@media (max-width: 800px) {
-  .charts-container {
-    flex-wrap: wrap; /* Stack charts vertically on narrow screens */
-  }
-}
-
-@media (max-width: 600px) {
-  .charts-container {
-    flex-direction: column; /* Ensure charts stack in a single column */
-    gap: 20px;
-  }
-}
-
-.chart-container {
-  flex: 1 1 300px; /* Base size for charts */
-  max-width: 48%; /* Cap at 48% for side-by-side layout */
-  border: 2px solid #000;
-  background-color: #fff;
-  padding: 10px;
-  box-shadow: 2px 2px 5px #666;
-}
-
-.chart-container canvas {
-  width: 100%;
-  height: auto;
-  border: 1px solid #000;
-}
-
-/* Footer Styles */
-footer {
-  text-align: center;
-  font-size: 10px;
-  margin-top: 10px;
-  color: #666;
-}
-
 .chart-container {
   flex: 1 1 auto; /* Adjust the chart container size flexibly */
   max-width: 48%; /* Restrict width for side-by-side layout */
@@ -195,4 +157,12 @@ footer {
   width: 100%;
   height: 100%; /* Make the canvas fill the container height */
   border: none; /* Remove borders for a seamless fit */
+}
+
+/* Footer Styles */
+footer {
+  text-align: center;
+  font-size: 10px;
+  margin-top: 10px;
+  color: #666;
 }

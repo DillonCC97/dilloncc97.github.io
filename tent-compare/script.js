@@ -130,8 +130,12 @@ function removeTent(index) {
 // Generate charts based on selected unit
 function generateCharts() {
   const selectedUnit = document.getElementById("global-unit").value;
-  generateScatterChart(selectedUnit);
-  generateOverlayChart(selectedUnit);
+  const selectedChart = document.getElementById("chart-type").value;
+  if (selectedChart === 'scatter-chart') {
+    generateScatterChart(selectedUnit);
+  } else {
+    generateOverlayChart(selectedUnit);
+  }
 }
 
 // Generate the scatter chart with unit conversion
@@ -146,15 +150,9 @@ function generateScatterChart(selectedUnit = "ft") {
   // Convert from inches to the selected unit
   const scaleFactor = unitConversions[selectedUnit];
 
-  const maxArea = Math.max(...tents.map(tent => (tent.areaInInches * scaleFactor ** 2)));
-  const maxPricePerSqUnit = Math.max(...tents.map(tent => (tent.pricePerSqIn / (scaleFactor ** 2))));
-
-  const paddedMaxArea = maxArea + maxArea * 0.1;
-  const paddedMaxPrice = maxPricePerSqUnit + maxPricePerSqUnit * 0.1;
-
   // Destroy any existing chart instance before creating a new one
   if (scatterChartInstance) {
-    scatterChartInstance.destroy();
+    scatterChartInstancex.destroy();
     scatterChartInstance = null;
   }
 
@@ -206,6 +204,7 @@ function generateScatterChart(selectedUnit = "ft") {
  * @param {string} selectedUnit - The selected unit for display.
  */
 function generateOverlayChart(selectedUnit = "ft") {
+  console.log('GEN', selectedUnit);
   const overlayCanvas = document.getElementById("overlay-chart");
   overlayCtx = overlayCanvas.getContext("2d");
 
@@ -430,6 +429,18 @@ function updateSortIndicators() {
   });
 }
 
+/**
+ * Updates the visibility of charts based on the selected option.
+ */
+function updateChartVisibility() {
+  const chartType = document.getElementById("chart-type").value;
+  document.getElementById("scatter-chart").parentElement.style.display =
+    chartType === "scatter-chart" ? "block" : "none";
+  document.getElementById("overlay-chart").parentElement.style.display =
+    chartType === "overlay-chart" ? "block" : "none";
+  generateCharts();
+}
+
 tents.forEach(normalizeDimensions);
 updateTentTable();
-generateCharts();
+updateChartVisibility();
