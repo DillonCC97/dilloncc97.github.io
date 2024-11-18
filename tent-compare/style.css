@@ -63,10 +63,6 @@ form button {
   font-weight: bold;
 }
 
-form button:hover {
-  background-color: #ff0000;
-}
-
 #tent-list {
   margin: 5px auto;
   padding: 5px;
@@ -92,10 +88,6 @@ form button:hover {
   background-color: #800000;
   border: 1px solid #000;
   cursor: pointer;
-}
-
-#tent-list button:hover {
-  background-color: #ff0000;
 }
 
 select {
