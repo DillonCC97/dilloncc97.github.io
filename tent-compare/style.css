@@ -76,6 +76,12 @@ button:focus, input:focus, select:focus {
   object-fit: contain; /* Preserve aspect ratio */
 }
 
+.chart-selection {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .chart-selection, .chart-option-container {
   padding: 5px;
 }
