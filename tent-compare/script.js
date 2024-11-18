@@ -456,25 +456,6 @@ function updateTableHeaders() {
 }
 
 /**
- * Updates the column headers with sorting indicators.
- */
-function updateSortIndicators() {
-  const headers = document.querySelectorAll("#tent-table th");
-  headers.forEach((header) => {
-    const key = header.getAttribute("onclick").match(/sortTable\('(.+?)'\)/)?.[1];
-    if (key === currentSortColumn) {
-      header.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)}${
-        currentSortDirection === "asc" ? "↑" : "↓"
-      }`;
-    } else {
-      header.textContent = key
-        ? key.charAt(0).toUpperCase() + key.slice(1)
-        : header.textContent;
-    }
-  });
-}
-
-/**
  * Updates the visibility of charts based on the selected option.
  */
 function updateChartVisibility() {
