@@ -233,6 +233,9 @@ let currentSortDirection = "asc";
 /**
  * Updates the tent table in the DOM with unit conversion.
  */
+/**
+ * Updates the tent table in the DOM with unit conversion.
+ */
 function updateTentTable() {
   const tableBody = document.querySelector("#tent-table tbody");
   tableBody.innerHTML = ""; // Clear existing rows
@@ -240,7 +243,7 @@ function updateTentTable() {
   const selectedUnit = document.getElementById("scatter-unit").value;
   const scaleFactor = unitConversions[selectedUnit];
 
-  tents.forEach((tent) => {
+  tents.forEach((tent, index) => {
     const convertedLength = tent.length * scaleFactor;
     const convertedWidth = tent.width * scaleFactor;
     const area = convertedLength * convertedWidth; // Calculate area in selected unit²
@@ -254,6 +257,7 @@ function updateTentTable() {
       <td>${area.toFixed(2)}</td>
       <td>${tent.price.toFixed(2)}</td>
       <td>${pricePerUnit.toFixed(2)}</td>
+      <td><button onclick="removeTent(${index})">Remove</button></td>
     `;
     tableBody.appendChild(row);
   });

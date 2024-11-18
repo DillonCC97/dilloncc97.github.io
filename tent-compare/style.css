@@ -156,3 +156,11 @@ footer {
   padding: 5px;
 }
 
+.tent-table button {
+  font-size: 10px;
+  padding: 3px 5px;
+  color: white;
+  background-color: #800000;
+  border: 1px solid #000;
+  cursor: pointer;
+}
