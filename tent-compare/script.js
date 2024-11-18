@@ -167,6 +167,8 @@ function generateScatterChart(selectedUnit = "ft") {
             y: tent.pricePerSqIn / (scaleFactor ** 2),
           },
         ],
+        pointRadius: 5,
+        borderWidth: 1,
         backgroundColor: getNextColor(),
       })),
     },
@@ -174,9 +176,28 @@ function generateScatterChart(selectedUnit = "ft") {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: true, position: "top" },
+        legend: {
+          display: true,
+          position: "top",
+          labels: {
+            font: {
+              family: 'Courier New',
+              size: 12,
+            }
+          }
+        },
         tooltip: {
           enabled: true,
+          callbacks: {
+            label: function (tooltipItem) {
+              const dataset = tooltipItem.dataset.label;
+              const { x, y } = tooltipItem.raw;
+              return `${dataset}: Area ${x.toFixed(2)} ${selectedUnit}², Price ${y.toFixed(2)} $/${selectedUnit}²`;
+            },
+          },
+          bodyFont: {
+            family: 'Courier New',
+          }
         },
       },
       scales: {
@@ -186,13 +207,35 @@ function generateScatterChart(selectedUnit = "ft") {
           title: {
             display: true,
             text: `Area (${selectedUnit}²)`,
+            font: {
+              size: 14,
+              weight: 'bold',
+              family: 'Courier New',
+            },
           },
+          ticks: {
+            font: {
+              family: 'Courier New',
+              size: 12,
+            }
+          }
         },
         y: {
           title: {
             display: true,
             text: `Price per ${selectedUnit}² ($)`,
+            font: {
+              size: 14,
+              weight: 'bold',
+              family: 'Courier New',
+            },
           },
+          ticks: {
+            font: {
+              family: 'Courier New',
+              size: 12,
+            }
+          }
         },
       },
     },
@@ -210,7 +253,6 @@ function generateOverlayChart(selectedUnit = "ft") {
 
   const canvasWidth = parentContainer.offsetWidth - 14;
   const canvasHeight = parentContainer.offsetHeight - 14;
-  console.log('WIDTHS', canvasWidth, canvasHeight);
   overlayCanvas.width = canvasWidth;
   overlayCanvas.height = canvasHeight;
 
@@ -238,8 +280,8 @@ function generateOverlayChart(selectedUnit = "ft") {
   const gridSpacingPx = rawGridSpacing * scale; // Grid spacing in pixels
 
   // Set dynamic font size for labels
-  const baseFontSize = Math.max(10, Math.min(14, canvasHeight / 50));
-  overlayCtx.font = `${baseFontSize}px Arial`;
+  const baseFontSize = Math.max(10, Math.min(12, canvasHeight / 50));
+  overlayCtx.font = `${baseFontSize}px Courier New`;
 
   // Draw grid lines and labels
   overlayCtx.strokeStyle = "#cccccc";
@@ -288,7 +330,7 @@ function generateOverlayChart(selectedUnit = "ft") {
     overlayCtx.fillStyle = colorPalette[index];
     overlayCtx.fillText(
       `${tent.name} (${convertedLength.toFixed(1)}x${convertedWidth.toFixed(1)} ${selectedUnit})`,
-      30,
+      40,
       rectHeightPx - 30
     );
   });
@@ -406,7 +448,7 @@ function updateTableHeaders() {
     if (key && headersConfig[key]) {
       let headerText = headersConfig[key];
       if (key === currentSortColumn) {
-        headerText += currentSortDirection === "asc" ? "↑" : "↓";
+        headerText += currentSortDirection === "asc" ? "⏶" : "⏷";
       }
       header.textContent = headerText;
     }
