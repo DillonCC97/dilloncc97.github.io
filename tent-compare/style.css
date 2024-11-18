@@ -160,8 +160,7 @@ form button {
 }
 
 .tent-table tr:focus {
-  outline: 2px solid #000;
-  outline-offset: 2px;
+  border: 2px dashed #000;
   background-color: #f0f0f0;
 }
 
