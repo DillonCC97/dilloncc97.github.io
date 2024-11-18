@@ -47,30 +47,15 @@ function addTent() {
   };
   normalizeDimensions(tent);
   tents.push(tent);
-  updateTentList();
+  updateTentTable();
   generateCharts();
 }
 
 // Remove a tent and update
 function removeTent(index) {
   tents.splice(index, 1);
-  updateTentList();
+  updateTentTable();
   generateCharts();
-}
-
-// Update the tent list in the DOM
-function updateTentList() {
-  const list = document.getElementById("tent-list");
-  list.innerHTML = "";
-  tents.forEach((tent, index) => {
-    const listItem = document.createElement("li");
-    listItem.textContent = `${tent.name} - ${tent.length.toFixed(2)}x${tent.width.toFixed(2)} ft (${tent.area.toFixed(2)} ft²) - $${tent.price.toFixed(2)}`;
-    const removeButton = document.createElement("button");
-    removeButton.textContent = "Remove";
-    removeButton.onclick = () => removeTent(index);
-    listItem.appendChild(removeButton);
-    list.appendChild(listItem);
-  });
 }
 
 // Generate charts based on selected unit
@@ -242,7 +227,114 @@ function generateOverlayChart(selectedUnit = "ft") {
   });
 }
 
+let currentSortColumn = null;
+let currentSortDirection = "asc";
+
+/**
+ * Updates the tent table in the DOM with unit conversion.
+ */
+function updateTentTable() {
+  const tableBody = document.querySelector("#tent-table tbody");
+  tableBody.innerHTML = ""; // Clear existing rows
+
+  const selectedUnit = document.getElementById("scatter-unit").value;
+  const scaleFactor = unitConversions[selectedUnit];
+
+  tents.forEach((tent) => {
+    const convertedLength = tent.length * scaleFactor;
+    const convertedWidth = tent.width * scaleFactor;
+    const area = convertedLength * convertedWidth; // Calculate area in selected unit²
+    const pricePerUnit = tent.price / area; // Calculate price per square unit
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${tent.name}</td>
+      <td>${convertedLength.toFixed(2)}</td>
+      <td>${convertedWidth.toFixed(2)}</td>
+      <td>${area.toFixed(2)}</td>
+      <td>${tent.price.toFixed(2)}</td>
+      <td>${pricePerUnit.toFixed(2)}</td>
+    `;
+    tableBody.appendChild(row);
+  });
+
+  updateSortIndicators(); // Update header indicators
+}
+
+/**
+ * Sorts the tent table by a specified column.
+ * @param {string} key - The key to sort by (e.g., "name", "length", "area").
+ */
+function sortTable(key) {
+  const selectedUnit = document.getElementById("scatter-unit").value;
+  const scaleFactor = unitConversions[selectedUnit];
+
+  // Toggle direction if sorting the same column, otherwise default to ascending
+  if (currentSortColumn === key) {
+    currentSortDirection = currentSortDirection === "asc" ? "desc" : "asc";
+  } else {
+    currentSortColumn = key;
+    currentSortDirection = "asc";
+  }
+
+  // Dynamically calculate derived values for sorting
+  tents.sort((a, b) => {
+    const getValue = (tent) => {
+      const convertedLength = tent.length * scaleFactor;
+      const convertedWidth = tent.width * scaleFactor;
+      const area = convertedLength * convertedWidth;
+
+      return key === "name"
+        ? tent.name
+        : key === "length"
+          ? convertedLength
+          : key === "width"
+            ? convertedWidth
+            : key === "area"
+              ? area
+              : key === "price"
+                ? tent.price
+                : key === "pricePerSqFt"
+                  ? tent.price / area
+                  : 0;
+    };
+
+    const valueA = getValue(a);
+    const valueB = getValue(b);
+
+    if (currentSortDirection === "asc") {
+      return valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
+    } else {
+      return valueA > valueB ? -1 : valueA < valueB ? 1 : 0;
+    }
+  });
+
+  updateTentTable(); // Re-render table after sorting
+}
+
+/**
+ * Updates the column headers with sorting indicators.
+ */
+function updateSortIndicators() {
+  const headers = document.querySelectorAll("#tent-table th");
+  headers.forEach((header) => {
+    const key = header.getAttribute("onclick").match(/sortTable\('(.+?)'\)/)?.[1];
+    if (key === currentSortColumn) {
+      header.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)} ${
+        currentSortDirection === "asc" ? "↑" : "↓"
+      }`;
+    } else {
+      header.textContent = key
+        ? key.charAt(0).toUpperCase() + key.slice(1)
+        : header.textContent;
+    }
+  });
+}
+
+// Initialize the table
+updateTentTable();
+
+
 // Initialize charts with default unit
 tents.forEach(normalizeDimensions);
-updateTentList();
 generateCharts();

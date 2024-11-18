@@ -35,7 +35,21 @@
     <input type="number" id="tent-price" placeholder="Enter price" required>
     <button type="button" onclick="addTent()">Add Tent</button>
   </form>
-  <ul id="tent-list"></ul>
+  <table id="tent-table" class="tent-table">
+    <thead>
+    <tr>
+      <th onclick="sortTable('name')">Name</th>
+      <th onclick="sortTable('length')">Length (ft)</th>
+      <th onclick="sortTable('width')">Width (ft)</th>
+      <th onclick="sortTable('area')">Area (ft²)</th>
+      <th onclick="sortTable('price')">Price ($)</th>
+      <th onclick="sortTable('pricePerSqFt')">Price/ft² ($)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Dynamic content will populate here -->
+    </tbody>
+  </table>
 </div>
 
 <div class="chart-options">
