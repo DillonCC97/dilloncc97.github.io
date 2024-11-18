@@ -152,7 +152,7 @@ function generateScatterChart(selectedUnit = "ft") {
 
   // Destroy any existing chart instance before creating a new one
   if (scatterChartInstance) {
-    scatterChartInstancex.destroy();
+    scatterChartInstance.destroy();
     scatterChartInstance = null;
   }
 
@@ -269,10 +269,11 @@ function generateOverlayChart(selectedUnit = "ft") {
 
   // Render tents with scaling
   const sortedTents = [...tents].sort((a, b) => b.areaInInches - a.areaInInches);
+  const landscape = canvasWidth > canvasHeight;
 
   sortedTents.forEach((tent, index) => {
-    const rectWidthPx = tent.length * scaleFactor * scale;
-    const rectHeightPx = tent.width * scaleFactor * scale;
+    const rectWidthPx = (landscape ? tent.length : tent.width) * scaleFactor * scale;
+    const rectHeightPx = (landscape ? tent.width : tent.length) * scaleFactor * scale;
 
     overlayCtx.fillStyle = `${colorPalette[index]}1A`;
     overlayCtx.fillRect(0, 0, rectWidthPx, rectHeightPx);
@@ -325,6 +326,7 @@ function updateTentTable() {
   });
 
   updateTableHeaders(); // Update header indicators
+  updateTableDataLabels();
 }
 
 /**
@@ -440,6 +442,20 @@ function updateChartVisibility() {
   document.getElementById("overlay-chart").parentElement.style.display =
     chartType === "overlay-chart" ? "block" : "none";
   generateCharts();
+}
+
+function updateTableDataLabels() {
+  const table = document.querySelector('#tent-table');
+  const headers = table.querySelectorAll('th');
+  const rows = table.querySelectorAll('tbody tr');
+
+  rows.forEach(row => {
+    const cells = row.querySelectorAll('td');
+    cells.forEach((cell, index) => {
+      const headerText = headers[index]?.innerText || '';
+      cell.setAttribute('data-label', headerText); // Add header text to data-label
+    });
+  });
 }
 
 tents.forEach(normalizeDimensions);

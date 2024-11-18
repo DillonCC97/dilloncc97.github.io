@@ -43,11 +43,13 @@ body {
 
 .form-container {
   flex: 0 1 500px; /* Fixed narrow width */
-  min-width: 500px;
 }
 
 .charts-container {
   flex-grow: 1;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .chart-container {
@@ -82,7 +84,7 @@ body {
 
   .form-container,
   .charts-container {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
   }
 
   .chart-container {
@@ -105,7 +107,7 @@ form {
 form label {
   width: 100%;
   font-size: 14px;
-  margin-bottom: 5px;
+  /*margin-bottom: 5px;*/
 }
 
 form input,
@@ -122,6 +124,7 @@ form button {
   display: block; /* Ensure consistent block behavior */
   align-self: center; /* Prevent stretching in flexbox */
   box-sizing: border-box; /* Ensure padding and border are included */
+  margin-bottom: 10px;
 }
 
 form select {
@@ -173,4 +176,51 @@ footer {
   font-size: 10px;
   margin-top: 10px;
   color: #666;
+}
+
+.chart-option-container {
+  margin-bottom: 5px;
+}
+
+/* Card Layout for Small Screens */
+@media (max-width: 768px) {
+  .tent-table {
+    display: block;
+    border: none; /* Remove table border for card styling */
+  }
+
+  .tent-table thead {
+    display: none; /* Hide the table header */
+  }
+
+  .tent-table tbody {
+    display: flex;
+    flex-direction: column; /* Stack rows as cards */
+  }
+
+  .tent-table tr {
+    display: flex;
+    flex-direction: column; /* Each row becomes a card */
+    border: 1px solid #000; /* Add border for card */
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 2px 2px 5px #999;
+  }
+
+  .tent-table td {
+    display: flex;
+    justify-content: space-between; /* Label and value side-by-side */
+    padding: 5px 0;
+    font-size: 14px;
+    border: 0;
+  }
+
+  .tent-table td::before {
+    content: attr(data-label); /* Display the column header */
+    font-weight: bold;
+    margin-right: 10px;
+    text-align: left;
+    /*flex-basis: 40%; !* Allocate space for labels *!*/
+  }
 }
