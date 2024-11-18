@@ -208,7 +208,7 @@ function generateOverlayChart(selectedUnit = "ft") {
   const overlayCanvas = document.getElementById("overlay-chart");
   overlayCtx = overlayCanvas.getContext("2d");
 
-  const canvasWidth = 550;
+  const canvasWidth = 1300;
   const canvasHeight = 800;
   overlayCanvas.width = canvasWidth;
   overlayCanvas.height = canvasHeight;
@@ -270,8 +270,8 @@ function generateOverlayChart(selectedUnit = "ft") {
   const sortedTents = [...tents].sort((a, b) => b.areaInInches - a.areaInInches);
 
   sortedTents.forEach((tent, index) => {
-    const rectWidthPx = tent.width * scaleFactor * scale;
-    const rectHeightPx = tent.length * scaleFactor * scale;
+    const rectWidthPx = tent.length * scaleFactor * scale;
+    const rectHeightPx = tent.width * scaleFactor * scale;
 
     overlayCtx.fillStyle = `${colorPalette[index]}1A`;
     overlayCtx.fillRect(0, 0, rectWidthPx, rectHeightPx);

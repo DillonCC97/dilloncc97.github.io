@@ -4,7 +4,7 @@ body {
   flex-direction: column;
   font-family: "Courier New", Courier, monospace;
   margin: 0;
-  padding: 0;
+  padding: 5px;
   box-sizing: border-box;
   background-color: #ffffe0; /* Light yellow for vintage feel */
   color: #000;
@@ -47,12 +47,29 @@ body {
 }
 
 .charts-container {
-  flex: 1 1 auto; /* Occupy remaining space */
-  display: block; /* Stack charts vertically */
 }
 
 .chart-container {
-  display: none; /* Hide all charts initially */
+  flex: 1 1 100%; /* Default to full width */
+  display: flex; /* Flex for canvas alignment */
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
+}
+
+.chart-selection {
+  padding: 5px;
+}
+
+/* Chart Styling */
+.chart-container canvas {
+  max-width: 100%; /* Chart fits container width */
+  max-height: 100%; /* Chart fits container height */
+  object-fit: contain; /* Maintain aspect ratio */
+  border: 2px solid #000;
+  background-color: #fff;
+  padding: 5px;
+  box-shadow: 2px 2px 5px #666;
 }
 
 /* Responsive Design for Small Screens */
@@ -65,11 +82,10 @@ body {
   .charts-container {
     flex: 1 1 auto;
   }
-}
 
-/* Display the first chart by default */
-.chart-container:first-child {
-  display: block;
+  .chart-container {
+    flex: 1 1 100%; /* Charts span full width when stacked */
+  }
 }
 
 /* Form and Table Section */
@@ -77,11 +93,11 @@ form {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 5px auto;
   padding: 5px;
   border: 2px solid #000;
   background-color: #fffbe6;
   box-shadow: 2px 2px 5px #999;
+  align-items: flex-start; /* Prevent vertical stretching in flexbox */
 }
 
 form label {
@@ -100,6 +116,15 @@ form button {
   border-radius: 4px;
   background-color: #fff;
   width: 48%; /* Two inputs per row */
+  height: auto; /* Reset height */
+  display: block; /* Ensure consistent block behavior */
+  align-self: center; /* Prevent stretching in flexbox */
+  box-sizing: border-box; /* Ensure padding and border are included */
+}
+
+form select {
+  max-height: 2.5em; /* Limit height for better appearance */
+  padding: 0.2em; /* Add padding for better usability */
 }
 
 form button {
@@ -138,25 +163,6 @@ form button {
   color: white;
   background-color: #800000;
   cursor: pointer;
-}
-
-/* Chart Section */
-.chart-container {
-  flex: 1 1 auto; /* Adjust the chart container size flexibly */
-  max-width: 48%; /* Restrict width for side-by-side layout */
-  border: 2px solid #000;
-  background-color: #fff;
-  padding: 0; /* Remove padding to avoid spacing issues */
-  box-shadow: 2px 2px 5px #666;
-  display: flex; /* Flex layout to make the canvas fill */
-  justify-content: center;
-  align-items: center;
-}
-
-.chart-container canvas {
-  width: 100%;
-  height: 100%; /* Make the canvas fill the container height */
-  border: none; /* Remove borders for a seamless fit */
 }
 
 /* Footer Styles */

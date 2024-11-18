@@ -62,14 +62,14 @@
         <option value="scatter-chart">Scatter Chart</option>
         <option value="overlay-chart">Overlay Chart</option>
       </select>
+      <label for="global-unit">Select Unit:</label>
+      <select id="global-unit" onchange="updateTableHeaders(); updateTentTable(); generateCharts();">
+        <option value="ft">Feet</option>
+        <option value="in">Inches</option>
+        <option value="cm">Centimeters</option>
+        <option value="m">Meters</option>
+      </select>
     </div>
-    <label for="global-unit">Select Unit:</label>
-    <select id="global-unit" onchange="updateTableHeaders(); updateTentTable(); generateCharts();">
-      <option value="ft">Feet</option>
-      <option value="in">Inches</option>
-      <option value="cm">Centimeters</option>
-      <option value="m">Meters</option>
-    </select>
     <div class="chart-container">
       <canvas id="scatter-chart"></canvas>
     </div>
