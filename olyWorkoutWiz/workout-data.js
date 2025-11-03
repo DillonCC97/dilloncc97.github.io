@@ -35,11 +35,11 @@ const workoutData = {
       "Pass Throughs - 2×10",
       "Good Mornings - 2×10",
       "Romanian Deadlifts - 2×8",
-      "Front Squat to Stand (Sotts Press position) - 2×5",
-      "Behind Neck Press - 2×8",
-      "Overhead Squat - 2×5",
+      "Overhead Squat (Snatch Grip) - 2×5",
       "Front Squat - 2×5",
-      "Muscle Clean + Front Squat - 2×3"
+      "Push Press - 2x5",
+      "Muscle Clean + Front Squat - 2×3",
+      "Jerk Balance - 2x3",
     ],
     
     // Technical complexes organized by intensity
@@ -59,8 +59,8 @@ const workoutData = {
         {
           name: "Complex B: Speed & Timing",
           exercises: [
-            "2 Tall Cleans",
-            "Clean Pull + Power Clean",
+            "Tall Clean",
+            "Power Clean",
             "Front Squat + Jerk"
           ],
           sets: "5 sets, rest 60-90 sec",
@@ -72,7 +72,7 @@ const workoutData = {
           name: "Complex C: Full Movement",
           exercises: [
             "Clean Pull",
-            "Power Clean",
+            "Hang Clean",
             "Clean",
             "Jerk"
           ],
@@ -259,7 +259,8 @@ const workoutData = {
         {
           name: "Complex D: Pull Focus",
           exercises: [
-            "2 Snatch Pulls (knee + floor)",
+            "Snatch Pull",
+            "Hang Snatch Pull",
             "Power Snatch",
             "Snatch"
           ],
@@ -281,8 +282,8 @@ const workoutData = {
         {
           name: "Complex F: Extended Pull",
           exercises: [
-            "Snatch Pull from Knee",
-            "Snatch Pull from Floor",
+            "Snatch Pull",
+            "Hang Snatch Pull",
             "Power Snatch",
             "2 Overhead Squats"
           ],
