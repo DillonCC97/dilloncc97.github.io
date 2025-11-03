@@ -311,6 +311,14 @@ button.selected .button-detail {
    PRINT STYLES
    ========================================== */
 
+/* Footer */
+footer {
+    text-align: center;
+    font-size: 10px;
+    margin-top: 10px;
+    color: #666;
+}
+
 @media print {
   body {
     background: white;
