@@ -1,0 +1,323 @@
+/**
+ * OLYMPIC LIFTING WORKOUT BUILDER - STYLESHEET
+ * =============================================
+ * 
+ * Minimalist academic design with clean typography and simple styling.
+ * Uses serif fonts for a scholarly aesthetic with refined spacing.
+ * 
+ * COLOR PALETTE:
+ * --------------
+ * - Primary Text: #1a1a1a (near black)
+ * - Secondary Text: #666 (medium gray)
+ * - Background: #fafaf9 (warm off-white)
+ * - Surface: #fff (white)
+ * - Borders: #e5e5e5, #d4d4d4 (light grays)
+ * 
+ * TYPOGRAPHY:
+ * -----------
+ * - Headings: Crimson Text (serif)
+ * - Body: Crimson Text (serif)
+ * - Labels/Details: Inter (sans-serif)
+ */
+
+/* ==========================================
+   IMPORTS & RESET
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@400;500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ==========================================
+   BASE STYLES
+   ========================================== */
+
+body {
+  font-family: 'Crimson Text', Georgia, serif;
+  background: #fafaf9;
+  color: #1a1a1a;
+  line-height: 1.7;
+  padding: 1rem;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* ==========================================
+   TYPOGRAPHY
+   ========================================== */
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+/* ==========================================
+   HEADER
+   ========================================== */
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 1rem;
+  border-bottom: 2px solid #1a1a1a;
+}
+
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 400;
+}
+
+/* ==========================================
+   SELECTION PANEL
+   ========================================== */
+
+.selection-panel {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  padding: 2rem;
+  margin-bottom: 3rem;
+}
+
+.selection-grid {
+  display: grid;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Two-column layout on desktop */
+@media (min-width: 768px) {
+  .selection-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.selection-group {
+  margin-bottom: 1.5rem;
+}
+
+.selection-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  display: block;
+  color: #666;
+}
+
+/* ==========================================
+   BUTTONS
+   ========================================== */
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+button {
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 1.1rem;
+  padding: 0.9rem 1.2rem;
+  background: #fff;
+  border: 1px solid #d4d4d4;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  position: relative;
+  color: #1a1a1a;
+}
+
+button:hover {
+  border-color: #1a1a1a;
+  background: #fafaf9;
+}
+
+/* Selected state styling */
+button.selected {
+  background: #1a1a1a;
+  color: #fff;
+  border-color: #1a1a1a;
+}
+
+/* Checkmark for selected buttons */
+button.selected::before {
+  content: '✓';
+  position: absolute;
+  right: 1rem;
+  font-weight: 700;
+}
+
+/* Button detail text (percentages, set info) */
+.button-detail {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+button.selected .button-detail {
+  color: #ccc;
+}
+
+/* ==========================================
+   WORKOUT DISPLAY
+   ========================================== */
+
+.workout-display {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  padding: 1.5rem;
+}
+
+/* Increase padding on larger screens */
+@media (min-width: 768px) {
+  .workout-display {
+    padding: 2.5rem;
+  }
+}
+
+.workout-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #1a1a1a;
+}
+
+/* ==========================================
+   WORKOUT SECTIONS
+   ========================================== */
+
+.workout-section {
+  margin-bottom: 2.5rem;
+}
+
+.section-header {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+/* Highlighted information boxes */
+.section-box {
+  background: #fafaf9;
+  border-left: 3px solid #1a1a1a;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.section-box-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.section-box-detail {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: #666;
+  font-style: italic;
+}
+
+/* ==========================================
+   LISTS
+   ========================================== */
+
+.exercise-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.exercise-list li {
+  padding: 0.4rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+/* Em dash bullet points */
+.exercise-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: #666;
+}
+
+/* Numbered lists for complex exercises */
+.numbered-list li::before {
+  content: attr(data-number);
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* ==========================================
+   TEXT ELEMENTS
+   ========================================== */
+
+.instruction-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+/* ==========================================
+   NOTES BOX
+   ========================================== */
+
+.notes-box {
+  background: #fafaf9;
+  border: 1px solid #e5e5e5;
+  padding: 1rem 1.25rem;
+  margin-top: 2rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.notes-box strong {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+/* ==========================================
+   PRINT STYLES
+   ========================================== */
+
+@media print {
+  body {
+    background: white;
+  }
+  
+  /* Hide selection panel when printing */
+  .selection-panel {
+    display: none;
+  }
+}
