@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olympic Lifting Workout Builder</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@400;500&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: #fafaf9;
+            color: #1a1a1a;
+            line-height: 1.7;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 1rem;
+            border-bottom: 2px solid #1a1a1a;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        /* Selection Panel */
+        .selection-panel {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .selection-grid {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .selection-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .selection-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .selection-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            display: block;
+            color: #666;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        button {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 1.1rem;
+            padding: 0.9rem 1.2rem;
+            background: #fff;
+            border: 1px solid #d4d4d4;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            position: relative;
+            color: #1a1a1a;
+        }
+
+        button:hover {
+            border-color: #1a1a1a;
+            background: #fafaf9;
+        }
+
+        button.selected {
+            background: #1a1a1a;
+            color: #fff;
+            border-color: #1a1a1a;
+        }
+
+        button.selected::before {
+            content: '✓';
+            position: absolute;
+            right: 1rem;
+            font-weight: 700;
+        }
+
+        .button-detail {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 0.25rem;
+            display: block;
+        }
+
+        button.selected .button-detail {
+            color: #ccc;
+        }
+
+        /* Workout Display */
+        .workout-display {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            padding: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .workout-display {
+                padding: 2.5rem;
+            }
+        }
+
+        .workout-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #1a1a1a;
+        }
+
+        .workout-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-header {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+        .section-box {
+            background: #fafaf9;
+            border-left: 3px solid #1a1a1a;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-box-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .section-box-detail {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .exercise-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .exercise-list li {
+            padding: 0.4rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .exercise-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: #666;
+        }
+
+        .numbered-list li::before {
+            content: attr(data-number);
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .instruction-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .notes-box {
+            background: #fafaf9;
+            border: 1px solid #e5e5e5;
+            padding: 1rem 1.25rem;
+            margin-top: 2rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .notes-box strong {
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .selection-panel {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h1>Dillon's Simple Oly Workout Wizard</h1>
+        <p class="subtitle">Build your custom workout by selecting lift type, intensity, and components</p>
+    </div>
+
+    <!-- Selection Panel -->
+    <div class="selection-panel">
+        <div class="selection-grid">
+            <!-- Lift Type -->
+            <div class="selection-group">
+                <label class="selection-label">Lift Type</label>
+                <div class="button-group">
+                    <button onclick="setLiftType('cleanAndJerk')" id="btn-cleanAndJerk" class="selected">
+                        Clean & Jerk
+                    </button>
+                    <button onclick="setLiftType('snatch')" id="btn-snatch">
+                        Snatch
+                    </button>
+                </div>
+            </div>
+
+            <!-- Intensity -->
+            <div class="selection-group">
+                <label class="selection-label">Intensity Level</label>
+                <div class="button-group">
+                    <button onclick="setIntensity('light')" id="btn-light">
+                        Light
+                        <span class="button-detail">35-45%, build to 65-70%</span>
+                    </button>
+                    <button onclick="setIntensity('moderate')" id="btn-moderate" class="selected">
+                        Moderate
+                        <span class="button-detail">50-60%, build to 75-80%</span>
+                    </button>
+                    <button onclick="setIntensity('heavy')" id="btn-heavy">
+                        Heavy
+                        <span class="button-detail">60-70%, build to 85-90%</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complex and Accessory Selection -->
+        <div class="selection-grid">
+            <div class="selection-group">
+                <label class="selection-label">Technical Complex</label>
+                <div id="complex-buttons" class="button-group"></div>
+            </div>
+
+            <div class="selection-group">
+                <label class="selection-label">Accessory Finisher</label>
+                <div id="accessory-buttons" class="button-group"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generated Workout Display -->
+    <div class="workout-display">
+        <h2 class="workout-title">Your Workout</h2>
+
+        <!-- Part 1: Warmup -->
+        <div class="workout-section">
+            <h3 class="section-header">Part 1: <span id="warmup-lift-name">Clean & Jerk</span> Warmup</h3>
+            <p class="instruction-text">Empty Bar — 15-20 minutes</p>
+            <ul id="warmup-list" class="exercise-list"></ul>
+        </div>
+
+        <!-- Part 2: Technical Complex -->
+        <div class="workout-section">
+            <h3 class="section-header">Part 2: Technical Complex</h3>
+            <div class="section-box">
+                <div class="section-box-title" id="complex-name"></div>
+                <div class="section-box-detail" id="complex-details"></div>
+            </div>
+            <p class="instruction-text">Perform consecutively without dropping the bar:</p>
+            <ul id="complex-exercises" class="exercise-list numbered-list"></ul>
+        </div>
+
+        <!-- Part 3: Main Lift -->
+        <div class="workout-section">
+            <h3 class="section-header">Part 3: <span id="lift-name">Clean & Jerk</span> Progression</h3>
+            <div class="section-box">
+                <div class="section-box-title" id="progression-name"></div>
+                <div class="section-box-detail" id="progression-rest"></div>
+            </div>
+            <ul id="progression-sets" class="exercise-list"></ul>
+        </div>
+
+        <!-- Part 4: Accessories -->
+        <div class="workout-section">
+            <h3 class="section-header">Part 4: Accessory Finisher</h3>
+            <div class="section-box">
+                <div class="section-box-title" id="accessory-name"></div>
+            </div>
+            <ul id="accessory-exercises" class="exercise-list"></ul>
+        </div>
+
+        <!-- Notes -->
+        <div class="notes-box">
+            <strong>Notes:</strong> Adjust percentages based on daily feel. Focus on quality positions over hitting exact numbers. Total workout time: ~75-90 minutes.
+        </div>
+    </div>
+</div>
+
+<script>
+    const workoutData = {
+        cleanAndJerk: {
+            displayName: "Clean & Jerk",
+            warmup: [
+                "Pass Throughs - 2×10",
+                "Good Mornings - 2×10",
+                "Romanian Deadlifts - 2×8",
+                "Front Squat to Stand (Sotts Press position) - 2×5",
+                "Behind Neck Press - 2×8",
+                "Overhead Squat - 2×5",
+                "Front Squat - 2×5",
+                "Muscle Clean + Front Squat - 2×3"
+            ],
+            complexes: {
+                light: [
+                    {
+                        name: "Complex A: Positional Focus",
+                        exercises: [
+                            "Hang Clean (mid-thigh)",
+                            "Hang Clean (knee)",
+                            "Clean from Floor",
+                            "Front Squat"
+                        ],
+                        sets: "4-5 sets, rest 90 sec",
+                        percentage: "35-45%"
+                    },
+                    {
+                        name: "Complex B: Speed & Timing",
+                        exercises: [
+                            "2 Tall Cleans",
+                            "Clean Pull + Power Clean",
+                            "Front Squat + Jerk"
+                        ],
+                        sets: "5 sets, rest 60-90 sec",
+                        percentage: "35-45%"
+                    }
+                ],
+                moderate: [
+                    {
+                        name: "Complex C: Full Movement",
+                        exercises: [
+                            "Clean Pull",
+                            "Power Clean",
+                            "Clean",
+                            "Jerk"
+                        ],
+                        sets: "4 sets, rest 2 min",
+                        percentage: "50-60%"
+                    },
+                    {
+                        name: "Complex D: Jerk Emphasis",
+                        exercises: [
+                            "Clean",
+                            "Push Jerk",
+                            "Split Jerk"
+                        ],
+                        sets: "4 sets, rest 2 min",
+                        percentage: "50-60%"
+                    }
+                ],
+                heavy: [
+                    {
+                        name: "Complex E: Strength Builder",
+                        exercises: [
+                            "Clean",
+                            "Front Squat",
+                            "Jerk"
+                        ],
+                        sets: "3-4 sets, rest 2-3 min",
+                        percentage: "60-70%"
+                    },
+                    {
+                        name: "Complex F: Power + Squat",
+                        exercises: [
+                            "Clean Pull",
+                            "Power Clean",
+                            "2 Front Squats",
+                            "Jerk"
+                        ],
+                        sets: "3 sets, rest 2-3 min",
+                        percentage: "60-70%"
+                    }
+                ]
+            },
+            progressions: {
+                light: {
+                    name: "Light Day (Build to 65-70%)",
+                    sets: [
+                        "3 reps @ 50%",
+                        "3 reps @ 55%",
+                        "2 reps @ 60%",
+                        "2 reps @ 65%",
+                        "1-2 reps @ 70%"
+                    ],
+                    rest: "Rest 2 min between sets"
+                },
+                moderate: {
+                    name: "Moderate Day (Build to 75-80%)",
+                    sets: [
+                        "3 reps @ 50%",
+                        "2 reps @ 60%",
+                        "2 reps @ 65%",
+                        "1 rep @ 70%",
+                        "1 rep @ 75%",
+                        "1 rep @ 80%",
+                        "Drop back: 2×1 @ 70-75%"
+                    ],
+                    rest: "Rest 2-3 min between sets"
+                },
+                heavy: {
+                    name: "Heavy Day (Build to 85-90%)",
+                    sets: [
+                        "2 reps @ 60%",
+                        "1 rep @ 70%",
+                        "1 rep @ 75%",
+                        "1 rep @ 80%",
+                        "1 rep @ 85%",
+                        "1 rep @ 87-90% (work up to daily max)",
+                        "Drop back: 2-3×1 @ 80-85%"
+                    ],
+                    rest: "Rest 3-4 min between sets"
+                }
+            },
+            accessories: [
+                {
+                    name: "Option 1: Front Squat Focus",
+                    exercises: [
+                        "Front Squats - 4×3 @ 80-85%",
+                        "Back Rack Reverse Lunges - 3×6/leg",
+                        "Weighted Planks - 3×45 sec"
+                    ]
+                },
+                {
+                    name: "Option 2: Posterior Chain",
+                    exercises: [
+                        "Romanian Deadlifts - 4×6 @ moderate-heavy",
+                        "Bulgarian Split Squats - 3×8/leg",
+                        "GHD Sit-ups - 3×15"
+                    ]
+                },
+                {
+                    name: "Option 3: Power & Stability",
+                    exercises: [
+                        "Push Press - 4×4 @ 75-80%",
+                        "Front Squat Pauses (3 sec) - 3×3 @ 70%",
+                        "Pallof Press - 3×10/side"
+                    ]
+                },
+                {
+                    name: "Option 4: Volume Squats",
+                    exercises: [
+                        "Back Squats - 4×5 @ 70-75%",
+                        "Walking Lunges - 3×20 steps (total)",
+                        "Hollow Rocks - 3×20"
+                    ]
+                },
+                {
+                    name: "Option 5: Conditioning + Core",
+                    exercises: [
+                        "Front Squat - 3×8 @ 65-70%",
+                        "Box Step-ups - 3×10/leg (moderate weight)",
+                        "Superset: Toes to Bar (3×10) + Plank (3×30 sec)"
+                    ]
+                }
+            ]
+        },
+        snatch: {
+            displayName: "Snatch",
+            warmup: [
+                "Pass Throughs - 2×10",
+                "Snatch Grip Romanian Deadlifts - 2×8",
+                "Muscle Snatch - 2×5",
+                "Snatch Balance - 2×5",
+                "Overhead Squat - 2×5",
+                "Snatch Grip Behind Neck Press - 2×8",
+                "Hang Power Snatch - 2×3",
+                "Power Snatch + Overhead Squat - 2×2"
+            ],
+            complexes: {
+                light: [
+                    {
+                        name: "Complex A: Positional Snatch",
+                        exercises: [
+                            "Snatch High-Pull",
+                            "Hang Power Snatch (above knee)",
+                            "Hang Snatch (below knee)",
+                            "Overhead Squat"
+                        ],
+                        sets: "4-5 sets, rest 90 sec",
+                        percentage: "35-45%"
+                    },
+                    {
+                        name: "Complex B: Speed Development",
+                        exercises: [
+                            "2 Snatch Balances",
+                            "Hang Power Snatch (mid-thigh)",
+                            "Snatch from Floor"
+                        ],
+                        sets: "5 sets, rest 60-90 sec",
+                        percentage: "35-45%"
+                    }
+                ],
+                moderate: [
+                    {
+                        name: "Complex C: Full Sequence",
+                        exercises: [
+                            "Snatch Pull",
+                            "Power Snatch",
+                            "Snatch",
+                            "Overhead Squat"
+                        ],
+                        sets: "4 sets, rest 2 min",
+                        percentage: "50-60%"
+                    },
+                    {
+                        name: "Complex D: Pull Focus",
+                        exercises: [
+                            "2 Snatch Pulls (knee + floor)",
+                            "Power Snatch",
+                            "Snatch"
+                        ],
+                        sets: "4 sets, rest 2 min",
+                        percentage: "50-60%"
+                    }
+                ],
+                heavy: [
+                    {
+                        name: "Complex E: Strength Builder",
+                        exercises: [
+                            "Snatch",
+                            "Overhead Squat",
+                            "Snatch Balance"
+                        ],
+                        sets: "3-4 sets, rest 2-3 min",
+                        percentage: "60-70%"
+                    },
+                    {
+                        name: "Complex F: Extended Pull",
+                        exercises: [
+                            "Snatch Pull from Knee",
+                            "Snatch Pull from Floor",
+                            "Power Snatch",
+                            "2 Overhead Squats"
+                        ],
+                        sets: "3 sets, rest 2-3 min",
+                        percentage: "60-70%"
+                    }
+                ]
+            },
+            progressions: {
+                light: {
+                    name: "Light Day (Build to 65-70%)",
+                    sets: [
+                        "3 reps @ 50%",
+                        "3 reps @ 55%",
+                        "2 reps @ 60%",
+                        "2 reps @ 65%",
+                        "1-2 reps @ 70%"
+                    ],
+                    rest: "Rest 2 min between sets"
+                },
+                moderate: {
+                    name: "Moderate Day (Build to 75-80%)",
+                    sets: [
+                        "3 reps @ 50%",
+                        "2 reps @ 60%",
+                        "2 reps @ 65%",
+                        "1 rep @ 70%",
+                        "1 rep @ 75%",
+                        "1 rep @ 80%",
+                        "Drop back: 2×1 @ 70-75%"
+                    ],
+                    rest: "Rest 2-3 min between sets"
+                },
+                heavy: {
+                    name: "Heavy Day (Build to 85-90%)",
+                    sets: [
+                        "2 reps @ 60%",
+                        "1 rep @ 70%",
+                        "1 rep @ 75%",
+                        "1 rep @ 80%",
+                        "1 rep @ 85%",
+                        "1 rep @ 87-90% (work up to daily max)",
+                        "Drop back: 2-3×1 @ 80-85%"
+                    ],
+                    rest: "Rest 3-4 min between sets"
+                }
+            },
+            accessories: [
+                {
+                    name: "Option 1: Overhead Strength",
+                    exercises: [
+                        "Overhead Squats - 4×3 @ 80-85%",
+                        "Snatch Grip Push Press - 3×5 @ 70%",
+                        "Weighted Planks (overhead plate hold) - 3×30 sec"
+                    ]
+                },
+                {
+                    name: "Option 2: Pulling Power",
+                    exercises: [
+                        "Snatch Grip Deadlifts - 4×5 @ 90-100% of snatch max",
+                        "Snatch High-Pulls - 3×4 @ 80-85%",
+                        "Good Mornings - 3×8",
+                        "Hanging Leg Raises - 3×10"
+                    ]
+                },
+                {
+                    name: "Option 3: Squat + Stability",
+                    exercises: [
+                        "Back Squats - 4×4 @ 75-80%",
+                        "Overhead Walking Lunges (barbell or plate) - 3×20 steps",
+                        "Sotts Press - 3×5 (light)"
+                    ]
+                },
+                {
+                    name: "Option 4: Volume Overhead Work",
+                    exercises: [
+                        "Snatch Balance - 4×3 @ 70-75%",
+                        "Overhead Squat Pauses (3 sec) - 3×3 @ 65-70%",
+                        "Single Arm Overhead Carries - 3×30m/arm (KB or DB)",
+                        "Hollow Rocks - 3×20"
+                    ]
+                },
+                {
+                    name: "Option 5: Conditioning + Posterior",
+                    exercises: [
+                        "Front Squats - 3×6 @ 70%",
+                        "Romanian Deadlifts (snatch grip) - 3×8",
+                        "Superset: GHD Back Extensions (3×12) + Toes to Bar (3×10)"
+                    ]
+                }
+            ]
+        }
+    };
+
+    // State
+    let state = {
+        liftType: 'cleanAndJerk',
+        intensity: 'moderate',
+        selectedComplex: 0,
+        selectedAccessory: 0
+    };
+
+    // Update button styles
+    function updateButtonStyles() {
+        // Lift type buttons
+        const liftButtons = ['cleanAndJerk', 'snatch'];
+        liftButtons.forEach(type => {
+            const btn = document.getElementById(`btn-${type}`);
+            if (state.liftType === type) {
+                btn.classList.add('selected');
+            } else {
+                btn.classList.remove('selected');
+            }
+        });
+
+        // Intensity buttons
+        const intensityButtons = ['light', 'moderate', 'heavy'];
+        intensityButtons.forEach(level => {
+            const btn = document.getElementById(`btn-${level}`);
+            if (state.intensity === level) {
+                btn.classList.add('selected');
+            } else {
+                btn.classList.remove('selected');
+            }
+        });
+    }
+
+    // Render complex buttons
+    function renderComplexButtons() {
+        const container = document.getElementById('complex-buttons');
+        const currentData = workoutData[state.liftType];
+        const complexes = currentData.complexes[state.intensity];
+
+        container.innerHTML = '';
+        complexes.forEach((complex, idx) => {
+            const btn = document.createElement('button');
+            btn.onclick = () => setComplex(idx);
+            if (state.selectedComplex === idx) {
+                btn.classList.add('selected');
+            }
+            btn.innerHTML = `
+                    ${complex.name}
+                    <span class="button-detail">${complex.percentage} • ${complex.sets}</span>
+                `;
+            container.appendChild(btn);
+        });
+    }
+
+    // Render accessory buttons
+    function renderAccessoryButtons() {
+        const container = document.getElementById('accessory-buttons');
+        const currentData = workoutData[state.liftType];
+
+        container.innerHTML = '';
+        currentData.accessories.forEach((acc, idx) => {
+            const btn = document.createElement('button');
+            btn.onclick = () => setAccessory(idx);
+            if (state.selectedAccessory === idx) {
+                btn.classList.add('selected');
+            }
+            btn.textContent = acc.name;
+            container.appendChild(btn);
+        });
+    }
+
+    // Render workout display
+    function renderWorkout() {
+        const currentData = workoutData[state.liftType];
+        const complexes = currentData.complexes[state.intensity];
+        const progression = currentData.progressions[state.intensity];
+        const selectedComplex = complexes[state.selectedComplex];
+        const selectedAccessory = currentData.accessories[state.selectedAccessory];
+
+        // Update lift name displays
+        document.getElementById('warmup-lift-name').textContent = currentData.displayName;
+        document.getElementById('lift-name').textContent = currentData.displayName;
+
+        // Warmup
+        const warmupList = document.getElementById('warmup-list');
+        warmupList.innerHTML = currentData.warmup.map(exercise =>
+            `<li>${exercise}</li>`
+        ).join('');
+
+        // Complex
+        document.getElementById('complex-name').textContent = selectedComplex.name;
+        document.getElementById('complex-details').textContent = `${selectedComplex.percentage} of 1RM • ${selectedComplex.sets}`;
+        document.getElementById('complex-exercises').innerHTML = selectedComplex.exercises.map((exercise, idx) =>
+            `<li data-number="${idx + 1}.">${exercise}</li>`
+        ).join('');
+
+        // Progression
+        document.getElementById('progression-name').textContent = progression.name;
+        document.getElementById('progression-rest').textContent = progression.rest;
+        document.getElementById('progression-sets').innerHTML = progression.sets.map(set =>
+            `<li>${set}</li>`
+        ).join('');
+
+        // Accessory
+        document.getElementById('accessory-name').textContent = selectedAccessory.name;
+        document.getElementById('accessory-exercises').innerHTML = selectedAccessory.exercises.map(exercise =>
+            `<li>${exercise}</li>`
+        ).join('');
+    }
+
+    // State setters
+    function setLiftType(type) {
+        state.liftType = type;
+        state.selectedComplex = 0;
+        state.selectedAccessory = 0;
+        updateButtonStyles();
+        renderComplexButtons();
+        renderAccessoryButtons();
+        renderWorkout();
+    }
+
+    function setIntensity(level) {
+        state.intensity = level;
+        state.selectedComplex = 0;
+        updateButtonStyles();
+        renderComplexButtons();
+        renderWorkout();
+    }
+
+    function setComplex(idx) {
+        state.selectedComplex = idx;
+        renderComplexButtons();
+        renderWorkout();
+    }
+
+    function setAccessory(idx) {
+        state.selectedAccessory = idx;
+        renderAccessoryButtons();
+        renderWorkout();
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        updateButtonStyles();
+        renderComplexButtons();
+        renderAccessoryButtons();
+        renderWorkout();
+    });
+</script>
+</body>
+</html>
